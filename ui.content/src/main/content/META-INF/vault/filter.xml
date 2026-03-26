@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/Ogani" mode="merge"/>
+    <filter root="/content/Ogani" mode="merge"/>
+    <filter root="/content/dam/Ogani" mode="merge">
+        <exclude pattern="/content/dam/Ogani(/.*)?"/>
+        <include pattern="/content/dam/Ogani/jcr:content(/.*)?"/>
+    </filter>
+    <filter root="/content/dam/Ogani/asset.jpg" mode="merge"/>
+    <filter root="/content/experience-fragments/Ogani" mode="merge"/>
+</workspaceFilter>

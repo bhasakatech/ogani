@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/apps/Ogani/clientlibs"/>
+    <filter root="/apps/Ogani/components"/>
+    <filter root="/apps/Ogani/i18n"/>
+</workspaceFilter>
