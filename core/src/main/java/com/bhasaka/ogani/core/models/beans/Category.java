@@ -1,4 +1,4 @@
-package com.bhasaka.ogani.core.models.featured;
+package com.bhasaka.ogani.core.models.beans;
 
 public class Category {
 

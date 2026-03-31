@@ -1,5 +1,9 @@
-package com.bhasaka.ogani.core.models.featured;
+package com.bhasaka.ogani.core.models;
 
+import com.bhasaka.ogani.core.models.beans.Category;
+import com.bhasaka.ogani.core.models.featuredproducts.CategoryItemModel;
+import com.bhasaka.ogani.core.models.featuredproducts.Product;
+import com.bhasaka.ogani.core.models.featuredproducts.ProductCFModel;
 import com.day.cq.search.PredicateGroup;
 import com.day.cq.search.Query;
 import com.day.cq.search.QueryBuilder;
@@ -7,22 +11,32 @@ import com.day.cq.search.result.Hit;
 import com.day.cq.search.result.SearchResult;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
-import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.ChildResource;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.annotation.PostConstruct;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Model(
         adaptables = Resource.class,
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
 )
 public class FeaturedProductsModel {
+
+    private static final Logger LOG = LoggerFactory.getLogger(FeaturedProductsModel.class);
+    private static final String CF_PARENT_PATH = "/content/dam/Ogani/content-fragments/featured";
+
+    private final List<Product> products = new ArrayList<>();
 
     @ValueMapValue
     private String sectionTitle;
@@ -40,11 +54,7 @@ public class FeaturedProductsModel {
     private QueryBuilder queryBuilder;
 
     @ChildResource(name = "categoryTags")
-    private List<Resource> categoryItems;
-
-    private final List<Product> products = new ArrayList<>();
-
-    private static final String CF_PARENT_PATH = "/content/dam/Ogani/content-fragments/featured";
+    private List<CategoryItemModel> categoryItems;
 
     @PostConstruct
     protected void init() {
@@ -78,29 +88,50 @@ public class FeaturedProductsModel {
                 Resource master = cf.getChild("jcr:content/data/master");
                 if (master == null) continue;
 
-                ValueMap vm = master.getValueMap();
+                ProductCFModel model = master.adaptTo(ProductCFModel.class);
+                if (model == null) continue;
 
-                String title = vm.get("title", String.class);
-                String price = vm.get("price", String.class);
-                String image = vm.get("image", String.class);
-                String[] categories = vm.get("category", String[].class);
-
-                // Convert categories to clean values
                 List<String> cleanCategories = new ArrayList<>();
-                if (categories != null) {
-                    for (String cat : categories) {
+                if (model.getCategory() != null) {
+                    for (String cat : model.getCategory()) {
                         cleanCategories.add(extractKey(cat));
                     }
                 }
 
-                if (title != null && price != null) {
-                    products.add(new Product(title, price, image, cleanCategories));
+                if (model.getTitle() != null && model.getPrice() != null) {
+                    products.add(new Product(
+                            model.getTitle(),
+                            model.getPrice(),
+                            model.getImage(),
+                            cleanCategories
+                    ));
                 }
 
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (RepositoryException e) {
+                LOG.error("Repository Exception while fetching CF", e);
             }
         }
+    }
+
+    public List<Category> getCategories() {
+        List<Category> list = new ArrayList<>();
+
+        if (categoryItems != null) {
+            for (CategoryItemModel item : categoryItems) {
+
+                String tag = item.getCategoryTag();
+                if (tag != null) {
+                    String key = extractKey(tag);
+                    String name = toTitleCase(key.replace("-", " "));
+                    list.add(new Category(key, name));
+                }
+            }
+        }
+        return list;
+    }
+
+    private String extractKey(String tag) {
+        return tag.substring(tag.lastIndexOf("/") + 1);
     }
 
     private String toTitleCase(String str) {
@@ -116,39 +147,9 @@ public class FeaturedProductsModel {
                         .append(" ");
             }
         }
-
         return result.toString().trim();
     }
 
-    // Categories for tabs
-    public List<Category> getCategories() {
-        List<Category> list = new ArrayList<>();
-
-        if (categoryItems != null) {
-            for (Resource item : categoryItems) {
-                String tag = item.getValueMap().get("categoryTag", String.class);
-
-                if (tag != null) {
-                    String key = extractKey(tag);
-                    String name = toTitleCase(key.replace("-", " "));
-                    list.add(new Category(key, name));
-                }
-            }
-        }
-        return list;
-    }
-
-
-    private String extractKey(String tag) {
-        return tag.substring(tag.lastIndexOf("/") + 1);
-    }
-
-    private String capitalize(String str) {
-        if (str == null || str.isEmpty()) return str;
-        return str.substring(0, 1).toUpperCase() + str.substring(1);
-    }
-
-    // Getters
     public String getSectionTitle() {
         return sectionTitle != null ? sectionTitle : "Featured Products";
     }

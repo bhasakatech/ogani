@@ -1,4 +1,4 @@
-package com.bhasaka.ogani.core.models.featured;
+package com.bhasaka.ogani.core.models.featuredproducts;
 
 import io.wcm.testing.mock.aem.junit5.AemContextExtension;
 import org.junit.jupiter.api.Test;
