@@ -1,0 +1,30 @@
+
+<sly data-sly-use.model="com.bhasaka.ogani.core.models.FruitBannerModel" />
+
+<div class="fruit-banner-container">
+
+    <sly data-sly-list.item="${model.banners}">
+
+        <div class="card ${item.alignment == 'right' ? 'right-card' : 'left-card'}"
+             style="background-image: url(${item.bgImage @ context='uri'})">
+
+            <img class="product-img"
+                 src="${item.image @ context='uri'}"
+                 alt="${item.title}" />
+
+            <div class="content">
+                <h2>${item.title}</h2>
+                <p>${item.description}</p>
+
+                  <a href="${item.buttonLink @ extension='html'}"
+                   class="btn"
+                   data-sly-test="${item.buttonLink}">
+                    ${item.buttonText}
+                </a>
+            </div>
+
+        </div>
+
+    </sly>
+
+</div>
