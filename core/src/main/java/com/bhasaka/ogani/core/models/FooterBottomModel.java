@@ -14,7 +14,7 @@ public class FooterBottomModel {
     @ValueMapValue
     private String copyright;
 
-    //  SINGLE IMAGE (instead of list)
+
     @ValueMapValue(name = "paymentImage")
     private String paymentImage;
 

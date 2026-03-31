@@ -38,8 +38,8 @@ public class FooterNewsletterModel {
     }
 
     // ================= INNER CLASS =================
-
-    @Model(adaptables = Resource.class)
+    @Model(adaptables = Resource.class,
+            defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
     public static class SocialLink {
 
         @ValueMapValue

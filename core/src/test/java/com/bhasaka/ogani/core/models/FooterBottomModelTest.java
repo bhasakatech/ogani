@@ -21,7 +21,7 @@ class FooterBottomModelTest {
     @BeforeEach
     void setUp() {
 
-        // VERY IMPORTANT 🔥
+
         context.addModelsForClasses(FooterBottomModel.class);
 
         context.create().resource("/content/footer",
@@ -35,27 +35,27 @@ class FooterBottomModelTest {
         model = resource.adaptTo(FooterBottomModel.class);
     }
 
-//    @Test
+    @Test
     void testModelNotNull() {
         assertNotNull(model);
     }
 
-//    @Test
+    @Test
     void testCopyright() {
         assertEquals("©2026 All rights reserved", model.getCopyright());
     }
 
-//    @Test
+    @Test
     void testPaymentImage() {
         assertEquals("/content/dam/payment.png", model.getPaymentImage());
     }
 
-//    @Test
+    @Test
     void testPaymentAlt() {
         assertEquals("Payment methods", model.getPaymentAlt());
     }
 
-//    @Test
+    @Test
     void testAllFieldsTogether() {
         assertAll(
                 () -> assertEquals("©2026 All rights reserved", model.getCopyright()),
@@ -64,7 +64,7 @@ class FooterBottomModelTest {
         );
     }
 
-//    @Test
+    @Test
     void testEmptyValues() {
 
         context.create().resource("/content/empty");

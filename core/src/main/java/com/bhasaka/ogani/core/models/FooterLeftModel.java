@@ -56,8 +56,9 @@ public class FooterLeftModel {
         return linksColumn2;
     }
 
-    // ✅ FIX APPLIED HERE
-    @Model(adaptables = Resource.class)
+
+    @Model(adaptables = Resource.class,
+            defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
     public static class Link {
 
         @ValueMapValue
