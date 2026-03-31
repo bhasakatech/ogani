@@ -1,0 +1,15 @@
+{
+  "title": "Subscribe to our Newsletter",
+  "description": "Get updates about latest products",
+
+  "socialLinks": {
+    "item0": {
+      "url": "https://facebook.com",
+      "iconClass": "fa-facebook-f"
+    },
+    "item1": {
+      "url": "https://twitter.com",
+      "iconClass": "fa-twitter"
+    }
+  }
+}
