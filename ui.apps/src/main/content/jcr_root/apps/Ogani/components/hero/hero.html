@@ -1,0 +1,18 @@
+<div class="hero__item" data-sly-use.heroBanner="com.bhasaka.ogani.core.models.HeroBannerModel">
+
+  <div class="image-cmp">
+    <sly data-sly-resource="${'bannerImage' @ resourceType='core/wcm/components/image/v3/image'}"></sly>
+  </div>
+
+  <div class="overlay-content">
+    <div class="hero__text">
+      <span>${heroBanner.eyebrowText}</span>
+      <h2>${heroBanner.heroDesc @ context='html'}</h2>
+      <p class="hero-banner__subtext">${heroBanner.subText}</p>
+    </div>
+    <div>
+      <sly data-sly-resource="${'ctaButton' @ resourceType='core/wcm/components/button/v1/button'}"></sly>
+    </div>
+  </div>
+
+</div>
