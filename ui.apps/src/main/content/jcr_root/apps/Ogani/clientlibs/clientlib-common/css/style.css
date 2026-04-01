@@ -3213,9 +3213,60 @@ justify-content: space-between;
   .humberger__menu__widget .header__top__right__language {
     margin-right: 20px;
   }
-  .humberger__menu__nav {
-    display: none;
-  }
+  /* custom humberger menu */
+/* Ensure the OOTB nav resets basic list styles */
+.humberger__menu__nav .cmp-navigation__group {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    margin-bottom: 2rem;
+
+}
+
+/* Base styling for ALL links (Parent AND Child) to keep them identical */
+.humberger__menu__nav .cmp-navigation__item-link {
+    display: block;
+    color: #1c1c1c;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 0;
+    text-decoration: none;
+    border-bottom: 1px solid #e1e1e1;
+    transition: all 0.3s;
+}
+
+.humberger__menu__nav .cmp-navigation__item-link:hover {
+    color: #7fad39;
+    text-decoration: none;
+}
+
+/* Hide child menus by default */
+.humberger__menu__nav .cmp-navigation__item--level-0 > .cmp-navigation__group {
+    display: none; 
+    padding-left: 0px; /* Slight indent so users know it's a sub-menu */
+    transition: transform 500ms ease;
+}
+
+/* CSS for the arrow next to the text */
+.humberger__menu__nav .nav-arrow {
+    display: inline-block;
+    margin-left: 8px; /* Pushes it just slightly right of the text */
+    font-size: 12px;
+    cursor: pointer;
+    padding-top: 3px;
+    transition: transform 0.3s ease; /* Smooth rotation animation */
+}
+
+/* When the 'expanded' class is added via JS, show the child menu */
+.humberger__menu__nav .cmp-navigation__item.expanded > .cmp-navigation__group {
+    display: block;
+}
+
+/* Rotate the right-pointing arrow 90 degrees to point down when expanded */
+.humberger__menu__nav .cmp-navigation__item.expanded > .cmp-navigation__item-link .nav-arrow {
+    transform: rotate(90deg);
+}
   .humberger__menu__wrapper .header__top__right__social {
     display: block;
     margin-right: 0;
