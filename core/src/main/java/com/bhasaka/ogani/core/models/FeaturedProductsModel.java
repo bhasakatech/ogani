@@ -82,10 +82,10 @@ public class FeaturedProductsModel {
 
         for (Hit hit : result.getHits()) {
             try {
-                Resource cf = resourceResolver.getResource(hit.getPath());
-                if (cf == null) continue;
+                Resource contentFragment = resourceResolver.getResource(hit.getPath());
+                if (contentFragment == null) continue;
 
-                Resource metadataResource  = cf.getChild("jcr:content/data/master");
+                Resource metadataResource  = contentFragment.getChild("jcr:content/data/master");
                 if (metadataResource == null) continue;
 
                 ProductCFModel productCFModel = metadataResource.adaptTo(ProductCFModel.class);
