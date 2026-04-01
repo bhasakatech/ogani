@@ -85,24 +85,24 @@ public class FeaturedProductsModel {
                 Resource cf = resourceResolver.getResource(hit.getPath());
                 if (cf == null) continue;
 
-                Resource master = cf.getChild("jcr:content/data/master");
-                if (master == null) continue;
+                Resource metadataResource  = cf.getChild("jcr:content/data/master");
+                if (metadataResource == null) continue;
 
-                ProductCFModel model = master.adaptTo(ProductCFModel.class);
-                if (model == null) continue;
+                ProductCFModel productCFModel = metadataResource.adaptTo(ProductCFModel.class);
+                if (productCFModel == null) continue;
 
                 List<String> cleanCategories = new ArrayList<>();
-                if (model.getCategory() != null) {
-                    for (String cat : model.getCategory()) {
+                if (productCFModel.getCategory() != null) {
+                    for (String cat : productCFModel.getCategory()) {
                         cleanCategories.add(extractKey(cat));
                     }
                 }
 
-                if (model.getTitle() != null && model.getPrice() != null) {
+                if (productCFModel.getTitle() != null && productCFModel.getPrice() != null) {
                     products.add(new Product(
-                            model.getTitle(),
-                            model.getPrice(),
-                            model.getImage(),
+                            productCFModel.getTitle(),
+                            productCFModel.getPrice(),
+                            productCFModel.getImage(),
                             cleanCategories
                     ));
                 }
