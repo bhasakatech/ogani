@@ -20,6 +20,7 @@
             <bgImage
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                rootPath= "/content/dam/Ogani/promobanner"
                 fieldLabel="Background Image"
                 name="./bgImage"/>
             <alignment
