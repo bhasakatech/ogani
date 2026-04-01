@@ -1,0 +1,23 @@
+{
+  "happy-path": {
+    "jcr:primaryType": "nt:unstructured",
+    "contactItems": {
+      "jcr:primaryType": "nt:unstructured",
+      "item1": {
+        "jcr:primaryType": "nt:unstructured",
+        "icon": "fa-phone",
+        "title": "Phone",
+        "value": "+1 234 567 8900"
+      },
+      "item2": {
+        "jcr:primaryType": "nt:unstructured",
+        "icon": "fa-envelope",
+        "title": "Email",
+        "value": "hello@colorlib.com"
+      }
+    }
+  },
+  "empty-path": {
+    "jcr:primaryType": "nt:unstructured"
+  }
+}
