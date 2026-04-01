@@ -16,13 +16,6 @@
                         sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
                         fieldLabel="Text"
                         name="./text"/>
-                    <fragmentFolder
-                        jcr:primaryType="nt:unstructured"
-                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
-                        fieldLabel="Content Fragment Folder"
-                        name="./fragmentFolder"
-                        required="{Boolean}true"
-                        rootPath="/content/dam"/>
                 </items>
             </column>
         </items>

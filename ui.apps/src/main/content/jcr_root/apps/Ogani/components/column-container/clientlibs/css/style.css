@@ -1,0 +1,42 @@
+/*.column-layout {
+    display: flex;
+    gap: 20px;
+}
+
+.column {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .column-layout {
+        flex-direction: column;
+    }
+
+    .column {
+        width: 100%;
+    }
+}
+*/
+
+.column-layout {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.column {
+    flex: 1 1 0;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .column-layout {
+        flex-direction: column;
+    }
+
+    .column {
+        width: 100%;
+    }
+}
