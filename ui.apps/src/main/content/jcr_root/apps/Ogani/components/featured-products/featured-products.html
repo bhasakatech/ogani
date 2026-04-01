@@ -1,0 +1,53 @@
+<sly data-sly-use.model="com.bhasaka.ogani.core.models.FeaturedProductsModel"/>
+
+<!-- Header -->
+<div class="featured-header">
+    <h1>${model.sectionTitle}</h1>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+
+    <button class="tab-btn active" data-category="all">All</button>
+
+    <sly data-sly-list.category="${model.categories}">
+        <button class="tab-btn" data-category="${category.tag}">
+            ${category.name}
+        </button>
+    </sly>
+
+</div>
+
+<!-- Products -->
+<div class="products">
+
+    <sly data-sly-list.product="${model.products}">
+
+        <div class="product-card"
+             data-category="${product.categories @ join=','}">
+
+            <!-- Image + Hover Actions Wrapper (IMPORTANT) -->
+            <div class="product-img-wrapper">
+
+                <img src="${product.image}" alt="${product.title}" />
+
+                <div class="product-actions"
+                     data-sly-test="${model.enableHoverActions}">
+                     
+                    <a href="#" class="action-btn">❤️</a>
+                    <a href="#" class="action-btn">🔄</a>
+                    <a href="#" class="action-btn">🛒</a>
+
+                </div>
+
+            </div>
+
+            <!-- Product Info -->
+            <h3>${product.title}</h3>
+            <p>$ ${product.price}</p>
+
+        </div>
+
+    </sly>
+
+</div>
