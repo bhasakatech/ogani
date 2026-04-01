@@ -250,22 +250,14 @@ ol {
   Header
 -----------------------*/
 
-#headerTopBar {
-  background: #f5f5f5;
-}
+
 
 .header__top {
   background: #f5f5f5;
-  width: 100vw;
-
-  /* 2. Position it relatively so we can push it around */
-  position: relative;
-
-  /* 3. Push it to the exact middle of the page */
-  left: 50%;
-
-  /* 4. Pull it perfectly back to the left edge by 50% of the screen width */
-  margin-left: -50vw;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -51vw;
 }
 
 .header__top__left {
