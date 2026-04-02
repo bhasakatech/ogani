@@ -47,6 +47,7 @@ class HeroBannerTest {
         assertTrue(model.getOverlay());
     }
 
+    
     @Test
     void testOverlayTrue() {
         Resource resource = context.create().resource(
