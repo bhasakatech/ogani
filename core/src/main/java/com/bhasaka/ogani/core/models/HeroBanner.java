@@ -34,4 +34,5 @@ public class HeroBanner {
     public Boolean getOverlay() {
         return overlay != null && overlay;
     }
+    
 }

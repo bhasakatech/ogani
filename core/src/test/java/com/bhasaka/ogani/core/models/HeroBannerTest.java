@@ -57,7 +57,6 @@ class HeroBannerTest {
 
         HeroBanner model = resource.adaptTo(HeroBanner.class);
         assertTrue(model.getOverlay(), "Overlay should be true when authored as true");
-        
     }
 
     @Test
