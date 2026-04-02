@@ -22,7 +22,7 @@ class ContactSectionModelTest {
     void setUp() {
         ctx.addModelsForClasses(ContactSectionModel.class, ContactItem.class);
 
-        ctx.load().json("/ContactSectionTest.json", "/content/contact");
+        ctx.load().json("/contactSectionTest.json", "/content/contact");
     }
 
     @Test
@@ -49,7 +49,6 @@ class ContactSectionModelTest {
 
     @Test
     void testContactSection_EmptyPath() {
-        // Arrange
         Resource resource = ctx.resourceResolver().getResource("/content/contact/empty-path");
         assertNotNull(resource);
 
