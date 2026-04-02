@@ -16,7 +16,7 @@
             <title
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
-                fieldLabel="Title"
+                fieldLabel="Banner Title"
                 name="./bannerTitle"
                 required="false"/>
             <overlay

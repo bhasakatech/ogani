@@ -18,6 +18,7 @@ class HeroBannerTest {
 
     @BeforeEach
     void setUp() {
+        
         // Register the model class
         context.addModelsForClasses(HeroBanner.class);
 
