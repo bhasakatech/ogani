@@ -1,0 +1,78 @@
+
+<!--<sly data-sly-use.model="com.bhasaka.ogani.core.models.ProductModel"/>
+
+<div class="latest-product__text">
+
+    <h4 data-sly-test="${model.text}">
+        ${model.text}
+    </h4>
+
+    <div class="latest-product__slider owl-carousel">
+
+       
+        <sly data-sly-list.slide="${model.slides}">
+
+            <div class="latest-product__slider__item">
+
+                
+                <sly data-sly-list.product="${model.products}">
+                    <a href="#" class="latest-product__item">
+
+                        <div class="latest-product__item__pic">
+                            <img src="${product.image}" alt="${product.title}">
+                        </div>
+
+                        <div class="latest-product__item__text">
+                            <h6>${product.title}</h6>
+                            <span>₹ ${product.price}</span>
+                        </div>
+
+                    </a>
+                </sly>
+
+            </div>
+
+        </sly>
+
+    </div>
+
+</div>
+
+-->
+
+<sly data-sly-use.model="com.bhasaka.ogani.core.models.ProductModel"/>
+
+<div class="latest-product__text">
+
+    <h4 data-sly-test="${model.text}">
+        ${model.text}
+    </h4>
+
+    <div class="latest-product__slider owl-carousel">
+
+        <sly data-sly-list.slide="${model.slides}">
+
+            <div class="latest-product__slider__item">
+
+                <sly data-sly-list.product="${slide}">
+                    <a href="#" class="latest-product__item">
+
+                        <div class="latest-product__item__pic">
+                            <img src="${product.image}" alt="${product.title}">
+                        </div>
+
+                        <div class="latest-product__item__text">
+                            <h6>${product.title}</h6>
+                            <span>₹ ${product.price}</span>
+                        </div>
+
+                    </a>
+                </sly>
+
+            </div>
+
+        </sly>
+
+    </div>
+
+</div>
