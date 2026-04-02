@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
     jcr:primaryType="nt:unstructured"
-    jcr:title="Column Container Config"
+    jcr:title="Column Container"
     sling:resourceType="cq/gui/components/authoring/dialog">
     <content
         jcr:primaryType="nt:unstructured"
@@ -15,15 +15,15 @@
                 <items jcr:primaryType="nt:unstructured">
                     <option_x0020_1
                         jcr:primaryType="nt:unstructured"
-                        text="Columns: 2"
+                        text="2 columns"
                         value="2"/>
                     <option_x0020_2
                         jcr:primaryType="nt:unstructured"
-                        text="Columns: 3"
+                        text="3 columns"
                         value="3"/>
                     <option_x0020_3
                         jcr:primaryType="nt:unstructured"
-                        text="Columns: 4"
+                        text="4 columns"
                         value="4"/>
                 </items>
             </dropDown>
