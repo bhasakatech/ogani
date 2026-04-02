@@ -3,7 +3,8 @@
     jcr:primaryType="nt:unstructured"
     jcr:title="Hero Banner"
     sling:resourceType="cq/gui/components/authoring/dialog">
-    <content
+    <content 
+    
         jcr:primaryType="nt:unstructured"
         sling:resourceType="granite/ui/components/coral/foundation/container">
         <items jcr:primaryType="nt:unstructured">
