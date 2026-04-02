@@ -1,0 +1,48 @@
+<sly data-sly-use.model="com.bhasaka.ogani.core.models.CategoryCarouselModel" />
+
+<div class="category-carousel">
+
+    <!-- Empty State -->
+    <sly data-sly-test="${model.categories.size == 0}">
+        <p class="carousel-empty">No categories available</p>
+    </sly>
+
+    <!-- Carousel -->
+    <sly data-sly-test="${model.categories.size > 0}">
+
+        <!-- Navigation Buttons -->
+        <button class="carousel-btn prev" aria-label="Previous">&#10094;</button>
+        <button class="carousel-btn next" aria-label="Next">&#10095;</button>
+
+        <div class="carousel-viewport">
+
+            <!-- Track -->
+            <div class="carousel-track">
+
+                <sly data-sly-list.item="${model.categories}">
+                    <div class="product-carousel-item">
+
+                        <a href="${item.link @ context='uri'}" class="carousel-link">
+
+                            <div class="carousel-image">
+                                <img src="${item.image @ context='uri'}"
+                                     alt="${item.title}"
+                                     loading="lazy" />
+                            </div>
+
+                            <div class="carousel-title">
+                                <h3>${item.title}</h3>
+                            </div>
+
+                        </a>
+
+                    </div>
+                </sly>
+
+            </div>
+
+        </div>
+
+    </sly>
+
+</div>
