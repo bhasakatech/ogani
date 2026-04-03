@@ -6,9 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const track = carousel.querySelector(".carousel-track");
     const nextBtn = carousel.querySelector(".next");
     const prevBtn = carousel.querySelector(".prev");
-
+    
     let items = Array.from(track.children);
     let index = 0;
+    
 
     function getVisibleItems() {
         if (window.innerWidth <= 480) return 1;
@@ -18,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let visibleItems = getVisibleItems();
 
-    // ✅ Clone WITHOUT deleting original HTL content
     function cloneItems() {
         const clones = items.slice(0, visibleItems).map(item => item.cloneNode(true));
         clones.forEach(clone => track.appendChild(clone));
@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
     nextBtn.addEventListener("click", nextSlide);
     prevBtn.addEventListener("click", prevSlide);
 
-    // Auto slide
     let autoSlide = setInterval(nextSlide, 3000);
 
     carousel.addEventListener("mouseenter", () => clearInterval(autoSlide));
@@ -80,7 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
         autoSlide = setInterval(nextSlide, 3000);
     });
 
-    // ⚠️ On resize → DO NOT rebuild DOM, just reset
     window.addEventListener("resize", () => {
         visibleItems = getVisibleItems();
         index = 0;

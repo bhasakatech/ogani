@@ -4,9 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 
-import com.bhasaka.ogani.core.models.beans.Category;
+import com.bhasaka.ogani.core.models.beans.ProductCategory;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
@@ -25,7 +24,7 @@ public class CategoryCarouselModel {
     @ValueMapValue
     private String cfPath;
 
-    private List<Category> categories = new ArrayList<>();
+    private List<ProductCategory> categories = new ArrayList<>();
 
     @PostConstruct
     protected void init() {
@@ -46,14 +45,14 @@ public class CategoryCarouselModel {
                     String link = data.getValueMap().get("link", String.class);
 
                     if (title != null && image != null) {
-                        categories.add(new Category(title, image, link));
+                        categories.add(new ProductCategory(title, image, link));
                     }
                 }
             }
         }
     }
 
-    public List<Category> getCategories() {
+    public List<ProductCategory> getCategories() {
         return categories;
     }
     

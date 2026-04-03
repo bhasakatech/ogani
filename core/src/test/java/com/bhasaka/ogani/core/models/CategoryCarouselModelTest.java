@@ -1,6 +1,6 @@
 package com.bhasaka.ogani.core.models;
 
-import com.bhasaka.ogani.core.models.beans.Category;
+import com.bhasaka.ogani.core.models.beans.ProductCategory;
 import io.wcm.testing.mock.aem.junit5.AemContext;
 import io.wcm.testing.mock.aem.junit5.AemContextExtension;
 import org.junit.jupiter.api.BeforeEach;
@@ -137,7 +137,7 @@ class CategoryCarouselModelTest {
 
         assertNotNull(model);
 
-        List<Category> categories = model.getCategories();
+        List<ProductCategory> categories = model.getCategories();
 
         assertEquals(2, categories.size());
         assertEquals("Apple", categories.get(0).getTitle());
