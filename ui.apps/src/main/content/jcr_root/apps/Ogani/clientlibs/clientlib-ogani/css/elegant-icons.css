@@ -10,7 +10,7 @@
     font-style: normal;
 }
 
-/* Use the following CSS code if you want to use data attributes for inserting your icons */
+
 [data-icon]:before {
     font-family: "ElegantIcons";
     content: attr(data-icon);
@@ -23,12 +23,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Use the following CSS code if you want to have a class per icon */
-/*
-Instead of a list of all class selectors,
-you can use the generic selector below, but it's slower:
-[class*="your-class-prefix"] {
-*/
+
 .arrow_up,
 .arrow_down,
 .arrow_left,

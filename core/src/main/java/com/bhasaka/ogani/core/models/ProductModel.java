@@ -67,6 +67,10 @@ public List<List<Product>> getSlides() {
 
         for (Resource child : folderResource.getChildren()) {
 
+            if ("jcr:content".equals(child.getName())) {
+                continue;
+            }
+
             Resource dataNode = child.getChild("jcr:content/data/master");
 
             if (dataNode != null) {
