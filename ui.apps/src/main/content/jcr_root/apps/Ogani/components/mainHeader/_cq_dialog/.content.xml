@@ -22,7 +22,7 @@
                 emptyText="Select the root tag for departments..."
                 fieldLabel="Departments Tag Root Path"
                 name="./tagRootPath"
-                rootPath="/content/cq:tags"/>
+                rootPath="/content/cq:tags/ogani/">
             <supportText
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
