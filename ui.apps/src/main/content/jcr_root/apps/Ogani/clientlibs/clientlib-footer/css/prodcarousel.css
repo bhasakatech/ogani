@@ -1,0 +1,231 @@
+/* ================= ROOT ================= */
+.product-carousel {
+    padding: 60px 80px;
+    background: #ffffff; 
+    font-family: "Cairo", sans-serif;
+}
+
+/* ================= HEADER ================= */
+.section-header h2 {
+    font-weight:800;
+    color: #1c1c1c;
+}
+
+h2{
+    font-size:36px;
+}
+
+.underline {
+    width: 80px;
+    height: 4px;
+    background: #7fad39;
+    margin-top: 10px;
+}
+
+/* ================= CAROUSEL ================= */
+.carousel-wrapper {
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+/* TRACK */
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    cursor: grab;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+/* ================= CARD ================= */
+.product-card {
+    flex: 0 0 calc(100% / 3 - 20px);
+    scroll-snap-align: start;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+/* ================= IMAGE ================= */
+.image-wrapper {
+    background: #f5f5f5;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-wrapper img {
+    max-width: 70%;
+    max-height: 180px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.1);
+}
+
+/* ================= BADGE ================= */
+.badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 60px;
+    height: 60px;
+    background: #ff2d2d;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* ================= HOVER ICONS ================= */
+.actions {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    display: flex;
+    gap: 10px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.product-card:hover .actions {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* ICON BASE */
+.icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* ICON DEFAULT */
+.icon i {
+    font-size: 14px;
+    color: #333;
+    transition: transform 0.5s ease, color 0.3s ease;
+}
+
+/*HOVER FIX (IMPORTANT) */
+.icon:hover {
+    background: #7fad39 !important;   /* force green */
+}
+
+.icon:hover i {
+    color: #fff !important;
+    transform: rotate(360deg);
+}
+
+.actions .icon {
+    background: #fff;
+}
+
+.product-card:hover .icon {
+    background: #fff;
+}
+
+/* ================= TEXT ================= */
+.product-info {
+    margin-top: 10px;
+}
+
+.category {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 6px;
+}
+
+.product-title {
+    margin-top:0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1c1c1c;
+    margin-bottom: 6px;
+}
+
+/* ================= PRICE ================= */
+.price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.price .current {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1c1c1c;
+}
+
+.price .original {
+    font-size: 14px;
+    color: #999;
+    text-decoration: line-through;
+}
+
+/* ================= DOTS ================= */
+.carousel-dots {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.carousel-dots span {
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    display: inline-block;
+    border-radius: 50%;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.carousel-dots span.active {
+    background: #7fad39;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablet (2 cards) */
+@media (max-width: 992px) {
+    .product-card {
+        flex: 0 0 calc(100% / 2 - 20px);
+    }
+}
+
+/* Mobile (1 card) */
+@media (max-width: 576px) {
+    .product-carousel {
+        padding: 40px 20px; /* adjust side spacing */
+    }
+
+    .product-card {
+        flex: 0 0 100%;
+    }
+}

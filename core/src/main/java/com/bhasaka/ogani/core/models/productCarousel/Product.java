@@ -1,28 +1,47 @@
 package com.bhasaka.ogani.core.models.productCarousel;
 
+
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.DefaultInjectionStrategy;
+import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
+
+@Model(
+        adaptables = Resource.class,
+        defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
+)
 public class Product {
 
+    @ValueMapValue
     private String title;
+    @ValueMapValue
     private String category;
+    @ValueMapValue
     private String image;
+    @ValueMapValue
     private double originalPrice;
+    @ValueMapValue
     private double currentPrice;
-    private int discount;
+    @ValueMapValue
+    private double discount;
 
-    public Product(String title, String category, String image,
-                   double originalPrice, double currentPrice, int discount) {
-        this.title = title;
-        this.category = category;
-        this.image = image;
-        this.originalPrice = originalPrice;
-        this.currentPrice = currentPrice;
-        this.discount = discount;
-    }
+    // Getters & Setters
 
     public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+
     public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+
     public String getImage() { return image; }
+    public void setImage(String image) { this.image = image; }
+
     public double getOriginalPrice() { return originalPrice; }
+    public void setOriginalPrice(double originalPrice) { this.originalPrice = originalPrice; }
+
     public double getCurrentPrice() { return currentPrice; }
-    public int getDiscount() { return discount; }
+    public void setCurrentPrice(double currentPrice) { this.currentPrice = currentPrice; }
+
+    public double getDiscount() { return discount; }
+    public void setDiscount(int discount) { this.discount = discount; }
 }

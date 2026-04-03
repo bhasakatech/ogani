@@ -1,57 +1,62 @@
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
 <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"/>
+<sly data-sly-call="${clientlib.css @ categories='ogani.product-carousel'}"/>
+<sly data-sly-call="${clientlib.js @ categories='ogani.product-carousel'}"/>
 
 <sly data-sly-call="${clientlib.css @ categories='Ogani.product-carousel'}"/>
 <sly data-sly-call="${clientlib.js @ categories='Ogani.product-carousel'}"/>
 
-<sly data-sly-use.model="com.Ogani.core.models.productCarousel.ProductCarouselModel"></sly>
+<sly data-sly-use.model="com.bhasaka.ogani.core.models.productCarousel.ProductCarouselModel"></sly>
 
 <div class="product-carousel">
 
-    <h2 class="section-title">Sale Off</h2>
-
-    <div class="carousel-wrapper swiper">
-
-        <div class="swiper-wrapper">
-
-            <div class="swiper-slide" data-sly-list.product="${model.products}">
+    <div class="section-header">
+       <h2 data-sly-test="${properties.title}">${properties.title}</h2>
+       <h2 data-sly-test="${!properties.title}">Sale Off</h2>
+       <div class="underline"></div>
+    </div>
+    <div class="carousel-wrapper">
+    <div class="carousel-track">
+        <sly data-sly-test="${model.productList && model.productList.size > 0}">
+            <sly data-sly-list.product="${model.productList}">
 
                 <div class="product-card">
 
-                    <div class="sale-badge">
+                    <div class="badge" data-sly-test="${product.discount > 0}">
                         -${product.discount}%
                     </div>
 
-                    <div class="product-image">
-                        <img src="${product.image}" alt="${product.title}" />
-                    </div>
-
-                    <div class="product-info">
-                        <span class="category">${product.category}</span>
-                        <h3>${product.title}</h3>
-
-                        <div class="price">
-                            <span class="current">$${product.currentPrice}</span>
-                            <span class="original">$${product.originalPrice}</span>
-                        </div>
+                    <div class="image-wrapper">
+                        <img src="${product.image @ context='uri'}" alt="${product.title}"/>
                     </div>
 
                     <div class="actions">
-                        <i class="fa fa-heart"></i>
-                        <i class="fa fa-exchange"></i>
-                        <button>Add to Cart</button>
+                        <button class="icon wishlist"><i class="fa fa-heart"></i></button>
+                        <button class="icon compare"><i class="fa fa-exchange"></i></button>
+                        <button class="icon cart"><i class="fa fa-shopping-cart"></i></button>
+                    </div>
+
+                    <div class="product-info">
+                        <p class="category">${product.category}</p>
+                        <h3 class="product-title">${product.title}</h3>
+
+                        <div class="price">
+                            <span class="current">₹${product.currentPrice}</span>
+                            <span class="original"
+                                  data-sly-test="${product.originalPrice > product.currentPrice}">
+                                ₹${product.originalPrice}
+                            </span>
+                        </div>
                     </div>
 
                 </div>
 
-            </div>
-
-        </div>
-
-        <!-- Navigation -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-
+            </sly>
+        </sly>
     </div>
-
+    <!-- DOTS -->
+    <div class="carousel-dots" id="carouselDots"></div>
+</div>
 </div>
