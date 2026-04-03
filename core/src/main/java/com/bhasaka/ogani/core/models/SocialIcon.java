@@ -5,29 +5,20 @@ import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
-@Model(
-        adaptables = Resource.class,
-        defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
-)
-public class ContactItem {
+@Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+public class SocialIcon {
+
     @ValueMapValue
     private String icon;
 
     @ValueMapValue
-    private String title;
-
-    @ValueMapValue
-    private String value;
+    private String link;
 
     public String getIcon() {
         return icon;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getValue() {
-        return value;
+    public String getLink() {
+        return link;
     }
 }
