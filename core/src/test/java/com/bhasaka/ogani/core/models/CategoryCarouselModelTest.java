@@ -21,9 +21,6 @@ class CategoryCarouselModelTest {
         context.addModelsForClasses(CategoryCarouselModel.class);
     }
 
-    // ---------------------------
-    // 1. cfPath NULL
-    // ---------------------------
     @Test
     void test_cfPathNull() {
 
@@ -37,9 +34,6 @@ class CategoryCarouselModelTest {
         assertTrue(model.getCategories().isEmpty());
     }
 
-    // ---------------------------
-    // 2. folder missing
-    // ---------------------------
     @Test
     void test_folderMissing() {
 
@@ -54,9 +48,6 @@ class CategoryCarouselModelTest {
         assertTrue(model.getCategories().isEmpty());
     }
 
-    // ---------------------------
-    // 3. empty folder
-    // ---------------------------
     @Test
     void test_emptyFolder() {
 
@@ -73,9 +64,7 @@ class CategoryCarouselModelTest {
         assertTrue(model.getCategories().isEmpty());
     }
 
-    // ---------------------------
-    // 4. missing data node
-    // ---------------------------
+    
     @Test
     void test_missingDataNode() {
 
@@ -92,9 +81,6 @@ class CategoryCarouselModelTest {
         assertTrue(model.getCategories().isEmpty());
     }
 
-    // ---------------------------
-    // 5. missing title/image (branch coverage)
-    // ---------------------------
     @Test
     void test_missingProperties() {
 
@@ -112,9 +98,6 @@ class CategoryCarouselModelTest {
         assertTrue(model.getCategories().isEmpty());
     }
 
-    // ---------------------------
-    // 6. SUCCESS CASE
-    // ---------------------------
     @Test
     void test_success() {
 
