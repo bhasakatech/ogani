@@ -1,0 +1,91 @@
+.container {
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 100%;
+  }
+}
+@media (min-width: 576px) {
+  .container {
+    max-width: 100%;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 100%;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+/*---------------------
+  Map
+-----------------------*/
+
+.map {
+  height: 500px;
+  position: relative;
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.custom-leaflet-popup h4 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1c1c1c;
+  margin: 0 0 8px 0;
+       display: flex;
+    justify-content: center;
+}
+
+.custom-leaflet-popup ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+}
+
+.custom-leaflet-popup ul li {
+  font-size: 16px;
+  color: #666666;
+  line-height: 22px;
+  margin-bottom: 4px;
+      display: flex;
+    justify-content: center;
+
+
+}
+
+.leaflet-popup-content {
+  width: 350px;
+    background: #ffffff;
+    text-align: center;
+    padding: 23px 0;
+    position: relative;
+    z-index: 1;
+    width: 349px;
+    height: 128px;
+    left: 5px;
+    top: -15px;
+}
+
+.leaflet-popup-content-wrapper{
+  /* transform: translateX(-75px); */
+  border-radius: 0;
+  height: 128px;
+    width: 350px;
+}
+
+
+
+/* ========================================= */
