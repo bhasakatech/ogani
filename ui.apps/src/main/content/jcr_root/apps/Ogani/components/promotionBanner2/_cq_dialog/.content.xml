@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Promotional Banner Configuration"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <title
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                fieldLabel="Title"
+                name="./title"/>
+            <description
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+                fieldLabel="Description"
+                name="./description"/>
+            <bgImage
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                rootPath= "/content/dam/Ogani/promobanner"
+                fieldLabel="Background Image"
+                name="./bgImage"/>
+            <alignment
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                fieldLabel="Alignment"
+                name="./alignment">
+                <items jcr:primaryType="nt:unstructured">
+                    <left
+                        jcr:primaryType="nt:unstructured"
+                        text="Left "
+                        value="left"/>
+                    <right
+                        jcr:primaryType="nt:unstructured"
+                        text="Right "
+                        value="right"/>
+                </items>
+            </alignment>
+        </items>
+    </content>
+</jcr:root>
