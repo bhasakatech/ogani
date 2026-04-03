@@ -1,0 +1,19 @@
+<sly data-sly-use.model="com.bhasaka.ogani.core.models.ContactSectionModel"
+     data-sly-use.placeholderTemplate="core/wcm/components/commons/v1/templates.html">
+    <section class="contact spad">
+        <div class="container">
+            <div class="row" data-sly-test="${model.contactItems}">
+                <sly data-sly-list.item="${model.contactItems}">
+                    <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                        <div class="contact__widget">
+                            <span class="${item.icon}"></span> 
+                            <h4>${item.title}</h4>
+                            <p>${item.value}</p>
+                        </div>
+                    </div>
+                </sly>
+            </div>  
+            <sly data-sly-call="${placeholderTemplate.placeholder @ isEmpty=!model.contactItems}"></sly>
+        </div>
+    </section>
+</sly>
