@@ -1,46 +1,44 @@
-// package com.bhasaka.ogani.core.models.beans;
+package com.bhasaka.ogani.core.models.beans;
 
-// import io.wcm.testing.mock.aem.junit5.AemContextExtension;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-// import static org.junit.jupiter.api.Assertions.assertEquals;
+class CategoryTest {
 
-// import org.junit.jupiter.api.Test;
-// import org.junit.jupiter.api.extension.ExtendWith;
-// import org.mockito.junit.jupiter.MockitoExtension;
+    @Test
+    void testConstructorAndGetters() {
+        String tag = "electronics";
+        String name = "Electronics";
 
+        Category category = new Category(tag, name);
 
-// import static org.junit.jupiter.api.Assertions.*;
+        assertNotNull(category);
+        assertEquals(tag, category.getTag());
+        assertEquals(name, category.getName());
+    }
 
-// class CategoryTest {
+    @Test
+    void testNullValues() {
+        Category category = new Category(null, null);
+        assertNotNull(category);
+        assertNull(category.getTag());
+        assertNull(category.getName());
+    }
 
-//     @Test
-//     void testConstructorAndGetters() {
-//         Category category = new Category(
-//                 "Apple",
-//                 "/content/dam/apple.png",
-//                 "/content/apple"
-//         );
+    @Test
+    void testEmptyValues() {
+        Category category = new Category("", "");
 
-//         assertEquals("Apple", category.getTitle());
-//         assertEquals("/content/dam/apple.png", category.getImage());
-//         assertEquals("/content/apple", category.getLink());
-//     }
+        assertNotNull(category);
+        assertEquals("", category.getTag());
+        assertEquals("", category.getName());
+    }
 
-//     @Test
-//     void testNullValues() {
-//         Category category = new Category(null, null, null);
+    @Test
+    void testDifferentValues() {
+        Category category = new Category("food", "Food Items");
 
-//         assertNull(category.getTitle());
-//         assertNull(category.getImage());
-//         assertNull(category.getLink());
-//     }
-
-//     @Test
-//     void testEmptyValues() {
-//         Category category = new Category("", "", "");
-
-//         assertEquals("", category.getTitle());
-//         assertEquals("", category.getImage());
-//         assertEquals("", category.getLink());
-//     }
-// }
+        assertEquals("food", category.getTag());
+        assertEquals("Food Items", category.getName());
+    }
+}
