@@ -1,0 +1,57 @@
+{
+  "parent": {
+    "jcr:primaryType": "nt:unstructured",
+    "headertopbar": {
+      "jcr:primaryType": "nt:unstructured",
+      "email": "test@test.com",
+      "loginLink": "/content/login",
+      "loginIcon": "icon-user",
+      "promotionalText": "Promo!",
+      "languages": ["en", "fr"],
+      "iconList": {
+        "jcr:primaryType": "nt:unstructured",
+        "item0": {
+          "jcr:primaryType": "nt:unstructured",
+          "icon": "fa-social",
+          "link": "https://social.com"
+        }
+      }
+    },
+    "happy-path": {
+      "jcr:primaryType": "nt:unstructured",
+      "phoneNumber": "+1 234 567 8900",
+      "supportText": "24/7 Customer Support",
+      "enableCart": true,
+      "tagRootPath": "/content/cq:tags/departments"
+    },
+    "fallback-phone": {
+      "jcr:primaryType": "nt:unstructured",
+      "tagRootPath": "/content/cq:tags/departments"
+    },
+    "blank-tag": {
+      "jcr:primaryType": "nt:unstructured",
+      "phoneNumber": "+1 234 567 8900",
+      "tagRootPath": ""
+    },
+    "invalid-tag": {
+      "jcr:primaryType": "nt:unstructured",
+      "phoneNumber": "+1 234 567 8900",
+      "tagRootPath": "/content/cq:tags/invalid"
+    }
+  },
+  "parent-missing-topbar": {
+    "jcr:primaryType": "nt:unstructured",
+    "current": {
+      "jcr:primaryType": "nt:unstructured"
+    }
+  },
+  "fail-adaptation": {
+    "jcr:primaryType": "nt:unstructured",
+    "headertopbar": {
+      "jcr:primaryType": "nt:unstructured"
+    },
+    "current": {
+      "jcr:primaryType": "nt:unstructured"
+    }
+  }
+}
