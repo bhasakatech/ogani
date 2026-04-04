@@ -1,6 +1,5 @@
 #base=js
 
 jquery.js
-main.js
+leaflet.js
 bootstrap.js
-popper.js
