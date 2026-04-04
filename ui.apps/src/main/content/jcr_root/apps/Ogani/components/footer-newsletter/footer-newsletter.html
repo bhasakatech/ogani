@@ -1,0 +1,21 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"/>
+<sly data-sly-call="${clientlib.css @ categories='ogani.fontawesome'}"/>
+
+<sly data-sly-use.model="com.bhasaka.ogani.core.models.FooterNewsletterModel"/>
+
+<div class="footer-newsletter">
+    <h3 class="footer-newsletter-title">${model.title}</h3>
+    <p>${model.description}</p>
+    <div class="newsletter-box">
+        <input type="email" placeholder="Enter your mail"/>
+        <button>SUBSCRIBE</button>
+    </div>
+      <ul class="social-icons" data-sly-list.item="${model.socialLinks}">
+        <li>
+            <a href="${item.url}">
+                <i class="${item.iconClass}"></i>
+            </a>   
+        </li>
+    </ul>
+
+</div>
