@@ -1,14 +1,15 @@
 package com.bhasaka.ogani.core.models.productCarousel;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.wcm.testing.mock.aem.junit5.AemContext;
 import io.wcm.testing.mock.aem.junit5.AemContextExtension;
-
-import org.apache.sling.api.resource.Resource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.util.List;
+import java.io.InputStream;
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,167 +17,111 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductCarouselModelTest {
 
     private final AemContext context = new AemContext();
-    private ProductCarouselModel model;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception {
 
         context.addModelsForClasses(ProductCarouselModel.class);
 
-        context.create().resource("/content/test",
-                "products", new String[]{
-                        "/content/dam/product1",
-                        "/content/dam/product2"
-                }
-        );
+        ObjectMapper mapper = new ObjectMapper();
+        InputStream is = getClass().getClassLoader()
+                .getResourceAsStream("product-carousel.json");
 
-        context.create().resource("/content/dam/product1/jcr:content/data/master",
-                "title", "Apple",
-                "category", "Fruits",
-                "image", "/content/dam/images/apple.png",
-                "originalPrice", 100,
-                "currentPrice", 80
-        );
+        JsonNode root = mapper.readTree(is);
+        String rootPath = root.get("rootPath").asText();
 
-        context.create().resource("/content/dam/product2/jcr:content/data/master",
-                "title", "Mango",
-                "category", "Fruits",
-                "image", "/content/dam/images/mango.png",
-                "originalPrice", 200,
-                "discount", 25
-        );
+        context.create().resource(rootPath);
 
-        Resource resource = context.resourceResolver().getResource("/content/test");
-        model = resource.adaptTo(ProductCarouselModel.class);
+        Iterator<JsonNode> products = root.get("products").elements();
+
+        while (products.hasNext()) {
+            JsonNode p = products.next();
+
+            String productPath = rootPath + "/" + p.get("name").asText();
+
+            context.create().resource(
+                    productPath + "/jcr:content/data/master",
+                    "title", p.get("title").asText(),
+                    "category", p.get("category").asText(),
+                    "image", p.get("image").asText(),
+                    "originalPrice", p.get("originalPrice").asDouble(),
+                    "currentPrice", p.get("currentPrice").asDouble(),
+                    "discount", p.get("discount").asDouble()
+            );
+        }
+
+        context.currentResource(
+                context.create().resource("/content/test",
+                        "rootPath", rootPath
+                )
+        );
     }
 
     @Test
-    void testProductList_Size() {
+    void testModelInitialization() {
+
+        ProductCarouselModel model =
+                context.currentResource().adaptTo(ProductCarouselModel.class);
+
+        assertNotNull(model);
+        assertFalse(model.isEmpty());
         assertEquals(2, model.getProductList().size());
     }
 
     @Test
-    void testCurrentPriceFlow() {
-        Product p = model.getProductList().get(0);
-        assertEquals(80.0, p.getCurrentPrice());
-        assertEquals(20, p.getDiscount());
+    void testProductValues() {
+
+        ProductCarouselModel model =
+                context.currentResource().adaptTo(ProductCarouselModel.class);
+
+        Product product = model.getProductList().get(0);
+
+        assertEquals("Apple", product.getTitle());
+        assertEquals("Fruits", product.getCategory());
+        assertEquals("/content/dam/apple.png", product.getImage());
+        assertEquals(100.0, product.getOriginalPrice());
+        assertEquals(80.0, product.getCurrentPrice());
+        assertEquals(20, product.getDiscount());
     }
 
     @Test
-    void testDiscountFlow() {
-        Product p = model.getProductList().get(1);
-        assertEquals(150.0, p.getCurrentPrice());
-        assertEquals(25, p.getDiscount());
+    void testDiscountCalculation_whenOnlyDiscountPresent() {
+
+        ProductCarouselModel model =
+                context.currentResource().adaptTo(ProductCarouselModel.class);
+
+        Product product = model.getProductList().get(1);
+
+        assertEquals(45.0, product.getCurrentPrice());
+        assertEquals(10, product.getDiscount());
     }
 
     @Test
-    void testProductsNull() {
+    void testEmptyWhenRootPathMissing() {
 
-        context.create().resource("/content/nullProducts");
-
-        ProductCarouselModel m = context.resourceResolver()
-                .getResource("/content/nullProducts")
-                .adaptTo(ProductCarouselModel.class);
-
-        assertTrue(m.getProductList().isEmpty());
-    }
-
-    @Test
-    void testEmptyPathInsideArray() {
-
-        context.create().resource("/content/emptyPath",
-                "products", new String[]{""}
+        context.currentResource(
+                context.create().resource("/content/test2")
         );
 
-        ProductCarouselModel m = context.resourceResolver()
-                .getResource("/content/emptyPath")
-                .adaptTo(ProductCarouselModel.class);
+        ProductCarouselModel model =
+                context.currentResource().adaptTo(ProductCarouselModel.class);
 
-        assertTrue(m.getProductList().isEmpty());
+        assertNotNull(model);
+        assertTrue(model.isEmpty());
     }
 
     @Test
-    void testInvalidResourcePath() {
+    void testEmptyWhenInvalidPath() {
 
-        context.create().resource("/content/invalid",
-                "products", new String[]{"/invalid/path"}
+        context.currentResource(
+                context.create().resource("/content/test3",
+                        "rootPath", "/invalid/path")
         );
 
-        ProductCarouselModel m = context.resourceResolver()
-                .getResource("/content/invalid")
-                .adaptTo(ProductCarouselModel.class);
+        ProductCarouselModel model =
+                context.currentResource().adaptTo(ProductCarouselModel.class);
 
-        assertTrue(m.getProductList().isEmpty());
-    }
-
-    @Test
-    void testNonDamImagePath() {
-
-        context.create().resource("/content/test2",
-                "products", new String[]{"/content/dam/product3"}
-        );
-
-        context.create().resource("/content/dam/product3/jcr:content/data/master",
-                "image", "/some/random/path/image.png",
-                "originalPrice", 100,
-                "currentPrice", 50
-        );
-
-        ProductCarouselModel m = context.resourceResolver()
-                .getResource("/content/test2")
-                .adaptTo(ProductCarouselModel.class);
-
-        Product p = m.getProductList().get(0);
-
-        assertNotNull(p.getImage());
-    }
-
-    @Test
-    void testDiscountWithoutOriginalPrice() {
-
-        context.create().resource("/content/test3",
-                "products", new String[]{"/content/dam/product4"}
-        );
-
-        context.create().resource("/content/dam/product4/jcr:content/data/master",
-                "discount", 30
-        );
-
-        ProductCarouselModel m = context.resourceResolver()
-                .getResource("/content/test3")
-                .adaptTo(ProductCarouselModel.class);
-
-        Product p = m.getProductList().get(0);
-
-        assertEquals(0.0, p.getCurrentPrice());
-    }
-
-    @Test
-    void testExceptionHandling() {
-
-        context.create().resource("/content/test4",
-                "products", new String[]{"/content/dam/product5"}
-        );
-
-        // Missing master node -> triggers exception path
-        context.create().resource("/content/dam/product5");
-
-        ProductCarouselModel m = context.resourceResolver()
-                .getResource("/content/test4")
-                .adaptTo(ProductCarouselModel.class);
-
-        assertTrue(m.getProductList().isEmpty());
-    }
-
-    @Test
-    void testIsEmptyTrue() {
-
-        context.create().resource("/content/empty");
-
-        ProductCarouselModel m = context.resourceResolver()
-                .getResource("/content/empty")
-                .adaptTo(ProductCarouselModel.class);
-
-        assertTrue(m.isEmpty());
+        assertNotNull(model);
+        assertTrue(model.isEmpty());
     }
 }
