@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Main Header Config"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <logo
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/wcm/components/image/v3/image/cq:dialog"/>
+            <phone
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                emptyText="+65 11.188.888"
+                fieldLabel="Phone Number"
+                name="./phoneNumber"/>
+            <tagPath
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                emptyText="Select the root tag for departments..."
+                fieldLabel="Departments Tag Root Path"
+                name="./tagRootPath"
+                rootPath="/content/cq:tags/ogani/">
+            <supportText
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                emptyText="Support text..."
+                fieldLabel="Support Text"
+                name="./supportText"/>
+            <enableCart
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                checked="{Boolean}true"
+                name="./enableCart"
+                text="Enable/disable wishlist and cart"
+                uncheckedValue="{Boolean}false"
+                value="{Boolean}true"/>
+        </items>
+    </content>
+</jcr:root>

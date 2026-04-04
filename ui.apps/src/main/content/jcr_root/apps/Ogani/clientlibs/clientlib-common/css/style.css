@@ -653,8 +653,6 @@ ol {
     position: absolute;
     width: 90%;
     background: #fff;
-    z-index: 9999;
-
 }
 
 .hero__categories ul li {
@@ -3019,7 +3017,7 @@ justify-content: space-between;
 
 @media only screen and (min-width: 1200px) {
   .container {
-    max-width: 1300px;
+    max-width: 1170px;
   }
   
 }
@@ -3424,7 +3422,6 @@ justify-content: space-between;
     position: relative;
     width: 100%;
     background: #fff;
-
 }
   .hero__categories {
     margin-bottom: 30px;
