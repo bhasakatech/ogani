@@ -297,7 +297,6 @@ public class BlogPagesModel {
         for (int i = start; i <= end; i++) {
             pages.add(i);
         }
-
         return pages;
     }
 
