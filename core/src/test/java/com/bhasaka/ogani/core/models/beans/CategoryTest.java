@@ -1,19 +1,44 @@
 package com.bhasaka.ogani.core.models.beans;
 
-import io.wcm.testing.mock.aem.junit5.AemContextExtension;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
-import static junitx.framework.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith({AemContextExtension.class, MockitoExtension.class})
 class CategoryTest {
 
     @Test
     void testConstructorAndGetters() {
+        String tag = "electronics";
+        String name = "Electronics";
 
-        Category category = new Category("fresh-meat", "Fresh Meat");
-        assertEquals("fresh-meat", category.getTag());
-        assertEquals("Fresh Meat", category.getName());
+        Category category = new Category(tag, name);
+
+        assertNotNull(category);
+        assertEquals(tag, category.getTag());
+        assertEquals(name, category.getName());
+    }
+
+    @Test
+    void testNullValues() {
+        Category category = new Category(null, null);
+        assertNotNull(category);
+        assertNull(category.getTag());
+        assertNull(category.getName());
+    }
+
+    @Test
+    void testEmptyValues() {
+        Category category = new Category("", "");
+
+        assertNotNull(category);
+        assertEquals("", category.getTag());
+        assertEquals("", category.getName());
+    }
+
+    @Test
+    void testDifferentValues() {
+        Category category = new Category("food", "Food Items");
+
+        assertEquals("food", category.getTag());
+        assertEquals("Food Items", category.getName());
     }
 }
