@@ -1,0 +1,79 @@
+<sly data-sly-use.model="com.bhasaka.ogani.core.models.cartpage.CpProductModel"/>
+
+<div class="cart-container">
+
+    <table class="cart-table">
+        <tr>
+            <th>${model.productsLabel}</th>
+            <th >${model.priceLabel}</th>
+            <th style="width:5px;transform: translateX(-30px);">${model.quantityLabel}</th>
+            <th>${model.totalLabel}</th>
+            <th></th>
+        </tr>
+
+        <sly data-sly-list.item="${model.productList}">
+            <tr class="cart-row" data-price="${item.currentPrice}">
+
+                <td class="product-info">
+                    <img src="${item.image}" alt="${item.title}">
+                    <span>${item.title}</span>
+                </td>
+
+                <td>$${item.currentPrice}</td>
+
+                <td>
+                    <div class="qty-box">
+                        <button class="minus">-</button>
+                        <input type="text" value="1" class="qty"/>
+                        <button class="plus">+</button>
+                    </div>
+                </td>
+
+                <td class="row-total">$${item.currentPrice}</td>
+
+                <td>
+                    <button class="remove">x</button>
+                </td>
+
+            </tr>
+        </sly>
+
+    </table>
+
+    <!-- ACTIONS -->
+    <div class="cart-actions">
+     <button onclick="window.location.href='${model.continueShoppingLink @ extension='html'}'">
+        ${model.continueShoppingLabel}
+    </button>
+
+    <button onclick="window.location.href='${model.updateCartLink @ extension='html'}'">
+        ${model.updateCartLabel}
+    </button>
+    </div>
+<!--
+    <button class="checkout"
+        onclick="window.location.href='${model.checkoutLink @ extension='html'}'">
+        ${model.checkoutLabel}
+    </button>
+-->
+    <div class="coupon-section">
+        <h4 class="coupon-title">Discount Codes</h4>
+    </div>
+
+    <!-- COUPON -->
+    <div class="coupon">
+        <input type="text" placeholder="${model.couponPlaceholder}">
+        <button>${model.applyCouponLabel}</button>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="cart-summary">
+        <h3>${model.cartTotalLabel}</h3>
+        <p>${model.subtotalLabel} <span id="subtotal">$0</span></p>
+        <p>${model.totalSummaryLabel} <span id="total">$0</span></p>
+        <button class="checkout"
+        onclick="window.location.href='${model.checkoutLink @ extension='html'}'">
+        ${model.checkoutLabel}
+    </button>
+
+</div>
