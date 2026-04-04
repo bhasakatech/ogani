@@ -20,7 +20,6 @@ class CategoryTest {
     @Test
     void testNullValues() {
         Category category = new Category(null, null);
-
         assertNotNull(category);
         assertNull(category.getTag());
         assertNull(category.getName());
