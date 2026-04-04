@@ -114,16 +114,16 @@ public class BlogPagesModel {
         int totalMatches = (int) result.getTotalMatches();
         totalPages = (int) Math.ceil((double) totalMatches / limit);
 
-        for (Iterator<Resource> it = result.getResources(); it.hasNext(); ) {
-            Resource res = it.next();
+        for (Iterator<Resource> iterator = result.getResources(); iterator.hasNext(); ) {
+            Resource res = iterator.next();
 
             Resource content = res.getChild("jcr:content");
             if (content == null) continue;
 
-            ValueMap vm = content.getValueMap();
+            ValueMap valueMap = content.getValueMap();
 
-            String title = vm.get("jcr:title", "");
-            String description = vm.get("jcr:description", "");
+            String title = valueMap.get("jcr:title", "");
+            String description = valueMap.get("jcr:description", "");
 
             String image = "";
             Resource imageRes = findImageResource(content);
@@ -131,7 +131,7 @@ public class BlogPagesModel {
                 image = imageRes.getValueMap().get("fileReference", "");
             }
 
-            Date date = vm.get("jcr:created", Date.class);
+            Date date = valueMap.get("jcr:created", Date.class);
 
             String formattedDate = "";
             if (date != null) {
@@ -172,9 +172,9 @@ public class BlogPagesModel {
         // Step 2: Iterate tags
         for (Resource child : root.getChildren()) {
 
-            ValueMap vm = child.getValueMap();
+            ValueMap childValueMap = child.getValueMap();
 
-            String title = vm.get("jcr:title", child.getName());
+            String title = childValueMap.get("jcr:title", child.getName());
 
             String tagId = child.getPath()
                     .replace("/content/cq:tags/", "")
@@ -221,23 +221,23 @@ public class BlogPagesModel {
 
         SearchResult result = query.getResult();
 
-        for (Iterator<Resource> it = result.getResources(); it.hasNext();) {
+        for (Iterator<Resource> searchResultIterator = result.getResources(); searchResultIterator.hasNext();) {
 
-            Resource res = it.next();
+            Resource res = searchResultIterator.next();
             Resource content = res.getChild("jcr:content");
 
             if (content == null) continue;
 
-            ValueMap vm = content.getValueMap();
+            ValueMap contentValueMap = content.getValueMap();
 
             // Title
-            String title = vm.get("jcr:title", "");
+            String title = contentValueMap.get("jcr:title", "");
 
             // Path
             String path = res.getPath() + ".html";
 
             // Image
-            String image = vm.get("cq:featuredimage/fileReference", String.class);
+            String image = contentValueMap.get("cq:featuredimage/fileReference", String.class);
 
             if (image == null || image.isEmpty()) {
                 Resource featured = content.getChild("cq:featuredimage");
@@ -246,7 +246,7 @@ public class BlogPagesModel {
                 }
             }
 
-            Date date = vm.get("jcr:created", Date.class);
+            Date date = contentValueMap.get("jcr:created", Date.class);
 
             String formattedDate = "";
             if (date != null) {
