@@ -4,11 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CategoryTest {
-
+class ProductCategoryTest {
     @Test
     void testConstructorAndGetters() {
-        Category category = new Category(
+        ProductCategory category = new ProductCategory(
                 "Apple",
                 "/content/dam/apple.png",
                 "/content/apple"
@@ -21,7 +20,7 @@ class CategoryTest {
 
     @Test
     void testNullValues() {
-        Category category = new Category(null, null, null);
+        ProductCategory category = new ProductCategory(null, null, null);
 
         assertNull(category.getTitle());
         assertNull(category.getImage());
@@ -30,7 +29,7 @@ class CategoryTest {
 
     @Test
     void testEmptyValues() {
-        Category category = new Category("", "", "");
+        ProductCategory category = new ProductCategory("", "", "");
 
         assertEquals("", category.getTitle());
         assertEquals("", category.getImage());
