@@ -1,0 +1,15 @@
+{
+  "happy-path": {
+    "jcr:primaryType": "nt:unstructured",
+    "icon": "fa-facebook",
+    "link": "https://facebook.com/ogani"
+  },
+  "missing-icon-path": {
+    "jcr:primaryType": "nt:unstructured",
+    "link": "https://twitter.com/ogani"
+  },
+  "missing-link-path": {
+    "jcr:primaryType": "nt:unstructured",
+    "icon": "fa-twitter"
+  }
+}

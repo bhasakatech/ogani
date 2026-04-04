@@ -1,7 +1,7 @@
 package com.bhasaka.ogani.core.models.beans;
 
 public class Category {
-
+    
     private String tag;
     private String name;
 
