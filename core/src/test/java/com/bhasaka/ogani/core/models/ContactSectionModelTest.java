@@ -22,7 +22,7 @@ class ContactSectionModelTest {
     void setUp() {
         ctx.addModelsForClasses(ContactSectionModel.class, ContactItem.class);
 
-        ctx.load().json("/ContactSectionTest.json", "/content/contact");
+        ctx.load().json("/contact-Section-Test.json", "/content/contact");
     }
 
     @Test
