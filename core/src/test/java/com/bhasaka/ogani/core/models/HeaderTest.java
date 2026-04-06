@@ -24,7 +24,7 @@ class HeaderTest {
     @BeforeEach
     void setUp() {
         ctx.addModelsForPackage("com.bhasaka.ogani.core.models");
-        ctx.load().json("/HeaderTest.json", "/content/ogani");
+        ctx.load().json("/headerTest.json", "/content/ogani");
     }
 
     @Test

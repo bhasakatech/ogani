@@ -20,7 +20,7 @@ class SocialIconTest {
     @BeforeEach
     void setUp() {
         ctx.addModelsForClasses(SocialIcon.class);
-        ctx.load().json("/SocialIconTest.json", "/content/socialicons");
+        ctx.load().json("/socialIconTest.json", "/content/socialicons");
     }
 
     @Test
