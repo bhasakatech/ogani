@@ -22,7 +22,7 @@ class HeaderTopBarTest {
     @BeforeEach
     void setUp() {
        ctx.addModelsForPackage("com.bhasaka.ogani.core.models");
-        ctx.load().json("/HeaderTopBarTest.json", "/content/ogani/headertopbar");
+        ctx.load().json("/headerTopBarTest.json", "/content/ogani/headertopbar");
     }
 
     @Test
