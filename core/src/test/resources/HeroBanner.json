@@ -1,0 +1,13 @@
+{
+  "eyebrowText": "Fresh Veggies",
+  "heroDesc": "<strong>100% Organic</strong>",
+  "subText": "Healthy and affordable",
+  "bannerImage": {
+    "fileReference": "/content/dam/Ogani/home/banner.jpg"
+  },
+  "ctaButton": {
+    "jcr:title": "Shop",
+    "linkURL": "/content/Ogani/us/en/home"
+  }
+
+}

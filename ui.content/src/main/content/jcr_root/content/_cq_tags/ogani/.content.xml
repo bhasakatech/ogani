@@ -6,4 +6,5 @@
     sling:resourceType="cq/tagging/components/tag">
     <products/>
     <blog-categories/>
+    <all-departments/>
 </jcr:root>

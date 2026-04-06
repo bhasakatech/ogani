@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Featured Products"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <sectionTitle
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                fieldLabel="Section Title"
+                name="./sectionTitle"/>
+            <categoryTags
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                composite="{Boolean}true"
+                fieldLabel="Category Tags">
+                <field
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/container"
+                    name="./categoryTags"
+                    rootPath="/content/cq:tags/ogani">
+                    <items jcr:primaryType="nt:unstructured">
+                        <categoryTag
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="cq/gui/components/coral/common/form/tagfield"
+                            fieldLabel="Product Tag"
+                            name="./categoryTag"
+                            rootPath="/content/cq:tags/ogani"/>
+                    </items>
+                </field>
+            </categoryTags>
+            <numberOfProducts
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                fieldLabel="Number of Products to Display"
+                max="20"
+                min="1"
+                name="./numberOfProducts"/>
+            <enableHoverActions
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                fieldLabel="Enable Hover Actions"
+                name="./enableHoverActions"
+                text="Enable Hover Actions"
+                value="{Boolean}true"/>
+        </items>
+    </content>
+</jcr:root>
