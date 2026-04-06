@@ -1,0 +1,42 @@
+{
+  "test": {
+    "productsLabel": "Products",
+    "priceLabel": "Price",
+    "quantityLabel": "Quantity",
+    "totalLabel": "Total",
+    "products": {
+      "item1": {
+        "cfPath": "/content/dam/product1"
+      },
+      "item2": {
+        "cfPath": "/content/dam/product2"
+      }
+    }
+  },
+  "dam": {
+    "product1": {
+      "jcr:content": {
+        "data": {
+          "master": {
+            "title": "Apple",
+            "category": "Fruits",
+            "image": "/content/dam/apple.png",
+            "currentPrice": 80
+          }
+        }
+      }
+    },
+    "product2": {
+      "jcr:content": {
+        "data": {
+          "master": {
+            "title": "Milk",
+            "category": "Dairy",
+            "image": "/content/dam/milk.png",
+            "currentPrice": 50
+          }
+        }
+      }
+    }
+  }
+}
