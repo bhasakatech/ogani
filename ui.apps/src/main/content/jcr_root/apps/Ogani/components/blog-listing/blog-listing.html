@@ -1,0 +1,35 @@
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<div class="blog-section" data-sly-use.model="com.bhasaka.ogani.core.models.BlogListingModel">
+    <div class="blog-listing-component">
+        <h2 class="blog-heading">${model.blogTitle}</h2>
+        <div class="blog-container"  data-sly-list.blog="${model.blogs}">
+            <div class="blog-card">
+                <div class="blog-image">
+                <a href="${blog.path}">
+                    <img src="${blog.image}" alt="${blog.title}">
+                </a>
+            </div>
+
+            <div class="blog-meta">
+                <span class="date">
+                    <i class="fa fa-calendar"></i> ${blog.publishDate}
+                </span>
+
+                <span class="comments">
+                    <i class="fa fa-comment"></i> 5
+                </span>
+            </div>
+
+            <h3 class="blog-title">
+                <a href="${blog.path}">${blog.title}</a>
+            </h3>
+
+            <p class="blog-desc">${blog.description}</p>
+
+            </div>
+        </div>
+    </div>
+</div>
