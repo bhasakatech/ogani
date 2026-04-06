@@ -4,7 +4,7 @@
     xmlns:cq="http://www.day.com/jcr/cq/1.0"
     xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
     jcr:primaryType="nt:unstructured"
-    jcr:title ="Cart Page"
+    jcr:title ="Product Cart"
     sling:resourceType="cq/gui/components/authoring/dialog">
 
     <content jcr:primaryType="nt:unstructured"
@@ -12,30 +12,30 @@
 
         <items jcr:primaryType="nt:unstructured">
 
-    <products
-    jcr:primaryType="nt:unstructured"
-    sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
-    fieldLabel="Products"
-    composite="{Boolean}true">
-
-    <field
-        jcr:primaryType="nt:unstructured"
-        sling:resourceType="granite/ui/components/coral/foundation/container"
-        name="./products">
-
-        <items jcr:primaryType="nt:unstructured">
-
-            <cfPath
+        <products
                 jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
-                fieldLabel="Content Fragment Path"
-                name="./cfPath"
-                rootPath="/content/dam/Ogani/content-fragments/sales"
-                required="{Boolean}true"/>
-        </items>
+                sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                fieldLabel="Products"
+                composite="{Boolean}true">
 
-    </field>
-</products>
+                <field
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/container"
+                    name="./products">
+
+                    <items jcr:primaryType="nt:unstructured">
+
+                        <cfPath
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                            fieldLabel="Content Fragment Path"
+                            name="./cfPath"
+                            rootPath="/content/dam/Ogani/content-fragments/sales"
+                            required="{Boolean}true"/>
+                    </items>
+
+                </field>
+            </products>
 
             <productsLabel jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
