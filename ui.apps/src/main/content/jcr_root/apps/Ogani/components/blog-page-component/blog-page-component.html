@@ -89,13 +89,14 @@
            class="tag ${!param.category ? 'active' : ''}">
             All
         </a>
-
-        <sly data-sly-list.cat="${model.categories.entrySet}">
-            <a href="?category=${cat.key}&search=${param.search}"
-               class="tag ${param.category == cat.key ? 'active' : ''}">
-                ${cat.value}
+        
+        <sly data-sly-list.cat="${model.categories}">
+            <a href="?category=${cat.tagId}&search=${param.search}"
+               class="${param.category == cat.tagId ? 'active' : ''}">
+                ${cat.title}
             </a>
-        </sly>
+    	</sly>
+
 
     </div>
 </div>

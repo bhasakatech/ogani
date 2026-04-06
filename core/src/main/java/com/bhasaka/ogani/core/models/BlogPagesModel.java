@@ -1,6 +1,5 @@
 package com.bhasaka.ogani.core.models;
 
-import com.bhasaka.ogani.core.models.beans.BlogItem;
 import com.bhasaka.ogani.core.models.beans.BlogPageItem;
 import com.bhasaka.ogani.core.models.beans.CategoryItem;
 import com.day.cq.search.Query;
@@ -149,7 +148,7 @@ public class BlogPagesModel {
         }
     }
 
-    // LOAD CATEGORIES
+    // Load Categories
     private void loadCategories() {
 
         if (categoryRootPath == null || blogParentPath == null || queryBuilder == null) return;
@@ -157,36 +156,24 @@ public class BlogPagesModel {
         Resource root = resourceResolver.getResource(categoryRootPath);
         if (root == null) return;
 
-        Iterator<Resource> children = root.listChildren();
-
-        // Step 1: Navigate to actual tags
-        if (children.hasNext()) {
-            Resource firstChild = children.next();
-            if (firstChild.hasChildren()) {
-                root = firstChild;
-            }
-        }
-
         Session session = resourceResolver.adaptTo(Session.class);
 
-        // Step 2: Iterate tags
         for (Resource child : root.getChildren()) {
 
-            ValueMap childValueMap = child.getValueMap();
+            ValueMap vm = child.getValueMap();
 
-            String title = childValueMap.get("jcr:title", child.getName());
+            String title = vm.get("jcr:title", child.getName());
 
             String tagId = child.getPath()
                     .replace("/content/cq:tags/", "")
                     .replaceFirst("/", ":");
 
             Map<String, String> map = new HashMap<>();
-
             map.put("path", blogParentPath);
             map.put("type", "cq:Page");
             map.put("property", "jcr:content/cq:tags");
             map.put("property.value", tagId);
-            map.put("p.limit", "0"); // only count, no results
+            map.put("p.limit", "0");
 
             Query query = queryBuilder.createQuery(
                     com.day.cq.search.PredicateGroup.create(map),

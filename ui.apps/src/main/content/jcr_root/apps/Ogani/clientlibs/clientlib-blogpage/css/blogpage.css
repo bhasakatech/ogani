@@ -122,10 +122,6 @@
     border-radius: 5px;
 }
 
-.recent-text {
-    flex: 1;
-}
-
 .recent-text a {
     font-size: 14px;
     font-weight: 600;
@@ -142,17 +138,12 @@
 .recent-text span {
     font-size: 12px;
     color: #999;
-}
-
-.recent-text span {
-    font-size: 12px;
-    color: #999;
     display: block;
     margin-top: 4px;
 }
 
 /* =========================
-   SEARCH BY (TAGS)
+   SEARCH BY (TAGS) ✅ IMPROVED
 ========================= */
 .tag-box {
     display: flex;
@@ -160,26 +151,33 @@
     gap: 10px;
 }
 
-.tag {
+/* TAG BASE */
+.tag-box a {
     font-size: 12px;
     color: #666;
     border: 1px solid #eee;
     padding: 6px 14px;
     text-decoration: none;
     background: #f5f5f5;
-    transition: 0.3s;
-    border-radius: 8px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
-.tag:hover {
+/* HOVER */
+.tag-box a:hover {
     background: #7fad39;
     color: #fff;
     border-color: #7fad39;
+    transform: translateY(-2px);
 }
 
-.tag.active {
-    color: #666;
+/* ACTIVE */
+.tag-box a.active {
+    background: #7fad39;
+    color: #fff;
     border-color: #7fad39;
+    font-weight: 500;
 }
 
 /* =========================
@@ -243,7 +241,6 @@
 
 .blog-title-a:hover {
     color: #7fad39;
-    cursor: pointer;
 }
 
 .blog-body p {
@@ -285,7 +282,6 @@
     flex-wrap: wrap;
 }
 
-/* BUTTON STYLE */
 .pagination a {
     display: inline-flex;
     align-items: center;
@@ -294,7 +290,7 @@
     height: 40px;
     padding: 0 12px;
     border: 1px solid #e1e1e1;
-    border-radius: 5;
+    border-radius: 5px; /* FIXED */
     text-decoration: none;
     font-size: 14px;
     color: #666;
@@ -302,7 +298,6 @@
     transition: all 0.3s ease;
 }
 
-/* HOVER EFFECT */
 .pagination a:hover {
     background: #7fad39;
     color: #fff;
@@ -310,7 +305,6 @@
     transform: translateY(-2px);
 }
 
-/* ACTIVE PAGE */
 .pagination a.active {
     background: #7fad39;
     color: #fff;
@@ -318,20 +312,16 @@
     font-weight: 600;
 }
 
-/* PREV / NEXT SPECIAL STYLE */
 .pagination a:first-child,
 .pagination a:last-child {
-    border-radius: 5px;
     padding: 0 18px;
     min-width: auto;
 }
 
-/* DISABLED (optional if you add logic later) */
 .pagination a.disabled {
     pointer-events: none;
     opacity: 0.5;
 }
-
 
 /* =========================
    RESPONSIVE
@@ -339,17 +329,12 @@
 
 /* TABLET */
 @media (max-width: 992px) {
-
     .blog-container {
         flex-direction: column;
         padding: 20px;
     }
 
-    .blog-sidebar {
-        width: 100%;
-        margin-top: 0;
-    }
-
+    .blog-sidebar,
     .blog-content {
         width: 100%;
     }
@@ -371,7 +356,7 @@
         height: 65px;
     }
 
-    .tag {
+    .tag-box a {
         font-size: 11px;
         padding: 5px 10px;
     }
@@ -383,8 +368,6 @@
     .blog-body p {
         font-size: 13px;
     }
-    
-    @media (max-width: 768px) {
 
     .pagination {
         gap: 6px;
@@ -400,8 +383,6 @@
     .pagination a:last-child {
         padding: 0 12px;
     }
-}
-
 }
 
 /* SMALL MOBILE */
