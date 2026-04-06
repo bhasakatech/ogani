@@ -1,0 +1,29 @@
+#primary-btn {
+	display: inline-block;
+	font-size: 14px;
+	padding: 10px 28px 10px;
+	color: #ffffff;
+	text-transform: uppercase;
+	font-weight: 700;
+	background: #7fad39;
+	letter-spacing: 2px;
+    text-decoration:none;
+}
+
+.primary-btn:hover {
+  background: #6e9f2f;     /* subtle hover effect */
+  color: #fff;
+  text-decoration: none;   /* keep underline off on hover */
+}
+
+
+.site-btn {
+	font-size: 14px;
+	color: #ffffff;
+	font-weight: 800;
+	text-transform: uppercase;
+	display: inline-block;
+	padding: 13px 30px 12px;
+	background: #7fad39;
+	border: none;
+}
