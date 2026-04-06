@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Product Details"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/tabs">
+        <items jcr:primaryType="nt:unstructured">
+            <cfTab
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Content Fragment"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <cfPath
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                        fieldLabel="Content Fragment Path"
+                        name="./cfPath"
+                        rootPath="/content/dam/Ogani/productdetailscf"/>
+                </items>
+            </cfTab>
+            <metaTab
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Product Meta"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <availability
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                        fieldLabel="Availability"
+                        name="./availability">
+                        <items jcr:primaryType="nt:unstructured">
+                            <inStock
+                                jcr:primaryType="nt:unstructured"
+                                text="In Stock"
+                                value="In Stock"/>
+                            <outStock
+                                jcr:primaryType="nt:unstructured"
+                                text="Out of Stock"
+                                value="Out of Stock"/>
+                        </items>
+                    </availability>
+                    <shipping
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        emptyText="e.g. 1 day shipping. Free pickup today"
+                        fieldLabel="Shipping Info"
+                        name="./shipping"/>
+                    <weight
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        emptyText="e.g. 0.5 kg"
+                        fieldLabel="Weight"
+                        name="./weight"/>
+                    <facebook
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="Facebook URL"
+                        name="./facebook"/>
+                    <twitter
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="Twitter URL"
+                        name="./twitter"/>
+                    <instagram
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="Instagram URL"
+                        name="./instagram"/>
+                    <pinterest
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="Pinterest URL"
+                        name="./pinterest"/>
+                </items>
+            </metaTab>
+            <productInformation
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Product Meta"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <descrption
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        emptyText="e.g. 1 day shipping. Free pickup today"
+                        fieldLabel="Product descrption"
+                        name="./prdDesc"/>
+                    <information
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        emptyText="e.g. 1 day shipping. Free pickup today"
+                        fieldLabel="Product Information"
+                        name="./prdInfo"/>
+                    <reviews
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        emptyText="e.g. 1 day shipping. Free pickup today"
+                        fieldLabel="Product Reviews"
+                        name="./prdReviews"/>
+                </items>
+            </productInformation>
+        </items>
+    </content>
+</jcr:root>
