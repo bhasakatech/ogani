@@ -1,51 +1,38 @@
 <sly data-sly-use.model="com.bhasaka.ogani.core.models.taggingproducts.ProductListingModel" />
-
 <div class="product">
-
-    <!-- TOP BAR -->
     <div class="product__topbar">
-
-        <!-- Sort -->
         <div class="product__sort">
-            <span>Sort By</span>
 
+            <span>Sort By</span>
             <select onchange="applySort(this.value)">
                 <option value="">Default</option>
                 <option value="low" ${param.sort == 'low' ? 'selected' : ''}>Price Low to High</option>
                 <option value="high" ${param.sort == 'high' ? 'selected' : ''}>Price High to Low</option>
             </select>
-        </div>
 
-        <!-- Count -->
+        </div>
         <div class="product__count">
             <h6><span>${model.totalProducts}</span> Products found</h6>
         </div>
-
-        <!-- View Icons -->
         <div class="product__view">
             <span>☷</span>
             <span>☰</span>
         </div>
-
     </div>
 
-    <!-- GRID -->
     <div class="product__grid" data-sly-test="${model.products.size > 0}">
 
         <div class="product__item" data-sly-repeat.product="${model.products}">
 
             <!-- IMAGE -->
             <div class="product__item__pic">
-
                 <img src="${product.image @ context='uri'}" alt="${product.title}" />
-
                 <!-- HOVER ACTIONS -->
                 <ul class="product__item__pic__hover">
                     <li><a href="#">❤</a></li>
                     <li><a href="#">⇄</a></li>
                     <li><a href="#">🛒</a></li>
                 </ul>
-
             </div>
 
             <!-- TEXT -->
@@ -53,14 +40,11 @@
                 <h6>${product.title}</h6>
                 <h5>$${product.price}</h5>
             </div>
-
         </div>
-
     </div>
 
     <!-- PAGINATION -->
     <div class="product__pagination" data-sly-test="${model.totalPages > 1}">
-
         <a href="?page=${model.prevPage}&sort=${param.sort}"
            class="${model.currentPage == 1 ? 'disabled' : ''}">
             Prev
@@ -72,13 +56,11 @@
                 ${page}
             </a>
         </sly>
-
+        
         <a href="?page=${model.nextPage}&sort=${param.sort}"
            class="${model.currentPage == model.totalPages ? 'disabled' : ''}">
             Next
         </a>
-
     </div>
-
 </div>
 
