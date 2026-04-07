@@ -1,5 +1,6 @@
 package com.bhasaka.ogani.core.models;
 
+
 import com.bhasaka.ogani.core.models.beans.Product;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.*;
@@ -37,7 +38,10 @@ public class ProductDetail {
     @ValueMapValue private String instagram;
     @ValueMapValue private String pinterest;
 
-    // New tab fields from dialog
+    @ValueMapValue private String prdDescTitle;
+    @ValueMapValue private String prdInfoTitle;
+    @ValueMapValue private String prdReviewTitle;
+
     @ValueMapValue private String prdDesc;
     @ValueMapValue private String prdInfo;
     @ValueMapValue private String prdReviews;
@@ -63,7 +67,6 @@ public class ProductDetail {
                 String image = vm.get("image", String.class);
                 String desc = vm.get("description", String.class);
                 String[] category = vm.get("category", String[].class);
-
                 products.add(new Product(title, price, image, desc, category));
             }
         }
@@ -90,5 +93,17 @@ public class ProductDetail {
 
     public String getPrdReviews() {
         return prdReviews;
+    }
+
+    public String getPrdDescTitle() {
+        return prdDescTitle;
+    }
+
+    public String getPrdInfoTitle() {
+        return prdInfoTitle;
+    }
+
+    public String getPrdReviewTitle() {
+        return prdReviewTitle;
     }
 }

@@ -82,22 +82,35 @@
                 <items jcr:primaryType="nt:unstructured">
                     <descrption
                         jcr:primaryType="nt:unstructured"
-                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
-                        emptyText="e.g. 1 day shipping. Free pickup today"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
                         fieldLabel="Product descrption"
                         name="./prdDesc"/>
                     <information
                         jcr:primaryType="nt:unstructured"
-                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
                         emptyText="e.g. 1 day shipping. Free pickup today"
                         fieldLabel="Product Information"
                         name="./prdInfo"/>
                     <reviews
                         jcr:primaryType="nt:unstructured"
-                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
-                        emptyText="e.g. 1 day shipping. Free pickup today"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
                         fieldLabel="Product Reviews"
                         name="./prdReviews"/>
+                    <descTitle
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="Product Description Title"
+                        name="./prdDescTitle"/>
+                    <infoTitle
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="Product Information Title"
+                        name="./prdInfoTitle"/>
+                    <reviewTitle
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="Product Review Title"
+                        name="./prdReviewTitle"/>
                 </items>
             </productInformation>
         </items>
