@@ -1,0 +1,28 @@
+{
+  "logo": "/content/dam/logo.png",
+  "address": "Hyderabad, India",
+  "phone": "+91-9876543210",
+  "email": "test@example.com",
+
+  "linksColumn1": {
+    "item0": {
+      "text": "Home",
+      "url": "/home"
+    },
+    "item1": {
+      "text": "Shop",
+      "url": "/shop"
+    }
+  },
+
+  "linksColumn2": {
+    "item0": {
+      "text": "Contact",
+      "url": "/contact"
+    },
+    "item1": {
+      "text": "About",
+      "url": "/about"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "happy-path": {
+    "jcr:primaryType": "nt:unstructured",
+    "email": "support@ogani.com",
+    "promotionalText": "Free Shipping on all orders over $99!",
+    "loginIcon": "fa-user",
+    "loginLink": "/content/ogani/us/en/login.html",
+    "languages": ["English", "Spanish", "French"],
+    "iconList": {
+      "jcr:primaryType": "nt:unstructured",
+      "item0": {
+        "jcr:primaryType": "nt:unstructured",
+        "icon": "fa-facebook",
+        "iconClass": "fa-facebook",
+        "url": "https://facebook.com",
+        "link": "https://facebook.com",
+        "href": "https://facebook.com",
+        "path": "https://facebook.com",
+        "target": "_blank"
+      },
+      "item1": {
+        "jcr:primaryType": "nt:unstructured",
+        "icon": "fa-twitter",
+        "iconClass": "fa-twitter",
+        "url": "https://twitter.com",
+        "link": "https://twitter.com",
+        "href": "https://twitter.com",
+        "path": "https://twitter.com",
+        "target": "_blank"
+      }
+    }
+  },
+  "empty-path": {
+    "jcr:primaryType": "nt:unstructured"
+  }
+}
