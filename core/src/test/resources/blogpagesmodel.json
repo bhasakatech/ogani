@@ -1,0 +1,41 @@
+{
+  "content": {
+    "blogs": {
+      "blog1": {
+        "jcr:primaryType": "cq:Page",
+        "jcr:content": {
+          "jcr:title": "Blog One",
+          "jcr:description": "Desc One",
+          "jcr:created": "2025-01-01T10:00:00.000Z",
+          "cq:tags": ["blog:beauty"],
+          "cq:featuredimage": {
+            "fileReference": "/content/dam/img1.jpg"
+          }
+        }
+      },
+      "blog2": {
+        "jcr:primaryType": "cq:Page",
+        "jcr:content": {
+          "jcr:title": "Blog Two",
+          "jcr:description": "Desc Two",
+          "jcr:created": "2025-01-02T10:00:00.000Z",
+          "cq:tags": ["blog:food"],
+          "cq:featuredimage": {
+            "fileReference": "/content/dam/img2.jpg"
+          }
+        }
+      }
+    }
+  },
+
+  "content/cq:tags": {
+    "blog": {
+      "beauty": {
+        "jcr:title": "Beauty"
+      },
+      "food": {
+        "jcr:title": "Food"
+      }
+    }
+  }
+}

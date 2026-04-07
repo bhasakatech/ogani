@@ -1,0 +1,161 @@
+<sly data-sly-use.model="com.bhasaka.ogani.core.models.BlogPagesModel"/>
+
+<div class="blog-container">
+
+    <!-- SIDEBAR -->
+    <div class="blog-sidebar">
+
+        <!-- SEARCH -->
+        <div class="sidebar-block">
+            <form method="get" class="search-form">
+
+                <input type="text"
+      			 name="search"
+      			 placeholder="${model.searchPlaceholder}"
+      			 value="${param.search}" />
+                       
+
+                <input type="hidden"
+                       name="category"
+                       value="${param.category}"/>
+
+                <button type="submit" class="search-btn">⌕</button>
+            </form>
+        
+       <sly data-sly-list.cat="${model.categories}">
+    		<p>${cat.value}</p>
+	   </sly>
+
+        <!-- CATEGORIES -->
+        <div class="sidebar-block">
+            <h3>Categories</h3>
+
+            <ul class="category-list">
+
+    <!-- ALL -->
+    <li>
+        <a href="?category=&search=${param.search}"
+           class="${!param.category ? 'active' : ''}">
+            All
+        </a>
+    </li>
+
+    <!-- DYNAMIC -->
+    <sly data-sly-list.cat="${model.categories}">
+        <li>
+            <a href="?category=${cat.tagId}&search=${param.search}"
+               class="${param.category == cat.tagId ? 'active' : ''}">
+               
+                ${cat.title} (${cat.count})
+            </a>
+        </li>
+    </sly>
+
+</ul>
+        </div>
+
+    </div>
+    
+    <!--Recent news-->
+    <!-- RECENT NEWS -->
+<div class="sidebar-block">
+    <h3>Recent News</h3>
+
+    <div class="recent-news">
+
+        <sly data-sly-list.item="${model.recentBlogs}">
+            <div class="recent-item">
+
+                <img src="${item.image @ context='uri'}" alt="${item.title}" />
+
+                <div class="recent-text">
+                    <a href="${item.path}">${item.title}</a>
+                    <span>${item.publishDate}</span>
+                </div>
+
+            </div>
+        </sly>
+
+    </div>
+</div>
+
+<!-- SEARCH BY -->
+<div class="sidebar-block">
+    <h3>Search By</h3>
+
+    <div class="tag-box">
+
+        <a href="?category=&search=${param.search}"
+           class="tag ${!param.category ? 'active' : ''}">
+            All
+        </a>
+        
+        <sly data-sly-list.cat="${model.categories}">
+            <a href="?category=${cat.tagId}&search=${param.search}"
+               class="${param.category == cat.tagId ? 'active' : ''}">
+                ${cat.title}
+            </a>
+    	</sly>
+
+
+    </div>
+</div>
+</div>
+
+
+    <!-- CONTENT -->
+    <div class="blog-content">
+
+        <div class="blog-grid">
+
+            <sly data-sly-list.blog="${model.paginatedBlogs}">
+                <div class="blog-card">
+
+                    <div class="blog-image">
+                        <img src="${blog.image}" alt="${blog.title}"/>
+                    </div>
+
+                    <div class="blog-body">
+
+                        <div class="blog-meta">
+                            ${blog.date}
+                        </div>
+
+                        <h3>
+                        <a href="${blog.path @ context='uri'}" class = "blog-title-a">
+                        ${blog.title}
+                        </a>
+                        </h3>
+
+                        <p>${blog.description}</p>
+
+                        <a href="${blog.path @ context='uri'}" class="read-more">READ MORE →</a>
+                    </div>
+                </div>
+            </sly>
+
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="pagination">
+
+            <a href="?page=${model.prevPage}&search=${param.search}&category=${param.category}">
+                Prev
+            </a>
+
+            <sly data-sly-list.page="${model.pageNumbers}">
+                <a href="?page=${page}&search=${param.search}&category=${param.category}"
+                   class="${page == model.currentPage ? 'active' : ''}">
+                    ${page}
+                </a>
+            </sly>
+
+            <a href="?page=${model.nextPage}&search=${param.search}&category=${param.category}">
+                Next
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

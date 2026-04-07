@@ -1,39 +1,44 @@
 package com.bhasaka.ogani.core.models.beans;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CategoryTest {
 
     @Test
     void testConstructorAndGetters() {
-        Category category = new Category(
-                "Apple",
-                "/content/dam/apple.png",
-                "/content/apple"
-        );
+        String tag = "electronics";
+        String name = "Electronics";
 
-        assertEquals("Apple", category.getTitle());
-        assertEquals("/content/dam/apple.png", category.getImage());
-        assertEquals("/content/apple", category.getLink());
+        Category category = new Category(tag, name);
+
+        assertNotNull(category);
+        assertEquals(tag, category.getTag());
+        assertEquals(name, category.getName());
     }
 
     @Test
     void testNullValues() {
-        Category category = new Category(null, null, null);
-
-        assertNull(category.getTitle());
-        assertNull(category.getImage());
-        assertNull(category.getLink());
+        Category category = new Category(null, null);
+        assertNotNull(category);
+        assertNull(category.getTag());
+        assertNull(category.getName());
     }
 
     @Test
     void testEmptyValues() {
-        Category category = new Category("", "", "");
+        Category category = new Category("", "");
 
-        assertEquals("", category.getTitle());
-        assertEquals("", category.getImage());
-        assertEquals("", category.getLink());
+        assertNotNull(category);
+        assertEquals("", category.getTag());
+        assertEquals("", category.getName());
+    }
+
+    @Test
+    void testDifferentValues() {
+        Category category = new Category("food", "Food Items");
+
+        assertEquals("food", category.getTag());
+        assertEquals("Food Items", category.getName());
     }
 }
