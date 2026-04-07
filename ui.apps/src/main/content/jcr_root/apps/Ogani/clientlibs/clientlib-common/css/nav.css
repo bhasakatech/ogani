@@ -1,0 +1,18 @@
+.header__logo .cmp-image__image {
+    width: auto;
+    height: auto;
+}
+.humberger__menu__logo .cmp-image__image {
+    width: auto;
+    height: auto;
+}
+.search_input_button{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.html, body {
+  overflow-x: hidden !important;
+ 
+}

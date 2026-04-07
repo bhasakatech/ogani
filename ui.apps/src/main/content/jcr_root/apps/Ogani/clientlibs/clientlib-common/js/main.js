@@ -94,34 +94,28 @@
 });
 
     // ======================================
+$(document).ready(function() {
+    const $heroList = $(".hero__categories__list");
+    const $searchList = $('.hero__search__categories__list');
 
-$(document).ready(function(){
-    
-    $(document).on('click', '.hero__categories__all', function(){
-        console.log("--> Click detected! Toggling dropdown.");
-        $(".hero__categories__list").slideToggle(400); 
+    $(document).on('click', '.hero__categories__all', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        $heroList.slideToggle(400); 
     });
+
+    $('.hero__search__categories').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if ($searchList.is(':visible')) {
+            $searchList.hide();
+        } else {
+            $searchList.show();
+        }
+    });
+
+
 });
-
-document.addEventListener("DOMContentLoaded", function() {
-    const categoryTrigger = document.querySelector('.hero__search__categories');
-    const categoryList = document.querySelector('.hero__search__categories__list');
-
-    if (categoryTrigger && categoryList) {
-        categoryTrigger.addEventListener('click', function(e) {
-            e.stopPropagation(); 
-            
-            if (categoryList.style.display === 'none' || categoryList.style.display === '') {
-                categoryList.style.display = 'block';
-            } else {
-                categoryList.style.display = 'none';
-            }
-        });
-
-        document.addEventListener('click', function() {
-            categoryList.style.display = 'none';
-        });
-    }
-});
-
 })(jQuery);

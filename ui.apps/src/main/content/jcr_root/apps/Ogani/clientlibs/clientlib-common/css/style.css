@@ -254,7 +254,7 @@ ol {
 
 .header__top {
   background: #f5f5f5;
-    width: 100vw;
+    width: 101vw;
     position: relative;
     left: 50%;
     margin-left: -51vw;
@@ -262,7 +262,7 @@ ol {
 
 .header__top__left {
   padding: 10px 0 13px;
-  padding-left: 1rem;
+  padding-left: 7%;
 }
 
 .header__top__left ul li {
@@ -300,7 +300,7 @@ ol {
 .header__top__right {
   text-align: right;
   padding: 10px 0 13px;
-  padding-right: 1rem;
+  padding-right: 5%;
 }
 
 .header__top__right__social {
@@ -417,6 +417,7 @@ ol {
 
 .header__logo {
   padding: 15px 0;
+  margin-left: -1vw;
 }
 
 .header__logo a {
@@ -651,10 +652,9 @@ ol {
     padding-top: 10px;
     padding-bottom: 12px;
     position: absolute;
-    width: 90%;
+    width: 89%;
     background: #fff;
-    z-index: 9999;
-
+    z-index: 10;
 }
 
 .hero__categories ul li {
@@ -674,7 +674,7 @@ ol {
 }
 
 .hero__search__form {
-  width: 600px;
+  width: 70%;
   height: 50px;
   border: 1px solid #ebebeb;
   float: left;
@@ -683,7 +683,7 @@ ol {
 /* custom css for searchform */
 
 .hero__search__form form .hero__search__categories {
-  width: 10rem;
+  width: 33%;
   float: left;
   font-size: 16px;
   color: #1c1c1c;
@@ -707,7 +707,7 @@ ol {
 
 .hero__search__form form .hero__search__categories span {
   position: absolute;
-  right: 14px;
+  right: 10px;
   top: 14px;
 }
 
@@ -725,9 +725,9 @@ ol {
 }
 
 .hero__search__form form button {
-  position: absolute;
+  /* position: absolute;
     right: 15rem;
-    top: 0px;
+    top: 0px; */
     height: 50px;
 }
 
@@ -3019,7 +3019,7 @@ justify-content: space-between;
 
 @media only screen and (min-width: 1200px) {
   .container {
-    max-width: 1300px;
+    max-width: 1200px;
   }
   
 }
@@ -3062,6 +3062,9 @@ justify-content: space-between;
   .hero__categories {
     margin-bottom: 30px;
   }
+      .container {
+        max-width: 768px;
+    }
   .hero__search__form {
         width: 452px;
 	  }
@@ -3073,6 +3076,8 @@ justify-content: space-between;
     position: relative;
     width: 100%;
     background: #fff;
+        z-index: 10;
+
 }
 .hero__search__form form input {
     width: 10rem;
@@ -3114,7 +3119,7 @@ justify-content: space-between;
     border: 1px solid #1c1c1c;
     cursor: pointer;
     position: absolute;
-    right: 15px;
+    right: 6vw;
     top: 22px;
   }
   .header .container {
@@ -3424,6 +3429,7 @@ justify-content: space-between;
     position: relative;
     width: 100%;
     background: #fff;
+    z-index: 10;
 
 }
   .hero__categories {
@@ -3442,7 +3448,7 @@ justify-content: space-between;
     display: none;
   }
   .hero__search__form form button {
-    right: 1rem;
+    /* right: 1rem; */
   }
   .hero__search__phone {
     float: left;
@@ -3611,49 +3617,7 @@ justify-content: space-between;
   .humberger__menu__nav {
         margin-bottom: 2rem;
   } 
-  /*.humberger__menu__wrapper .header__top__right__social {
-    display: block;
-    margin-right: 0;
-    margin-bottom: 20px;
-  }
-  .humberger__menu__wrapper .slicknav_btn {
-    display: none;
-  }
-  .humberger__menu__wrapper .slicknav_nav .slicknav_item a {
-    border-bottom: none !important;
-  }
-  .humberger__menu__wrapper .slicknav_nav {
-    display: block !important;
-  }
-  .humberger__menu__wrapper .slicknav_menu {
-    background: transparent;
-    padding: 0;
-    margin-bottom: 30px;
-  }
-  .humberger__menu__wrapper .slicknav_nav ul {
-    margin: 0;
-  }
-  .humberger__menu__wrapper .slicknav_nav a {
-    color: #1c1c1c;
-    font-size: 16px;
-    font-weight: 600;
-    margin: 0;
-    border-bottom: 1px solid #e1e1e1;
-  }
-  .humberger__menu__wrapper .slicknav_nav a:hover {
-    -webkit-border-radius: 0;
-    border-radius: 0;
-    background: transparent;
-    color: #7fad39;
-  }
-  .humberger__menu__wrapper .slicknav_nav .slicknav_row,
-  .humberger__menu__wrapper .slicknav_nav a {
-    padding: 8px 0;
-  } */
 
-
-  /* custom humberger menu */
-/* Ensure the OOTB nav resets basic list styles */
 .humberger__menu__nav .cmp-navigation__group {
     list-style: none;
     padding: 0;
@@ -3661,7 +3625,6 @@ justify-content: space-between;
     display: block;
 }
 
-/* Base styling for ALL links (Parent AND Child) to keep them identical */
 .humberger__menu__nav .cmp-navigation__item-link {
     display: block;
     color: #1c1c1c;
@@ -3678,29 +3641,25 @@ justify-content: space-between;
     text-decoration: none;
 }
 
-/* Hide child menus by default */
 .humberger__menu__nav .cmp-navigation__item--level-0 > .cmp-navigation__group {
     display: none; 
-    padding-left: 0px; /* Slight indent so users know it's a sub-menu */
+    padding-left: 0px; 
     transition: transform 500ms ease;
 }
 
-/* CSS for the arrow next to the text */
 .humberger__menu__nav .nav-arrow {
     display: inline-block;
-    margin-left: 8px; /* Pushes it just slightly right of the text */
+    margin-left: 8px; 
     font-size: 12px;
     cursor: pointer;
     padding-top: 3px;
-    transition: transform 0.3s ease; /* Smooth rotation animation */
+    transition: transform 0.3s ease;
 }
 
-/* When the 'expanded' class is added via JS, show the child menu */
 .humberger__menu__nav .cmp-navigation__item.expanded > .cmp-navigation__group {
     display: block;
 }
 
-/* Rotate the right-pointing arrow 90 degrees to point down when expanded */
 .humberger__menu__nav .cmp-navigation__item.expanded > .cmp-navigation__item-link .nav-arrow {
     transform: rotate(90deg);
 }
@@ -3752,6 +3711,7 @@ justify-content: space-between;
     position: relative;
     width: 100%;
     background: #fff;
+    z-index: 10;
 }
   .hero__search__form form .hero__search__categories {
     display: none;
