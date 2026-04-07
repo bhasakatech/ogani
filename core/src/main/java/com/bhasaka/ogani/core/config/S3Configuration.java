@@ -1,9 +1,4 @@
-//package com.bhasaka.ogani.core.config;
-
-
-
 package com.bhasaka.ogani.core.config;
-
 import org.osgi.service.metatype.annotations.AttributeDefinition;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 
