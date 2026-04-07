@@ -1,0 +1,47 @@
+{
+  "cfPath": "/content/products",
+  "pageSize": 2,
+  "tags": ["electronics"],
+
+  "cf1": {
+    "jcr:primaryType": "nt:unstructured",
+    "jcr:content": {
+      "data": {
+        "master": {
+          "title": "Phone A",
+          "price": "100",
+          "image": "/img/a.png",
+          "cq:tags": ["electronics"]
+        }
+      }
+    }
+  },
+  
+  "cf2": {
+    "jcr:primaryType": "nt:unstructured",
+    "jcr:content": {
+      "data": {
+        "master": {
+          "title": "Phone B",
+          "price": "200",
+          "image": "/img/b.png",
+          "cq:tags": ["electronics"]
+        }
+      }
+    }
+  },
+
+  "cf3": {
+    "jcr:primaryType": "nt:unstructured",
+    "jcr:content": {
+      "data": {
+        "master": {
+          "title": "Phone C",
+          "price": "300",
+          "image": "/img/c.png",
+          "cq:tags": ["fashion"]
+        }
+      }
+    }
+  }
+}
