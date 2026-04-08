@@ -105,7 +105,6 @@
                                 value="Total"/>
                         </items>
                     </order-summary>
-                    
                     <account-order-details
                         jcr:primaryType="nt:unstructured"
                         jcr:title="Account and Order Details"
