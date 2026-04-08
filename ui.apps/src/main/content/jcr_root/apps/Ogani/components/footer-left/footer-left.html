@@ -1,4 +1,3 @@
-
 <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"/>
 <sly data-sly-call="${clientlib.css @ categories='Ogani.footer'}"/>
 <sly data-sly-use.model="com.bhasaka.ogani.core.models.FooterLeftModel"/>
@@ -11,17 +10,28 @@
             <p>${model.address}</p>
             <p>Phone: ${model.phone}</p>
             <p>Email: ${model.email}</p>
-         </div>
-         <div class="second-column">
-                    <ul data-sly-list.item="${model.linksColumn1}">
-                        <li><a href="${item.url}">${item.text}</a></li>
-                    </ul>
         </div>
-        <div class="third-column">
-                    <ul data-sly-list.item="${model.linksColumn2}">
-                        <li><a href="${item.url}">${item.text}</a></li>
-                    </ul>
+<!-- USEFUL LINKS BLOCK -->
+    <div class="links-column">
+        <h4>Useful Links</h4>
+
+        <div class="links-wrapper">
+            <!-- COLUMN 1 -->
+            <div class="second-column">
+                <ul data-sly-list.item="${model.linksColumn1}">
+                    <li><a href="${item.url}">${item.text}</a></li>
+                </ul>
+            </div>
+
+             <!-- COLUMN 2 -->
+             <div class="third-column">
+                 <ul data-sly-list.item="${model.linksColumn2}">
+                    <li><a href="${item.url}">${item.text}</a></li>
+                 </ul>
+            </div>
         </div>
+
+    </div>
         <!-- RIGHT BLOCK -->
         <div class="fourth-column">
             <sly data-sly-resource="${'newsletter' @ resourceType='Ogani/components/footer-newsletter'}"/>

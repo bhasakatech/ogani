@@ -1,6 +1,4 @@
-
-
-/* MAIN CONTAINER */
+/*MAIN CONTAINER */
 .footer-container {
     background: #f3f6fa;
     padding: 40px 80px 0;
@@ -11,6 +9,7 @@
 /* TOP LAYOUT */
 /* Main container */
 .footer-top {
+    padding:0px 20px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -45,12 +44,26 @@
     margin: 0;
 }
 
-/* Create spacing from top (simulate heading gap) */
+/* USEFUL LINKS HEADING + WRAPPER */
+.links-column h4 {
+    color: black;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.links-wrapper {
+    display: flex;
+    gap: 40px;
+}
+
+
+/* Create spacing from top (simulate heading gap) 
 .second-column,
 .third-column {
     padding-top: 20px;
 }
-
+*/
 .second-column li,
 .third-column li {
     margin-bottom: 10px;
@@ -71,12 +84,14 @@
 
 /* FOURTH COLUMN (Newsletter area) */
 .fourth-column {
-    max-width: 300px;
+    max-width: 100%;
+    min-width: 300px;
 }
 
 /* Space from top like screenshot */
 .fourth-column {
-    padding-top: 20px;
+    padding-right: 30px;
+ /*   padding-top: 20px;*/
 }
 
 .fourth-column p {
@@ -140,12 +155,14 @@
 .newsletter-box {
     display: flex;
     width: 100%;
+    overflow: hidden;
 
 }
 
 .newsletter-box input {
     flex: 1;
-    height: 50px;
+    height: 45px;
+    min-width: 0;
     border: none;
     padding: 0 15px;
     background: #ffffff;
@@ -153,12 +170,13 @@
 }
 
 .newsletter-box button {
-    height: 50px;
+    height: 45px;
     background: #7fad39;
     color: #fff;
     border: none;
     padding: 0 25px;
     font-weight: 700;
+    white-space: nowrap;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -199,6 +217,10 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+.social-icons li a:hover i {
+    color: #ffffff !important;
+}
+
 /* ICON */
 .social-icons li a i {
     font-size: 15px;
@@ -225,7 +247,8 @@
 .footer-bottom-wrapper {
     border-top: 1px solid #ebebeb;
     margin-top: 30px;
-    padding: 20px 0;
+    padding: 20px;
+    padding-right: 47px;
 }
 
 .footer-bottom {
