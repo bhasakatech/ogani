@@ -4,7 +4,7 @@
     allowedPaths="[/content/entities(/.*)?]"
     ranking="{Long}100">
     <jcr:content
-        cq:lastModified="{Date}2026-03-31T18:05:11.484+05:30"
+        cq:lastModified="{Date}2026-04-04T12:36:32.057+05:30"
         cq:lastModifiedBy="admin"
         cq:scaffolding="/conf/Ogani/settings/dam/cfm/models/featured-product/jcr:content/model"
         cq:templateType="/libs/settings/dam/cfm/model-types/fragment"
@@ -24,7 +24,7 @@
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="cq/gui/components/authoring/dialog">
                 <content
-                    jcr:lastModified="{Date}2026-03-31T18:05:11.484+05:30"
+                    jcr:lastModified="{Date}2026-04-04T12:36:32.057+05:30"
                     jcr:lastModifiedBy="admin"
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
@@ -64,6 +64,20 @@
                             valueType="string">
                             <granite:data jcr:primaryType="nt:unstructured"/>
                         </_x0031_774790290563>
+                        <_x0031_775283421645
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/cfm/admin/components/authoring/contenteditor/multieditor"
+                            cfm-element="Description"
+                            checked="false"
+                            default-mime-type="text/html"
+                            listOrder="2"
+                            metaType="text-multi"
+                            name="description"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            valueType="string/multiline">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </_x0031_775283421645>
                         <_x0031_774790312633
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
@@ -107,6 +121,85 @@
                             rootPath="/content/cq:tags/ogani"
                             showEmptyInReadOnly="true"
                             valueType="string/tags[]"/>
+                        <_x0031_775281568723
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                            fieldLabel="Quantity"
+                            listOrder="3"
+                            metaType="number"
+                            name="quantity"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            step="1"
+                            typeHint="long"
+                            valueType="long">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </_x0031_775281568723>
+                        <_x0031_775281608631
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                            fieldLabel="Total"
+                            listOrder="3"
+                            metaType="number"
+                            name="total"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            step="any"
+                            value="0"
+                            valueType="double">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </_x0031_775281608631>
+                        <_x0031_775286122172
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/cfm/models/editor/components/contentreference"
+                            fieldLabel="thumbNail1"
+                            filter="hierarchy"
+                            listOrder="10"
+                            metaType="reference"
+                            name="thumb1"
+                            nameSuffix="contentReference"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            showThumbnail="false"
+                            valueType="string/reference">
+                            <granite:data
+                                jcr:primaryType="nt:unstructured"
+                                thumbnail-validation="cfm.validation.thumbnail.show"/>
+                        </_x0031_775286122172>
+                        <_x0031_775286281892
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/cfm/models/editor/components/contentreference"
+                            fieldLabel="thumbnail2"
+                            filter="hierarchy"
+                            listOrder="21"
+                            metaType="reference"
+                            name="thumb2"
+                            nameSuffix="contentReference"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            showThumbnail="false"
+                            valueType="string/reference">
+                            <granite:data
+                                jcr:primaryType="nt:unstructured"
+                                thumbnail-validation="cfm.validation.thumbnail.show"/>
+                        </_x0031_775286281892>
+                        <_x0031_775286314017
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/cfm/models/editor/components/contentreference"
+                            fieldLabel="thumbnail3"
+                            filter="hierarchy"
+                            listOrder="22"
+                            metaType="reference"
+                            name="thumb3"
+                            nameSuffix="contentReference"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            showThumbnail="false"
+                            valueType="string/reference">
+                            <granite:data
+                                jcr:primaryType="nt:unstructured"
+                                thumbnail-validation="cfm.validation.thumbnail.show"/>
+                        </_x0031_775286314017>
                     </items>
                 </content>
             </cq:dialog>

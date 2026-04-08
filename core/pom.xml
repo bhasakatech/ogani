@@ -55,6 +55,9 @@ Import-Package: \
  com.day.cq.search;version="[1.0,2)", \
  org.apache.commons.lang3;version="[3.0,4)", \
  *
+
+Export-Package: \
+ com.bhasaka.ogani.core.models.*
                             ]]></bnd>
                         </configuration>
                     </execution>

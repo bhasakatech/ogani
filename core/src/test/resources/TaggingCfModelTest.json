@@ -1,0 +1,13 @@
+{
+  "product1": {
+    "title": "Apple",
+    "price": "100",
+    "image": "/content/dam/apple.jpg",
+    "cq:tags": ["fruit", "fresh"]
+  },
+
+  "empty": {},
+  "partial": {
+    "title": "Orange"
+  }
+}
