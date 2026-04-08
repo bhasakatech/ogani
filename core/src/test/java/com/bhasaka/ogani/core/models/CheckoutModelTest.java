@@ -9,7 +9,10 @@ import io.wcm.testing.mock.aem.junit5.AemContext;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-@ExtendWith({AemContextExtension.class, MockitoExtension.class})
+@ExtendWith({
+        AemContextExtension.class,
+        MockitoExtension.class
+})
 class CheckoutModelTest {
 
     private final AemContext context = new AemContext();
