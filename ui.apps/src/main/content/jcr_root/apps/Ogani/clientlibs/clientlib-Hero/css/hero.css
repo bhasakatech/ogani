@@ -61,17 +61,12 @@
      margin-bottom: 8px;
     margin-top: 0px;  
 }
-
-
 .hero__text p{
     margin-top:0;
     margin-bottom:0;
     margin:10px 0px;
-    font-weight:bold;
-    
+    font-weight:bold;   
 }
-
-
 /* Subtext */
 .hero-banner__subtext {
   margin-top: 18px;
@@ -148,7 +143,3 @@
     font-size: 14px;
   }
 }
-
-
-
-

@@ -3,13 +3,11 @@
          data-sly-use.model="com.bhasaka.ogani.core.models.HeroBanner"
          style="background-image: url(${properties.backgroundImage @ context='uri'}); background-size: cover; background-position: center;">
     <div class="hero-banner__overlay" data-sly-test="${model.overlay}"></div>
-
-    <div class="bCcontainer" style="text-align: center">
+    <div style="text-align: center">
        
         <div class="breadcrumb__text">
             <h2>${currentPage.title}</h2>
-        </div>
-         
+        </div>         
         <div class="breadcrumb__option"
              data-sly-resource="${'breadcrumb' @ resourceType='/apps/Ogani/components/breadcrumb'}">
         </div>

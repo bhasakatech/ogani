@@ -1,4 +1,4 @@
-/* ================= ROOT ================= */
+/* ======ROOT ================= */
 .product-carousel {
     padding: 60px 80px;
     background: #ffffff; 
@@ -16,10 +16,13 @@ h2{
 }
 
 .underline {
-    width: 80px;
+    width: 153px;
     height: 4px;
     background: #7fad39;
     margin-top: 10px;
+
+    display: block;         
+    flex: none;             
 }
 
 /* ================= CAROUSEL ================= */
@@ -53,6 +56,12 @@ h2{
 
 .product-card:hover {
     transform: translateY(-5px);
+}
+
+.product-information p,
+.product-information h3,
+.product-information .price {
+    width: 100%;
 }
 
 /* ================= IMAGE ================= */
@@ -98,7 +107,7 @@ h2{
 /* ================= HOVER ICONS ================= */
 .actions {
     position: absolute;
-    top: 60%;
+    top: 67%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.8);
     display: flex;
@@ -152,8 +161,9 @@ h2{
 }
 
 /* ================= TEXT ================= */
-.product-info {
+.product-information {
     margin-top: 10px;
+    gap: 20px;
 }
 
 .category {
@@ -161,6 +171,7 @@ h2{
     color: #999;
     margin-bottom: 6px;
 }
+
 
 .product-title {
     margin-top:0;
@@ -212,7 +223,6 @@ h2{
 
 /* ================= RESPONSIVE ================= */
 
-/* Tablet (2 cards) */
 @media (max-width: 992px) {
     .product-card {
         flex: 0 0 calc(100% / 2 - 20px);
@@ -222,7 +232,7 @@ h2{
 /* Mobile (1 card) */
 @media (max-width: 576px) {
     .product-carousel {
-        padding: 40px 20px; /* adjust side spacing */
+        padding: 40px 20px; 
     }
 
     .product-card {
