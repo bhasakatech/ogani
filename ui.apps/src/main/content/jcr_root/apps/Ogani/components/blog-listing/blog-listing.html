@@ -2,6 +2,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='ogani.bloglisting-container'}"/>
+
 <div class="blog-section" data-sly-use.model="com.bhasaka.ogani.core.models.BlogListingModel">
     <div class="blog-listing-component">
         <h2 class="blog-heading">${model.blogTitle}</h2>
