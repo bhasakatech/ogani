@@ -90,7 +90,6 @@ public class CheckoutModel {
             return;
         }
 
-        // HERE
         Resource cartPage = resolver.getResource(cartPath);
 
         if (cartPage == null) {
