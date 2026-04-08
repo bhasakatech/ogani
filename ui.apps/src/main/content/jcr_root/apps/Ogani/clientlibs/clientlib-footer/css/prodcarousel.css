@@ -58,9 +58,9 @@ h2{
     transform: translateY(-5px);
 }
 
-.product-inf p,
-.product-inf h3,
-.product-inf .price {
+.product-information p,
+.product-information h3,
+.product-information .price {
     width: 100%;
 }
 
@@ -161,7 +161,7 @@ h2{
 }
 
 /* ================= TEXT ================= */
-.product-inf {
+.product-information {
     margin-top: 10px;
     gap: 20px;
 }
