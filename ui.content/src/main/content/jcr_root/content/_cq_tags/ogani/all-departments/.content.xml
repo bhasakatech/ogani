@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:description="\0"
+    jcr:primaryType="cq:Tag"
+    jcr:title="All departments"
+    sling:resourceType="cq/tagging/components/tag">
+    <fresh-meat/>
+    <vegetables/>
+    <fruit--nut-gifts/>
+    <fresh-berries/>
+    <ocean-foods/>
+    <butter--eggs/>
+    <fastfood/>
+    <fresh-onion/>
+    <papayaya--crisps/>
+    <oatmeal/>
+    <fresh-bananas/>
+</jcr:root>

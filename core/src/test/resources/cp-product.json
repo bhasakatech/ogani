@@ -1,0 +1,10 @@
+{
+  "product": {
+    "title": "Apple",
+    "category": "Fruits",
+    "image": "/content/dam/apple.png",
+    "originalPrice": 100,
+    "currentPrice": 80,
+    "discount": 20
+  }
+}

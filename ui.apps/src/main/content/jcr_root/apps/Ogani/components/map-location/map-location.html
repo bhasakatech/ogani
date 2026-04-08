@@ -1,0 +1,16 @@
+<sly data-sly-use.model="com.bhasaka.ogani.core.models.MapLocationModel"></sly>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='Ogani.map-location'}"/>
+
+<div class="map geoapify-map">
+    <div class="map-container js-leaflet-map"
+         data-lat="${model.latitude}" 
+         data-lng="${model.longitude}"
+         data-title="${model.title}"
+         data-phone="${model.phone}"
+         data-address="${model.address}">
+    </div>
+</div>

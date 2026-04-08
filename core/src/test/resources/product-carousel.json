@@ -1,0 +1,23 @@
+{
+  "rootPath": "/content/products",
+  "products": [
+    {
+      "name": "product1",
+      "title": "Apple",
+      "category": "Fruits",
+      "image": "/content/dam/apple.png",
+      "originalPrice": 100,
+      "currentPrice": 80,
+      "discount": 20
+    },
+    {
+      "name": "product2",
+      "title": "Banana",
+      "category": "Fruits",
+      "image": "/content/dam/banana.png",
+      "originalPrice": 50,
+      "currentPrice": 0,
+      "discount": 10
+    }
+  ]
+}

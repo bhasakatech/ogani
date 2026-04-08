@@ -1,0 +1,41 @@
+
+.breadcrumb-section {
+    font-family: "Cairo", sans-serif;
+	display: flex;
+	align-items: center;
+	padding: 45px 0 40px;
+    justify-content:center;
+    height:100px;   
+}
+.breadcrumb__text h2 {
+	font-size: 46px;
+	color: #ffffff;
+	font-weight: 700;
+    margin-bottom:0;
+}
+
+.breadcrumb__option a {
+	display: inline-block;
+	font-size: 16px;
+	color: #ffffff;
+	font-weight: 700;
+	margin-right: 20px;
+	position: relative;
+}
+
+.breadcrumb__option a:after {
+	position: absolute;
+	right: -12px;
+	top: 13px;
+	height: 1px;
+	width: 10px;
+	background: #ffffff;
+	content: "";
+}
+
+.breadcrumb__option span {
+	display: inline-block;
+	font-size: 16px;
+	color: #ffffff;
+}
+
