@@ -1,8 +1,19 @@
+.aem-Grid.aem-Grid--default--12>.aem-GridColumn.aem-GridColumn--default--12 {
+    float: left;
+    clear: none;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .breadcrumb-section {
+    font-family: "Cairo", sans-serif;
 	display: flex;
 	align-items: center;
 	padding: 45px 0 40px;
     justify-content:center;
+    height:100px;
+    
     
 }
 
@@ -10,6 +21,7 @@
 	font-size: 46px;
 	color: #ffffff;
 	font-weight: 700;
+    margin-bottom:0;
 }
 
 .breadcrumb__option a {
@@ -36,3 +48,4 @@
 	font-size: 16px;
 	color: #ffffff;
 }
+
