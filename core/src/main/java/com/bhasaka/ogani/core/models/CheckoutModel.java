@@ -105,7 +105,6 @@ public class CheckoutModel {
         }
 
         LOG.info("Products node FOUND");
-
         for (Resource item : productsNode.getChildren()) {
 
             LOG.info("Item Node: {}", item.getPath());
