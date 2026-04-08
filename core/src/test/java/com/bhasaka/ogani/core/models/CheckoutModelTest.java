@@ -11,7 +11,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith({
         AemContextExtension.class,
-        MockitoExtension.class})
+        MockitoExtension.class
+})
 class CheckoutModelTest {
 
     private final AemContext context = new AemContext();

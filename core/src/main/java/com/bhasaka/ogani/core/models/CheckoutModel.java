@@ -103,7 +103,6 @@ public class CheckoutModel {
             LOG.info("Products node NOT FOUND");
             return;
         }
-
         LOG.info("Products node FOUND");
         for (Resource item : productsNode.getChildren()) {
 
