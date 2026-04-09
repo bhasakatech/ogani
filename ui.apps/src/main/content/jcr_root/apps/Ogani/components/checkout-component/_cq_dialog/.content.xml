@@ -11,6 +11,18 @@
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/coral/foundation/tabs">
                 <items jcr:primaryType="nt:unstructured">
+                    <checkout-title
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Checkout Page Title"
+                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                        <items jcr:primaryType="nt:unstructured">
+                            <checkout-header-title
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="Checkout Title"
+                                name="./checkoutTitle"/>
+                        </items>
+                    </checkout-title>
                     <billing-details
                         jcr:primaryType="nt:unstructured"
                         jcr:title="Billing Details"
@@ -67,6 +79,62 @@
                                 name="./email"/>
                         </items>
                     </billing-details>
+                    <placeholder-details
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Placeholder Details"
+                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                        <items jcr:primaryType="nt:unstructured">
+                            <first-name
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="First Name Placeholder"
+                                name="./firstNamePlaceholder"/>
+                            <last-name
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="Last Name Placeholder"
+                                name="./lastNamePlaceholder"/>
+                            <country
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="Country Placeholder"
+                                name="./countryPlaceholder"/>
+                            <address
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="Address Placeholder"
+                                name="./addressPlaceholder"/>
+                            <address-apartment
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                name="./apartmentPlaceholder"/>
+                            <town-city
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="Town/City Placeholder"
+                                name="./townOrCityPlaceholder"/>
+                            <country-state
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="State/Country Placeholder"
+                                name="./stateOrCountryPlaceholder"/>
+                            <zip-code
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="Postcode/ZIP Placeholder"
+                                name="./zipCodePlaceholder"/>
+                            <phone
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="Phone Placeholder"
+                                name="./phonePlaceholder"/>
+                            <email
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="Email Placeholder"
+                                name="./emailPlaceholder"/>
+                        </items>
+                    </placeholder-details>
                     <order-summary
                         jcr:primaryType="nt:unstructured"
                         jcr:title="Order Summary"
@@ -103,6 +171,11 @@
                                 fieldLabel="Final Total Label"
                                 name="./finalTotalLabel"
                                 value="Total"/>
+                            <payment-desc
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+                                fieldLabel="Payment Description"
+                                name="./paymentDescription"/>
                         </items>
                     </order-summary>
                     <account-order-details
@@ -110,6 +183,11 @@
                         jcr:title="Account and Order Details"
                         sling:resourceType="granite/ui/components/coral/foundation/container">
                         <items jcr:primaryType="nt:unstructured">
+                            <account-info
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+                                fieldLabel="Account Information"
+                                name="./accountInformation"/>
                             <account-password
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
@@ -118,10 +196,18 @@
                                 name="./accountPassword"/>
                             <order-notes
                                 jcr:primaryType="nt:unstructured"
-                                sling:resourceType="cq/gui/components/authoring/dialog/richtext"
                                 fieldLabel="Order Notes"
-                                name="./orderNotes"
-                                useFixedInlineToolbar="{Boolean}true"/>
+                                name="./orderNotes"/>
+                            <account-password-placeholder
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="Account Password Placeholder"
+                                name="./accountPasswordPlaceholder"/>
+                            <order-notes-placeholder
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+                                fieldLabel="Order Notes Placeholder"
+                                name="./orderNotesPlaceholder"/>
                         </items>
                     </account-order-details>
                 </items>

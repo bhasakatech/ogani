@@ -23,6 +23,9 @@ public class CheckoutModel {
     private static final String cartPageChildData = "jcr:content/root/container/container/cart_page/products";
 
     @ValueMapValue
+    private String checkoutTitle;
+
+    @ValueMapValue
     private String fragmentFolder;
 
     @ValueMapValue
@@ -78,6 +81,49 @@ public class CheckoutModel {
 
     @ValueMapValue
     private String orderNotes;
+
+    // Placeholder related
+    @ValueMapValue
+    private String firstNamePlaceholder;
+
+    @ValueMapValue
+    private String lastNamePlaceholder;
+
+    @ValueMapValue
+    private String countryPlaceholder;
+
+    @ValueMapValue
+    private String addressPlaceholder;
+
+    @ValueMapValue
+    private String apartmentPlaceholder;
+
+    @ValueMapValue
+    private String townOrCityPlaceholder;
+
+    @ValueMapValue
+    private String stateOrCountryPlaceholder;
+
+    @ValueMapValue
+    private String zipCodePlaceholder;
+
+    @ValueMapValue
+    private String phonePlaceholder;
+
+    @ValueMapValue
+    private String emailPlaceholder;
+
+    @ValueMapValue
+    private String accountPasswordPlaceholder;
+
+    @ValueMapValue
+    private String orderNotesPlaceholder;
+
+    @ValueMapValue
+    private String accountInformation;
+
+    @ValueMapValue
+    private String paymentDescription;
 
     private List<ProductCart> products = new ArrayList<>();
     private double subtotal = 0;
@@ -238,5 +284,65 @@ public class CheckoutModel {
 
     public String getAccountPassword() {
         return accountPassword;
+    }
+
+    public String getCheckoutTitle() {
+        return checkoutTitle;
+    }
+
+    public String getFirstNamePlaceholder() {
+        return firstNamePlaceholder;
+    }
+
+    public String getLastNamePlaceholder() {
+        return lastNamePlaceholder;
+    }
+
+    public String getCountryPlaceholder() {
+        return countryPlaceholder;
+    }
+
+    public String getAddressPlaceholder() {
+        return addressPlaceholder;
+    }
+
+    public String getApartmentPlaceholder() {
+        return apartmentPlaceholder;
+    }
+
+    public String getTownOrCityPlaceholder() {
+        return townOrCityPlaceholder;
+    }
+
+    public String getStateOrCountryPlaceholder() {
+        return stateOrCountryPlaceholder;
+    }
+
+    public String getZipCodePlaceholder() {
+        return zipCodePlaceholder;
+    }
+
+    public String getPhonePlaceholder() {
+        return phonePlaceholder;
+    }
+
+    public String getEmailPlaceholder() {
+        return emailPlaceholder;
+    }
+
+    public String getAccountPasswordPlaceholder() {
+        return accountPasswordPlaceholder;
+    }
+
+    public String getOrderNotesPlaceholder() {
+        return orderNotesPlaceholder;
+    }
+
+    public String getAccountInformation() {
+        return accountInformation;
+    }
+
+    public String getPaymentDescription() {
+        return paymentDescription;
     }
 }

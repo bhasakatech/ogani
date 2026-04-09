@@ -7,39 +7,37 @@
     <!-- LEFT SIDE -->
     <div class="checkout-left">
 
-        <h2 class="checkout-title">Billing Details</h2>
+        <h2 class="checkout-title">${model.checkoutTitle}</h2>
 
         <div class="checkout-form">
 
             <div class="form-row">
-                <input type="text" placeholder="First Name*" class="form-input" value="${model.firstName}"/>
-                <input type="text" placeholder="Last Name*" class="form-input" value="${model.lastName}"/>
+                <input type="text" placeholder="${model.firstNamePlaceholder}" class="form-input" value="${model.firstName}"/>
+                <input type="text" placeholder="${model.lastNamePlaceholder}" class="form-input" value="${model.lastName}"/>
             </div>
 
-            <input type="text" placeholder="Country*" class="form-input" value="${model.country}"/>
-            
-            <input type="text" placeholder="Street Address*" class="form-input" value="${model.address}"/>
-            <input type="text" placeholder="Apartment, suite, unit etc (optional)" class="form-input" value="${model.apartment}"/>
-            <input type="text" placeholder="Town/City*" class="form-input" value="${model.townOrCity}"/>
-            <input type="text" placeholder="Country/State*" class="form-input" value="${model.stateOrCountry}"/>
-            <input type="text" placeholder="Postcode / ZIP*" class="form-input" value="${model.zipCode}"/>
+            <input type="text" placeholder="${model.countryPlaceholder}" class="form-input" value="${model.country}"/>
+            <input type="text" placeholder="${model.addressPlaceholder}" class="form-input" value="${model.address}"/>
+            <input type="text" placeholder="${model.apartmentPlaceholder}" class="form-input" value="${model.apartment}"/>
+            <input type="text" placeholder="${model.townOrCityPlaceholder}" class="form-input" value="${model.townOrCity}"/>
+            <input type="text" placeholder="${model.stateOrCountryPlaceholder}" class="form-input" value="${model.stateOrCountry}"/>
+            <input type="text" placeholder="${model.zipCodePlaceholder}" class="form-input" value="${model.zipCode}"/>
 
             <div class="form-row">
-                <input type="text" placeholder="Phone*" autocomplete="off" class="form-input" value="${model.phone}"/>
-                <input type="email" placeholder="Email*" autocomplete="off" class="form-input" value="${model.email}"/>
+                <input type="text" placeholder="${model.phonePlaceholder}" autocomplete="off" class="form-input" value="${model.phone}"/>
+                <input type="email" placeholder="${model.emailPlaceholder}" autocomplete="off" class="form-input" value="${model.email}"/>
             </div>
 
             <!-- Create Account -->
             <div class="form-checkbox">
-                <label><input type="checkbox" value = "${model.createAccount}"/> Create an account?</label>
+                <label><input type="checkbox" value = "${model.createAccount}"/>Create an account ?</label>
             </div>
 
             <div class="account-info">
                 <p>
-                    Create an account by entering the information below. If you are a returning
-                    customer please login at the top of the page.
+                    ${model.accountInformation}
                 </p>
-                <input type="password" placeholder="Account Password*" autocomplete="new-password" class="form-input" value = "${model.accountPassword}"/>
+                <input type="password" placeholder="${model.accountPasswordPlaceholder}" autocomplete="new-password" class="form-input" value = "${model.accountPassword}"/>
             </div>
 
             <!-- Ship -->
@@ -50,7 +48,7 @@
             <!-- Notes -->
             <div class="order-notes">
                 <label>Order notes*</label>
-                <textarea placeholder="Notes about your order, e.g. special notes for delivery.">${model.orderNotes @ context='html'}</textarea>
+                <textarea placeholder="${model.orderNotesPlaceholder}">${model.orderNotes}</textarea>
             </div>
 
         </div>
@@ -110,8 +108,7 @@
             </label>
 
             <p class="payment-desc">
-                Create an account to save your details for faster checkout next time.
-                You can also track your orders and manage your preferences easily.
+                ${model.paymentDescription}
             </p>
             <br/>
 
