@@ -8,9 +8,9 @@
 
             <span>Sort By</span>
             <select onchange="ProductListing.applySort(this.value)">
-                <option value="">Default</option>
-                <option value="low" ${param.sort == 'low' ? 'selected' : ''}>Price Low to High</option>
-                <option value="high" ${param.sort == 'high' ? 'selected' : ''}>Price High to Low</option>
+                <option value="">${model.defaultSorting}</option>
+                <option value="low" ${param.sort == 'low' ? 'selected' : ''}>${model.lowSorting}</option>
+                <option value="high" ${param.sort == 'high' ? 'selected' : ''}>${model.highSorting}</option>
             </select>
 
         </div>
