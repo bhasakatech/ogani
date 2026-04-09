@@ -17,7 +17,7 @@
                         sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
                         fieldLabel="Content Fragment Path"
                         name="./cfPath"
-                        rootPath="/content/dam/Ogani/productdetailscf"/>
+                        rootPath="/content/dam/Ogani"/>
                 </items>
             </cfTab>
             <metaTab

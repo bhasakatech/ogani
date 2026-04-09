@@ -6,19 +6,16 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  margin: 50px auto 80px auto;  /* auto centers horizontally */
-  max-width: 1200px;            /* contain width */
   width: 100%;                  /* responsive width */
-  padding: 0 20px;
-    padding-left: 20px;
-    margin-left:30%;
-   
 }
+
+
+
 /* Image side */
 .image-cmp {
   position: absolute;
   inset: 0;
-  width: 70%;
+  width: 80%;
   height: 100%;
 }
 
@@ -64,7 +61,6 @@
      margin-bottom: 8px;
     margin-top: 0px;  
 }
-
 .hero__text p{
     margin-top:0;
     margin-bottom:0;
@@ -83,8 +79,7 @@
 }
 
 /* Button */
-#primary-btn,
-.site-btn {
+#primary-btn {
   display: inline-block;
   font-size: 14px;
   text-transform: uppercase;
@@ -148,4 +143,3 @@
     font-size: 14px;
   }
 }
-

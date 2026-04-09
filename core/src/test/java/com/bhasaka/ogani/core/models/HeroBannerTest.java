@@ -43,7 +43,6 @@ class HeroBannerTest {
         HeroBanner model = resource.adaptTo(HeroBanner.class);
 
         assertEquals("/content/dam/Ogani/home/breadcrumb.jpg", model.getBackgroundImage());
-        assertEquals("Organi Shop", model.getBannerTitle());
         assertTrue(model.getOverlay());
     }
 

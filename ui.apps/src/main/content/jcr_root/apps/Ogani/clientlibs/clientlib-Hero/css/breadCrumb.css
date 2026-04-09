@@ -1,3 +1,10 @@
+.aem-Grid.aem-Grid--default--12>.aem-GridColumn.aem-GridColumn--default--12 {
+    float: left;
+    clear: none;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 .breadcrumb-section {
     font-family: "Cairo", sans-serif;
