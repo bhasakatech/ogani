@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // plus button
     document.querySelector(".qty-btn.plus").addEventListener("click", function () {
-        let qty = parseInt(qtyInput.value) || 1;
+        let qty = parseInt(qtyInput.value) || 0;
         qty++;
         qtyInput.value = qty;
         updatePrice(qty);
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // minus button
     document.querySelector(".qty-btn.minus").addEventListener("click", function () {
-        let qty = parseInt(qtyInput.value) || 1;
+        let qty = parseInt(qtyInput.value) || 0;
         if (qty > 1) {
             qty--;
             qtyInput.value = qty;
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // manual input change
     qtyInput.addEventListener("input", function () {
-        let qty = parseInt(qtyInput.value) || 1;
+        let qty = parseInt(qtyInput.value) || 0;
         if (qty < 1) qty = 1;
         qtyInput.value = qty;
         updatePrice(qty);
@@ -47,15 +47,31 @@ document.addEventListener("DOMContentLoaded", function () {
     const priceEl = document.querySelector(".product__price");
     const descEl = document.querySelector(".desc-text");
 
+    const qtyInput = document.getElementById("qtyInput");
+    const priceElement = document.getElementById("productPrice");
+
+    let basePrice = 0;
     let currentIndex = 0;
     const AUTO_DELAY = 3000;
 
     function updateProduct(thumb) {
+        // ✅ Update main image only when user clicks
         if (mainImg) mainImg.src = thumb.getAttribute("data-image");
+
+        // ✅ Update right‑side content
         if (titleEl) titleEl.textContent = thumb.getAttribute("data-title");
-        if (priceEl) priceEl.textContent = "₹ " + thumb.getAttribute("data-price");
         if (descEl) descEl.innerHTML = thumb.getAttribute("data-description");
 
+        // ✅ Reset base price from the clicked thumb
+        basePrice = parseFloat(thumb.getAttribute("data-price"));
+
+        // ✅ Reset quantity to 0
+        qtyInput.value = 0;
+
+        // ✅ Show the ORIGINAL product price
+        priceElement.textContent = "₹ " + basePrice.toFixed(2);
+
+        // ✅ Highlight active thumbnail
         thumbs.forEach(t => t.classList.remove("active"));
         thumb.classList.add("active");
     }
@@ -66,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function () {
         track.style.transition = "transform 0.6s ease";
         track.style.transform = "translateX(-" + (slideWidth + gap) + "px)";
 
-        // After transition, move first slide to the end
         setTimeout(() => {
             track.style.transition = "none";
             track.appendChild(track.firstElementChild);
@@ -74,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 600);
     }
 
-    // Manual click
+    // ✅ Manual click updates main image + content
     thumbs.forEach((thumb, index) => {
         thumb.addEventListener("click", function () {
             updateProduct(this);
@@ -82,15 +97,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Auto loop
     setInterval(() => {
         moveNext();
     }, AUTO_DELAY);
 
-    // Initial
     updateProduct(thumbs[currentIndex]);
 });
-
 
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".tab-nav li").forEach(tab => {
@@ -106,3 +118,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+
+
+
