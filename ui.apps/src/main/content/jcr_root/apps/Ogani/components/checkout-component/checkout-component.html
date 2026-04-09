@@ -1,0 +1,132 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='ogani.checkout-container'}"/>
+
+<div class="checkout-container"
+     data-sly-use.model="${'com.bhasaka.ogani.core.models.CheckoutModel'}">
+
+    <!-- LEFT SIDE -->
+    <div class="checkout-left">
+
+        <h2 class="checkout-title">${model.checkoutTitle}</h2>
+
+        <div class="checkout-form">
+
+            <div class="form-row">
+                <input type="text" placeholder="${model.firstNamePlaceholder}" class="form-input" value="${model.firstName}"/>
+                <input type="text" placeholder="${model.lastNamePlaceholder}" class="form-input" value="${model.lastName}"/>
+            </div>
+
+            <input type="text" placeholder="${model.countryPlaceholder}" class="form-input" value="${model.country}"/>
+            <input type="text" placeholder="${model.addressPlaceholder}" class="form-input" value="${model.address}"/>
+            <input type="text" placeholder="${model.apartmentPlaceholder}" class="form-input" value="${model.apartment}"/>
+            <input type="text" placeholder="${model.townOrCityPlaceholder}" class="form-input" value="${model.townOrCity}"/>
+            <input type="text" placeholder="${model.stateOrCountryPlaceholder}" class="form-input" value="${model.stateOrCountry}"/>
+            <input type="text" placeholder="${model.zipCodePlaceholder}" class="form-input" value="${model.zipCode}"/>
+
+            <div class="form-row">
+                <input type="text" placeholder="${model.phonePlaceholder}" autocomplete="off" class="form-input" value="${model.phone}"/>
+                <input type="email" placeholder="${model.emailPlaceholder}" autocomplete="off" class="form-input" value="${model.email}"/>
+            </div>
+
+            <!-- Create Account -->
+            <div class="form-checkbox">
+                <label><input type="checkbox" value = "${model.createAccount}"/>Create an account ?</label>
+            </div>
+
+            <div class="account-info">
+                <p>
+                    ${model.accountInformation}
+                </p>
+                <input type="password" placeholder="${model.accountPasswordPlaceholder}" autocomplete="new-password" class="form-input" value = "${model.accountPassword}"/>
+            </div>
+
+            <!-- Ship -->
+            <div class="form-checkbox">
+                <label><input type="checkbox" value = "${model.shipToDifferentAddress}"/> Ship to a different address?</label>
+            </div>
+
+            <!-- Notes -->
+            <div class="order-notes">
+                <label>Order notes*</label>
+                <textarea placeholder="${model.orderNotesPlaceholder}">${model.orderNotes}</textarea>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- RIGHT SIDE -->
+
+    <div class="checkout-right">
+
+        <h3 class="order-title">${model.orderTitle}</h3>
+
+        <div class="order-header">
+            <span>Products</span>
+            <span>Price</span>
+            <span>Total</span>
+        </div>
+
+        <!-- PRODUCT LIST -->
+        <div class="order-list">
+
+            <!-- EMPTY -->
+            <div data-sly-test="${model.isEmpty}">
+                <p>Your cart is empty</p>
+            </div>
+
+            <!-- PRODUCTS -->
+            <sly data-sly-list.product="${model.products}">
+                <div class="order-row">
+                    <span class="product-name">${product.title}</span>
+                    <span class="product-price">₹ ${product.currentPrice}</span>
+                    <span class="product-total">₹ ${product.currentPrice}</span>
+                </div>
+            </sly>
+
+        </div>
+
+        <!-- SUMMARY -->
+        <div class="order-summary">
+
+            <div class="summary-row">
+                <span>${model.subtotalLabel}</span>
+                <span class="amount">₹ ${model.subtotal}</span>
+            </div>
+
+            <div class="summary-row total">
+                <span>${model.finalTotalLabel}</span>
+                <span class="amount total-amount">₹ ${model.total}</span>
+            </div>
+
+        </div>
+
+        <!-- PAYMENT -->
+        <div class="payment-section">
+
+            <label>
+                <input type="checkbox"/> Create an account?
+            </label>
+
+            <p class="payment-desc">
+                ${model.paymentDescription}
+            </p>
+            <br/>
+
+            <label>
+                <input type="radio" name="payment"/> Check Payment
+            </label>
+
+            <label>
+                <input type="radio" name="payment"/> Paypal
+            </label>
+
+        </div>
+
+		<br/>
+        <button class="place-order-btn">
+            ${model.placeOrderLabel}
+        </button>
+
+    </div>
+
+</div>
