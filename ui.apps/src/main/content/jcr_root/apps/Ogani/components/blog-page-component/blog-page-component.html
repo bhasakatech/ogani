@@ -39,11 +39,11 @@
                     </a>
                 </li>
 
-                <sly data-sly-list.cat="${model.categories}">
+                <sly data-sly-list.categoryData="${model.categories}">
                     <li>
-                        <a href="?category=${cat.tagId}&search=${param.search}"
-                           class="${param.category == cat.tagId ? 'active' : ''}">
-                            ${cat.title} (${cat.count})
+                        <a href="?category=${categoryData.tagId}&search=${param.search}"
+                           class="${param.category == categoryData.tagId ? 'active' : ''}">
+                            ${categoryData.title} (${categoryData.count})
                         </a>
                     </li>
                 </sly>
@@ -82,10 +82,10 @@
                     All
                 </a>
 
-                <sly data-sly-list.cat="${model.categories}">
-                    <a href="?category=${cat.tagId}&search=${param.search}"
-                       class="tag ${param.category == cat.tagId ? 'active' : ''}">
-                        ${cat.title}
+                <sly data-sly-list.categoriesData="${model.categories}">
+                    <a href="?category=${categoryData.tagId}&search=${param.search}"
+                       class="tag ${param.category == categoryData.tagId ? 'active' : ''}">
+                        ${categoryData.title}
                     </a>
                 </sly>
 
