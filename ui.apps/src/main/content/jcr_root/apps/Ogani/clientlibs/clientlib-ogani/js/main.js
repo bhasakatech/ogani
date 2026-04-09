@@ -89,21 +89,35 @@
         $(".hero__categories ul").slideToggle(400);
     });
 
-    /*--------------------------
-        Latest Product Slider
-    ----------------------------*/
-    $(".latest-product__slider").owlCarousel({
-        loop: true,
-        margin: 0,
-        items: 1,
-        dots: false,
-        nav: true,
-        navText: ["<span class='fa fa-angle-left'><span/>", "<span class='fa fa-angle-right'><span/>"],
-        smartSpeed: 1200,
-        autoHeight: false,
-        autoplay: true,
+   /*--------------------------
+    Latest Product Slider
+----------------------------*/
+function initLatestProductSlider() {
+    $(".latest-product__slider").each(function () {
+        if (!$(this).hasClass("owl-loaded")) {
+            $(this).owlCarousel({
+                loop: true,
+                margin: 0,
+                items: 1,
+                dots: false,
+                nav: true,
+                navText: [
+                    "<span class='fa fa-angle-left'><span/>",
+                    "<span class='fa fa-angle-right'><span/>"
+                ],
+                smartSpeed: 1200,
+                autoHeight: false,
+                autoplay: true
+            });
+        }
     });
+}
 
+initLatestProductSlider();
+
+$(document).on("foundation-contentloaded", function () {
+    initLatestProductSlider();
+});
     /*-----------------------------
         Product Discount Slider
     -------------------------------*/
