@@ -207,4 +207,52 @@
         }
         $button.parent().find("input").val(newVal);
     });
+<<<<<<< feature/dev-26-contact-form
+
+/*--------------------------
+    Contact Form Submit
+----------------------------*/
+if ($("#contactForm").length) {
+    $("#contactForm").on("submit", function (event) {
+        event.preventDefault();
+
+        const name = $("#name").val().trim();
+        const email = $("#email").val().trim();
+        const message = $("#message").val().trim();
+        const responseMessage = $("#responseMessage");
+
+        if (!name || !email || !message) {
+            responseMessage.text("Please fill all fields.");
+            return;
+        }
+
+        // CSRF token automatically available in AEM
+        const csrfToken = $("input[name=':csrfToken']").val();
+
+        $.ajax({
+            url: $("#contactForm").attr("action"), // make sure your <form action> points to the contactform node JSON
+            type: "POST",
+            data: {
+                name: name,
+                email: email,
+                message: message,
+                ":csrfToken": csrfToken
+            },
+            success: function (response) {
+                responseMessage.text(response.message || "Form submitted successfully");
+                $("#contactForm")[0].reset();
+            },
+            error: function (xhr) {
+                let msg = "Submission failed.";
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    msg = xhr.responseJSON.message;
+                }
+                responseMessage.text(msg);
+            }
+        });
+    });
+}
+
+=======
+>>>>>>> develop
 })(jQuery);
