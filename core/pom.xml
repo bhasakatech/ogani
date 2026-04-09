@@ -49,26 +49,22 @@
                             <goal>bnd-process</goal>
                         </goals>
                         <configuration>
-<<<<<<< feature/dev-26-contact-form
-                            
-                <bnd><![CDATA[
-Import-Package: javax.annotation;version=0.0.0,*
--conditionalpackage: org.jsoup.*
-Embed-Dependency: aws-java-sdk-osgi
-Embed-Transitive: true
-]]></bnd>
-=======
-                            <bnd><![CDATA[
+              
+    <bnd><![CDATA[
 Import-Package: \
  javax.annotation;version=0.0.0, \
  com.day.cq.search;version="[1.0,2)", \
  org.apache.commons.lang3;version="[3.0,4)", \
  *
 
+-conditionalpackage: org.jsoup.*
+Embed-Dependency: aws-java-sdk-osgi
+Embed-Transitive: true
+
 Export-Package: \
  com.bhasaka.ogani.core.models.*
-                            ]]></bnd>
->>>>>>> develop
+    ]]></bnd>
+
                         </configuration>
                     </execution>
                 </executions>
@@ -257,14 +253,6 @@ Export-Package: \
     <version>2.11.3</version>
     <scope>provided</scope>
 </dependency>
-
-<dependency>
-    <groupId>software.amazon.ion</groupId>
-    <artifactId>ion-java</artifactId>
-    <version>1.0.2</version>
-    <scope>provided</scope>
-</dependency>
-
     </dependencies>
 
 </project>
