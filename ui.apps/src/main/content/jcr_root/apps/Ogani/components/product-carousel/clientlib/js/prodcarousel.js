@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    const track = document.querySelector(".carousel-track");
-    let cards = document.querySelectorAll(".product-card");
+    const track = document.querySelector(".pc__carousel-track");
+    let cards = document.querySelectorAll(".pc__product-card");
 
     const dotsContainer = document.getElementById("carouselDots");
 
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         track.insertBefore(cards[cards.length - 1 - i].cloneNode(true), track.firstChild); // start clone
     }
 
-    cards = document.querySelectorAll(".product-card");
+    cards = document.querySelectorAll(".pc__product-card");
 
     /* ================= INITIAL POSITION ================= */
 
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     for (let i = 0; i < totalSlides; i++) {
         const dot = document.createElement("span");
-        if (i === 0) dot.classList.add("active");
+        if (i === 0) dot.classList.add("pc__active");
 
         dot.addEventListener("click", () => {
             track.scrollTo({
@@ -40,16 +40,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateDots() {
-        let index = Math.round(track.scrollLeft / (cardWidth * visibleCards)) - 1;
+    let index = Math.round(track.scrollLeft / (cardWidth * visibleCards)) - 1;
 
-        if (index < 0) index = totalSlides - 1;
-        if (index >= totalSlides) index = 0;
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
 
-        document.querySelectorAll(".carousel-dots span")
-            .forEach((dot, i) => {
-                dot.classList.toggle("active", i === index);
-            });
-    }
+    document.querySelectorAll(".pc__carousel-dots span")
+        .forEach((dot, i) => {
+            dot.classList.toggle("pc__active", i === index);
+        });
+}
 
     /* ================= INFINITE SCROLL FIX ================= */
 

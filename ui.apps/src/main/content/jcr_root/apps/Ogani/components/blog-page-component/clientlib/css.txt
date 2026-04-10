@@ -1,1 +1,1 @@
-css/bloglisting.css
+css/blogpage.css
