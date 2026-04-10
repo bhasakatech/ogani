@@ -1,2 +1,1 @@
-css/bloglisting.css
 css/featured-products.css
