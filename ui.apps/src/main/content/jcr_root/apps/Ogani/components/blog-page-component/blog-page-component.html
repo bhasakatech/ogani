@@ -22,7 +22,9 @@
                        name="category"
                        value="${param.category}"/>
 
-                <button type="submit" class="search-btn">⌕</button>
+                <button type="submit" class="search-btn">
+  				  <i class="fa fa-search"></i>
+				</button>
             </form>
         </div>
 
@@ -81,13 +83,13 @@
                    class="tag ${!param.category ? 'active' : ''}">
                     All
                 </a>
-
+                
                 <sly data-sly-list.categoriesData="${model.categories}">
-                    <a href="?category=${categoryData.tagId}&search=${param.search}"
-                       class="tag ${param.category == categoryData.tagId ? 'active' : ''}">
-                        ${categoryData.title}
-                    </a>
-                </sly>
+   					 <a href="?category=${categoriesData.tagId}&search=${param.search}"
+     				  class="tag ${param.category == categoriesData.tagId ? 'active' : ''}">
+       						 ${categoriesData.title}
+    				 </a>
+				</sly>
 
             </div>
         </div>
@@ -109,7 +111,11 @@
                     <div class="blog-body">
 
                         <div class="blog-meta">
-                            ${blog.date}
+                        	 <i class="fa fa-calendar"></i>
+   							 ${'MMM dd, yyyy' @ format = blog.date}
+                        		&nbsp; &nbsp;
+       					 	<i class="fa fa-comment"></i>
+     						   5
                         </div>
 
                         <h3>
