@@ -5,30 +5,30 @@
      
 <sly data-sly-use.model="com.bhasaka.ogani.core.models.FooterLeftModel"/>
 
-<div class="footer-container">
+<div class="f__footer-container">
     <!-- TOP ROW -->
-    <div class="footer-top">
+    <div class="f__footer-top">
         <!-- LEFT BLOCK -->
-         <div class="first-column">
+         <div class="f__first-column">
             <img src="${model.logo}" alt="logo"/>
             <p>${model.address}</p>
             <p>Phone: ${model.phone}</p>
             <p>Email: ${model.email}</p>
         </div>
 <!-- USEFUL LINKS BLOCK -->
-    <div class="links-column">
+    <div class="f__links-column">
         <h4>Useful Links</h4>
 
-        <div class="links-wrapper">
+        <div class="f__links-wrapper">
             <!-- COLUMN 1 -->
-            <div class="second-column">
+            <div class="f__second-column">
                 <ul data-sly-list.item="${model.linksColumn1}">
                     <li><a href="${item.url}">${item.text}</a></li>
                 </ul>
             </div>
 
              <!-- COLUMN 2 -->
-             <div class="third-column">
+             <div class="f__third-column">
                  <ul data-sly-list.item="${model.linksColumn2}">
                     <li><a href="${item.url}">${item.text}</a></li>
                  </ul>
@@ -37,12 +37,12 @@
 
     </div>
         <!-- RIGHT BLOCK -->
-        <div class="fourth-column">
+        <div class="f__fourth-column">
             <sly data-sly-resource="${'newsletter' @ resourceType='Ogani/components/footer-newsletter'}"/>
         </div>
     </div>
     <!-- BOTTOM -->
-    <div class="footer-bottom-wrapper">
+    <div class="f__footer-bottom-wrapper">
         <sly data-sly-resource="${'bottom' @ resourceType='Ogani/components/footer-bottom'}"/>
     </div>
 </div>

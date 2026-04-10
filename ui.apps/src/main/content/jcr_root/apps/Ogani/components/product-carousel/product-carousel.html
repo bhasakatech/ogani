@@ -1,8 +1,6 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-
 <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"/>
-
 
 <sly data-sly-call="${clientlib.all @ categories='Ogani.product-carousel'}"/>
 
@@ -12,41 +10,41 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 <sly data-sly-use.model="com.bhasaka.ogani.core.models.productCarousel.ProductCarouselModel"></sly>
 
-<div class="product-carousel">
+<div class="pc__product-carousel">
 
-    <div class="section-header">
+    <div class="pc__section-header">
        <h2 data-sly-test="${properties.title}">${properties.title}</h2>
        <h2 data-sly-test="${!properties.title}">Sale Off</h2>
-       <div class="underline"></div>
+       <div class="pc__underline"></div>
     </div>
-    <div class="carousel-wrapper">
-    <div class="carousel-track">
+    <div class="pc__carousel-wrapper">
+    <div class="pc__carousel-track">
         <sly data-sly-test="${model.productList && model.productList.size > 0}">
             <sly data-sly-list.product="${model.productList}">
 
-                <div class="product-card">
+                <div class="pc__product-card">
 
-                    <div class="badge" data-sly-test="${product.discount > 0}">
+                    <div class="pc__badge" data-sly-test="${product.discount > 0}">
                         -${product.discount}%
                     </div>
 
-                    <div class="image-wrapper">
+                    <div class="pc__image-wrapper">
                         <img src="${product.image @ context='uri'}" alt="${product.title}"/>
                     </div>
 
-                    <div class="actions">
-                        <button class="icon wishlist"><i class="fa fa-heart"></i></button>
-                        <button class="icon compare"><i class="fa fa-exchange"></i></button>
-                        <button class="icon cart"><i class="fa fa-shopping-cart"></i></button>
+                    <div class="pc__actions">
+                        <button class="pc__icon wishlist"><i class="fa fa-heart"></i></button>
+                        <button class="pc__icon compare"><i class="fa fa-exchange"></i></button>
+                        <button class="pc__icon cart"><i class="fa fa-shopping-cart"></i></button>
                     </div>
 
-                    <div class="product-information">
-                        <p class="category">${product.category}</p>
-                        <h3 class="product-title">${product.title}</h3>
+                    <div class="pc__product-information">
+                        <p class="pc__category">${product.category}</p>
+                        <h3 class="pc__product-title">${product.title}</h3>
 
-                        <div class="price">
-                            <span class="current">₹${product.currentPrice}</span>
-                            <span class="original"
+                        <div class="pc__price">
+                            <span class="pc__current">₹${product.currentPrice}</span>
+                            <span class="pc__original"
                                   data-sly-test="${product.originalPrice > product.currentPrice}">
                                 ₹${product.originalPrice}
                             </span>
@@ -59,6 +57,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         </sly>
     </div>
     <!-- DOTS -->
-    <div class="carousel-dots" id="carouselDots"></div>
+    <div class="pc__carousel-dots" id="carouselDots"></div>
 </div>
 </div>
