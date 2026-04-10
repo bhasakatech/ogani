@@ -42,14 +42,14 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("click", function (e) {
         const target = e.target;
 
-        /* ➕ PLUS */
+        /* PLUS */
         if (target.classList.contains("cp__plus")) {
             const input = target.closest(".cp__qty-box").querySelector(".cp__qty");
             input.value = parseInt(input.value || "0", 10) + 1;
             updateCart();
         }
 
-        /* ➖ MINUS */
+        /* MINUS */
         if (target.classList.contains("cp__minus")) {
             const input = target.closest(".cp__qty-box").querySelector(".cp__qty");
             const current = parseInt(input.value || "0", 10);
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        /* ❌ REMOVE */
+        /* REMOVE */
         if (target.classList.contains("cp__remove")) {
             const row = target.closest(".cp__cart-row");
             if (row) {
