@@ -1,3 +1,5 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"/>
+<sly data-sly-call="${clientlib.all @ categories='Ogani-ProductDetails'}"/>
 <sly data-sly-use.model="com.bhasaka.ogani.core.models.ProductDetail"/>
 <div class="product-detail">
     <!-- MAIN PRODUCT -->
@@ -141,6 +143,5 @@
                     </div>
                 </div>
             </div>
-
     
 </section>

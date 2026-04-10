@@ -89,21 +89,35 @@
         $(".hero__categories ul").slideToggle(400);
     });
 
-    /*--------------------------
-        Latest Product Slider
-    ----------------------------*/
-    $(".latest-product__slider").owlCarousel({
-        loop: true,
-        margin: 0,
-        items: 1,
-        dots: false,
-        nav: true,
-        navText: ["<span class='fa fa-angle-left'><span/>", "<span class='fa fa-angle-right'><span/>"],
-        smartSpeed: 1200,
-        autoHeight: false,
-        autoplay: true,
+   /*--------------------------
+    Latest Product Slider
+----------------------------*/
+function initLatestProductSlider() {
+    $(".latest-product__slider").each(function () {
+        if (!$(this).hasClass("owl-loaded")) {
+            $(this).owlCarousel({
+                loop: true,
+                margin: 0,
+                items: 1,
+                dots: false,
+                nav: true,
+                navText: [
+                    "<span class='fa fa-angle-left'><span/>",
+                    "<span class='fa fa-angle-right'><span/>"
+                ],
+                smartSpeed: 1200,
+                autoHeight: false,
+                autoplay: true
+            });
+        }
     });
+}
 
+initLatestProductSlider();
+
+$(document).on("foundation-contentloaded", function () {
+    initLatestProductSlider();
+});
     /*-----------------------------
         Product Discount Slider
     -------------------------------*/
@@ -207,4 +221,49 @@
         }
         $button.parent().find("input").val(newVal);
     });
+
+/*--------------------------
+    Contact Form Submit
+----------------------------*/
+if ($("#contactForm").length) {
+    $("#contactForm").on("submit", function (event) {
+        event.preventDefault();
+
+        const name = $("#name").val().trim();
+        const email = $("#email").val().trim();
+        const message = $("#message").val().trim();
+        const responseMessage = $("#responseMessage");
+
+        if (!name || !email || !message) {
+            responseMessage.text("Please fill all fields.");
+            return;
+        }
+
+        // CSRF token automatically available in AEM
+        const csrfToken = $("input[name=':csrfToken']").val();
+
+        $.ajax({
+            url: $("#contactForm").attr("action"), // make sure your <form action> points to the contactform node JSON
+            type: "POST",
+            data: {
+                name: name,
+                email: email,
+                message: message,
+                ":csrfToken": csrfToken
+            },
+            success: function (response) {
+                responseMessage.text(response.message || "Form submitted successfully");
+                $("#contactForm")[0].reset();
+            },
+            error: function (xhr) {
+                let msg = "Submission failed.";
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    msg = xhr.responseJSON.message;
+                }
+                responseMessage.text(msg);
+            }
+        });
+    });
+}
+
 })(jQuery);

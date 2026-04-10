@@ -32,6 +32,15 @@ public class ProductListingModel {
     @ValueMapValue
     private Integer pageSize;
 
+    @ValueMapValue
+    private  String defaultSorting;
+
+    @ValueMapValue
+    private  String lowSorting;
+
+    @ValueMapValue
+    private  String highSorting;
+
     private List<TaggingProduct> products = new ArrayList<>();
     private int totalProducts;
     private int totalPages;
@@ -169,5 +178,17 @@ public class ProductListingModel {
 
     public int getPageSize() {
         return pageSize;
+    }
+
+    public String getDefaultSorting() {
+        return defaultSorting;
+    }
+
+    public String getLowSorting() {
+        return lowSorting;
+    }
+
+    public String getHighSorting() {
+        return highSorting;
     }
 }

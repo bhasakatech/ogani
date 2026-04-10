@@ -1,0 +1,243 @@
+/* ======ROOT ================= */
+.pc__product-carousel {
+    padding: 60px 100px;
+    padding-left:400px;
+    background: #ffffff; 
+    font-family: "Cairo", sans-serif;
+}
+
+/* ================= HEADER ================= */
+.pc__section-header h2 {
+    font-weight:800;
+    color: #1c1c1c;
+}
+
+h2{
+    font-size:36px;
+}
+
+.pc__underline {
+    width: 153px;
+    height: 4px;
+    background: #7fad39;
+    margin-top: 10px;
+
+    display: block;         
+    flex: none;             
+}
+
+/* ================= CAROUSEL ================= */
+.pc__carousel-wrapper {
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+/* TRACK */
+.pc__carousel-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    cursor: grab;
+}
+
+.pc__carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+/* ================= CARD ================= */
+.pc__product-card {
+    flex: 0 0 calc(100% / 3 - 20px);
+    scroll-snap-align: start;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.pc__product-card:hover {
+    transform: translateY(-5px);
+}
+
+.pc__product-information p,
+.pc__product-information h3,
+.pc__product-information .pc__price {
+    width: 100%;
+}
+
+/* ================= IMAGE ================= */
+.pc__image-wrapper {
+    background: #f5f5f5;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.pc__image-wrapper img {
+    max-width: 70%;
+    max-height: 180px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.pc__product-card:hover img {
+    transform: scale(1.1);
+}
+
+/* ================= BADGE ================= */
+.pc__badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 60px;
+    height: 60px;
+    background: #ff2d2d;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* ================= HOVER ICONS ================= */
+.pc__actions {
+    position: absolute;
+    top: 63%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    display: flex;
+    gap: 10px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.pc__product-card:hover .pc__actions {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* ICON BASE */
+.pc__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* ICON DEFAULT */
+.pc__icon i {
+    font-size: 14px;
+    color: #333;
+    display: inline-block;
+    transition: transform 0.5s ease, color 0.3s ease;
+}
+
+/*HOVER FIX (IMPORTANT) */
+.pc__icon:hover {
+    background: #7fad39 !important;  
+}
+
+.pc__icon:hover > i {
+    color: #fff !important;
+    transform: rotate(360deg);
+}
+
+.pc__actions .pc__icon {
+    background: #fff;
+}
+
+.pc__product-card:hover .pc__icon {
+    background: #fff;
+}
+
+/* ================= TEXT ================= */
+.pc__product-information {
+    margin-top: 25px;
+    gap: 20px;
+}
+
+.pc__category {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 6px;
+}
+
+
+.pc__product-title {
+    margin-top:0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1c1c1c;
+    margin-bottom: 6px;
+}
+
+/* ================= PRICE ================= */
+.pc__price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.pc__price .pc__current {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1c1c1c;
+}
+
+.pc__price .pc__original {
+    font-size: 14px;
+    color: #999;
+    text-decoration: line-through;
+}
+
+/* ================= DOTS ================= */
+.pc__carousel-dots {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pc__carousel-dots span {
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    display: inline-block;
+    border-radius: 50%;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.pc__carousel-dots span.pc__active {
+    background: #7fad39;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 992px) {
+    .pc__product-card {
+        flex: 0 0 calc(100% / 2 - 20px);
+    }
+}
+
+/* Mobile (1 card) */
+@media (max-width: 576px) {
+    .pc__product-carousel {
+        padding: 40px 20px; 
+    }
+
+    .pc__product-card {
+        flex: 0 0 100%;
+    }
+}

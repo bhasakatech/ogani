@@ -1,3 +1,0 @@
-#base=js
-prodcarousel.js
-cart-page.js

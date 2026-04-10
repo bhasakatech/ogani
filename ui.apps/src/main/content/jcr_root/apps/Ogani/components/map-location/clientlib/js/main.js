@@ -19,7 +19,7 @@
         const phone = mapElement.getAttribute('data-phone');
         const address = mapElement.getAttribute('data-address');
 
-        const zoomLevel = 10; 
+        const zoomLevel = 15; 
         const apiKey = "bb19ff895a5547fb93d840a1dd17fd01"; 
 
         if (!isNaN(lat) && !isNaN(lng)) {

@@ -1,3 +1,6 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='Ogani.header'}"/>
+     
 <div data-sly-use.topHeader="com.bhasaka.ogani.core.models.Header">
 
     <div class="container header">
@@ -65,7 +68,7 @@
             </div>
             <div id="mobile-menu-wrap"></div>
             <div class="header__top__right__social" data-sly-list.item="${topHeader.socialIcons}">
-                <a href="${item.link @ extension='html'}"><i class="fa-brands fa-${item.icon}"></i></a>
+                <a href="${item.link @ extension='html'}"><i class="fa-brands fa-${item.icon @ context='attribute'}"></i></a>
             </div>
             <div class="humberger__menu__contact">
                 <ul>

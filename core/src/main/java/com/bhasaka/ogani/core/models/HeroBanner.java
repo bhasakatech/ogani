@@ -15,9 +15,6 @@ public class HeroBanner {
     private String backgroundImage;
 
     @ValueMapValue
-    private String bannerTitle;
-
-    @ValueMapValue
     private Boolean overlay;
 
     @ScriptVariable
@@ -25,10 +22,6 @@ public class HeroBanner {
 
     public String getBackgroundImage() {
         return backgroundImage;
-    }
-
-    public String getBannerTitle() {
-        return bannerTitle;
     }
 
     public Boolean getOverlay() {
