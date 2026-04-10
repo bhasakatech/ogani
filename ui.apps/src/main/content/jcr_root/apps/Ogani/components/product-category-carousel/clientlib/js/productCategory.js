@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         track.style.transform = `translateX(-${index * itemWidth}px)`;
     }
-
+    
     function nextSlide() {
         index++;
         updateCarousel(true);
