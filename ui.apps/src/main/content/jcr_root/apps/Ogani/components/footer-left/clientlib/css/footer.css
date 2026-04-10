@@ -1,5 +1,5 @@
 /*MAIN CONTAINER */
-.footer-container {
+.f__footer-container {
     background: #f3f6fa;
     padding: 40px 80px 0;
     font-family: "Cairo", sans-serif;
@@ -8,7 +8,7 @@
 
 /* TOP LAYOUT */
 /* Main container */
-.footer-top {
+.f__footer-top {
     padding:0px 20px;
     display: flex;
     justify-content: space-between;
@@ -19,96 +19,96 @@
 }
 
 /* All columns */
-.footer-top > div {
+.f__footer-top > div {
     flex: 1;
     min-width: 220px;
 }
 
 /* FIRST COLUMN (Logo + Contact) */
-.first-column img {
+.f__first-column img {
     width: 130px;
     margin-bottom: 20px;
 }
 
-.first-column p {
+.f__first-column p {
     margin: 6px 0;
     font-size: 14px;
     color: #555;
 }
 
 /* SECOND & THIRD COLUMN (Links) */
-.second-column ul,
-.third-column ul {
+.f__second-column ul,
+.f__third-column ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
 /* USEFUL LINKS HEADING + WRAPPER */
-.links-column h4 {
+.f__links-column h4 {
     color: black;
     font-weight: 700;
     font-size: 18px;
     margin-bottom: 15px;
 }
 
-.links-wrapper {
+.f__links-wrapper {
     display: flex;
     gap: 40px;
 }
 
 
 /* Create spacing from top (simulate heading gap) 
-.second-column,
-.third-column {
+.f__second-column,
+.f__third-column {
     padding-top: 20px;
 }
 */
-.second-column li,
-.third-column li {
+.f__second-column li,
+.f__third-column li {
     margin-bottom: 10px;
 }
 
-.second-column a,
-.third-column a {
+.f__second-column a,
+.f__third-column a {
     text-decoration: none;
     font-size: 14px;
     color: #555;
     transition: 0.3s;
 }
 
-.second-column a:hover,
-.third-column a:hover {
+.f__second-column a:hover,
+.f__third-column a:hover {
     color: #7fad39;
 }
 
 /* FOURTH COLUMN (Newsletter area) */
-.fourth-column {
+.f__fourth-column {
     max-width: 100%;
     min-width: 300px;
 }
 
-/* Space from top like screenshot */
-.fourth-column {
+/* Space from top */
+.f__fourth-column {
     padding-right: 30px;
  /*   padding-top: 20px;*/
 }
 
-.fourth-column p {
+.f__fourth-column p {
     font-size: 14px;
     color: #555;
     margin-bottom: 15px;
 }
 
 /* Newsletter form inside child component */
-.fourth-column form,
-.fourth-column .newsletter-form {
+.f__fourth-column form,
+.f__fourth-column .f__newsletter-form {
     display: flex;
     align-items: center;
 }
 
 /* Input */
-.fourth-column input {
+.f__fourth-column input {
     flex: 1;
     padding: 12px;
     border: none;
@@ -118,7 +118,7 @@
 }
 
 /* Button */
-.fourth-column button {
+.f__fourth-column button {
     background-color: #7fad39;
     color: #fff;
     border: none;
@@ -127,39 +127,38 @@
     cursor: pointer;
 }
 
-/* Social icons (Font Awesome fix) */
 
 /* RIGHT SECTION */
-.footer-right {
+.f__footer-right {
     width: 40%;
 }
 
-.footer-newsletter{
+.f__footer-newsletter{
     width: 100%;
     height: auto;
 }
 
-.footer-newsletter h3 {
+.f__footer-newsletter h3 {
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 10px;
 }
 
-.footer-newsletter p {
+.f__footer-newsletter p {
     font-size: 14px;
     color: #6f6f6f;
     margin-bottom: 20px;
 }
 
 /* NEWSLETTER INPUT */
-.newsletter-box {
+.f__newsletter-box {
     display: flex;
     width: 100%;
     overflow: hidden;
 
 }
 
-.newsletter-box input {
+.f__newsletter-box input {
     flex: 1;
     height: 45px;
     min-width: 0;
@@ -169,7 +168,7 @@
     outline: none;
 }
 
-.newsletter-box button {
+.f__newsletter-box button {
     height: 45px;
     background: #7fad39;
     color: #fff;
@@ -181,17 +180,17 @@
     transition: 0.3s;
 }
 
-.newsletter-box button:hover {
+.f__newsletter-box button:hover {
     background: #5e8f2d;
 }
 
-.footer-newsletter-title{
+.f__footer-newsletter-title{
     color:black;
     font-size: 600;
 }
 
 /* SOCIAL ICONS CONTAINER */
-.social-icons {
+.f__social-icons {
     display: flex;
     align-items: center;
     gap: 14px;
@@ -201,7 +200,7 @@
 }
 
 /* EACH ICON BOX */
-.social-icons li a {
+.f__social-icons li a {
     width: 42px;
     height: 42px;
     background: #ffffff;
@@ -209,20 +208,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-    /* smooth UI */
+    text-decoration: none;
     transition: all 0.3s ease;
 
     /* subtle shadow like Ogani */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.social-icons li a:hover i {
+.f__social-icons li a:hover i {
     color: #ffffff !important;
 }
 
 /* ICON */
-.social-icons li a i {
+.f__social-icons li a i {
     font-size: 15px;
     color: #6f6f6f;
     line-height: 1;
@@ -230,7 +228,7 @@
 }
 
 /* HOVER EFFECT (important) */
-.social-icons li a:hover {
+.f__social-icons li a:hover {
     background: #7fad39;
 
     /* lift effect */
@@ -239,19 +237,19 @@
 }
 
 /* ICON COLOR CHANGE ON HOVER */
-.social-icons li a:hover i {
+.f__social-icons li a:hover i {
     color: #ffffff;
 }
 
 /* BOTTOM */
-.footer-bottom-wrapper {
+.f__footer-bottom-wrapper {
     border-top: 1px solid #ebebeb;
     margin-top: 30px;
     padding: 20px;
     padding-right: 47px;
 }
 
-.footer-bottom {
+.f__footer-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -259,40 +257,40 @@
 }
 
 /* COPYRIGHT */
-.footer-bottom-left p {
+.f__footer-bottom-left p {
     font-size: 14px;
     color: #6f6f6f;
     margin: 0;
 }
 
 /* PAYMENT IMAGE */
-.footer-bottom-right img {
+.f__footer-bottom-right img {
     height: 25px;
     object-fit: contain;
 }
 
 
 @media (max-width: 992px) {
-    .footer-container {
+    .f__footer-container {
         padding: 30px 30px 0;
     }
 
-    .footer-top {
+    .f__footer-top {
         gap: 30px;
     }
 }
 
 @media (max-width: 768px) {
-    .footer-top {
+    .f__footer-top {
         flex-direction: column;
         gap: 25px;
     }
 
-    .footer-top > div {
+    .f__footer-top > div {
         width: 100%;
     }
 
-    .footer-bottom {
+    .f__footer-bottom {
         flex-direction: column;
         gap: 15px;
         text-align: center;
