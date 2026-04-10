@@ -1,3 +1,2 @@
 #base=css
-style.css
 cart-page.css
