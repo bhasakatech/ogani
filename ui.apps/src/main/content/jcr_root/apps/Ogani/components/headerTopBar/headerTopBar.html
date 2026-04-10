@@ -1,3 +1,6 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='Ogani.header'}"/>
+
 <div id="headerTopBar" class="header__top" data-sly-use.header="com.bhasaka.ogani.core.models.HeaderTopBar"
     data-sly-test="${header.email || header.promotionalText}">
     <div class="container">
