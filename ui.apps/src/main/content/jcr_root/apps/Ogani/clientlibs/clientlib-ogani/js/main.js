@@ -221,7 +221,6 @@ $(document).on("foundation-contentloaded", function () {
         }
         $button.parent().find("input").val(newVal);
     });
-<<<<<<< feature/dev-26-contact-form
 
 /*--------------------------
     Contact Form Submit
@@ -267,6 +266,4 @@ if ($("#contactForm").length) {
     });
 }
 
-=======
->>>>>>> develop
 })(jQuery);
