@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProductCategoryTest {
+    
     @Test
     void testConstructorAndGetters() {
         ProductCategory category = new ProductCategory(
@@ -30,7 +31,6 @@ class ProductCategoryTest {
     @Test
     void testEmptyValues() {
         ProductCategory category = new ProductCategory("", "", "");
-
         assertEquals("", category.getTitle());
         assertEquals("", category.getImage());
         assertEquals("", category.getLink());

@@ -51,7 +51,6 @@ public class CategoryCarouselModel {
             }
         }
     }
-
     public List<ProductCategory> getCategories() {
         return categories;
     }

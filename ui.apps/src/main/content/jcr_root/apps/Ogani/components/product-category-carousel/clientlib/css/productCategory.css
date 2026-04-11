@@ -1,25 +1,155 @@
-.container {
-  padding-left: 0;
-  padding-right: 0;
-  width: 100%;
+/* ================= WRAPPER ================= */
+.category-carousel {
+    position: relative;
+    padding: 60px 0;
+    max-width: 1200px;   
+    margin: 0 auto;
 }
-@media (min-width: 1200px) {
-  .container {
-    max-width: 100%;
-  }
+
+/* ================= VIEWPORT ================= */
+.carousel-viewport {
+    overflow: hidden;
+    margin: 0;  
 }
-@media (min-width: 576px) {
-  .container {
-    max-width: 100%;
-  }
+
+/* ================= TRACK ================= */
+.carousel-track {
+    display: flex;
+    gap: 15px;
+    transition: transform 0.5s ease-in-out;
 }
-@media (min-width: 768px) {
-  .container {
-    max-width: 100%;
-  }
+
+/* ================= ITEMS ================= */
+.product-carousel-item {
+    flex: 0 0 calc((100% - 45px) / 4); /* 4 cards with 15px gap */
 }
-@media (min-width: 992px) {
-  .container {
-    max-width: 100%;
-  }
+
+/* ================= CARD ================= */
+.carousel-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+    padding: 30px 20px;  /* balanced like original */
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+/* ================= IMAGE ================= */
+.carousel-image {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-image img {
+    max-width: 140px;
+    max-height: 140px;
+    object-fit: contain;
+}
+
+/* ================= TITLE ================= */
+.carousel-title {
+    margin-top: 12px;
+    background: #ffffff;
+    padding: 12px 10px;
+}
+
+.carousel-title h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1c1c1c;
+    font-family: "Cairo", sans-serif;
+}
+
+/* ================= ARROWS ================= */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 70px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-btn.prev { left: -50px; }  /* slightly outside like original */
+.carousel-btn.next { right: -50px; }
+/* ================= LARGE DESKTOP (default already OK) ================= */
+
+
+/* ================= LAPTOP ================= */
+@media (max-width: 1200px) {
+    .category-carousel {
+        max-width: 1000px;
+    }
+
+    .carousel-btn.prev { left: -40px; }
+    .carousel-btn.next { right: -40px; }
+}
+
+
+/* ================= TABLET ================= */
+@media (max-width: 992px) {
+    .category-carousel {
+        max-width: 90%;
+    }
+
+    .carousel-viewport {
+        margin: 0 20px;
+    }
+
+    .product-carousel-item {
+        flex: 0 0 calc((100% - 15px) / 2);
+    }
+
+    .carousel-btn.prev { left: 0; }
+    .carousel-btn.next { right: 0; }
+}
+
+
+/* ================= MOBILE ================= */
+@media (max-width: 576px) {
+    .category-carousel {
+        max-width: 100%;
+        padding: 40px 0;
+    }
+
+    .carousel-viewport {
+        margin: 0 15px;
+    }
+
+    .carousel-track {
+        gap: 10px;
+    }
+
+    .product-carousel-item {
+        flex: 0 0 100%;
+    }
+
+    .carousel-link {
+        padding: 20px 15px; /* compact mobile */
+    }
+
+    .carousel-image {
+        height: 120px;
+    }
+
+    .carousel-image img {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    @media (max-width: 576px) {
+    .carousel-btn {
+        display: none; 
+    }
+}
+
+    .carousel-btn.prev { left: 5px; }
+    .carousel-btn.next { right: 5px; }
 }

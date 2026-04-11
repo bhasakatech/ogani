@@ -119,9 +119,7 @@ class CategoryCarouselModelTest {
                         .adaptTo(CategoryCarouselModel.class);
 
         assertNotNull(model);
-
         List<ProductCategory> categories = model.getCategories();
-
         assertEquals(2, categories.size());
         assertEquals("Apple", categories.get(0).getTitle());
         assertEquals("Banana", categories.get(1).getTitle());
