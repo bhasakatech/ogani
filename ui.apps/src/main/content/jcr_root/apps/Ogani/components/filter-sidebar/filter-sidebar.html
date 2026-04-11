@@ -1,0 +1,63 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"/>
+
+<sly data-sly-call="${clientlib.css @ categories='Ogani.filter-sidebar'}"/>
+<sly data-sly-call="${clientlib.js @ categories='Ogani.filter-sidebar'}"/>
+
+<sly data-sly-use.model="com.bhasaka.ogani.core.models.FilterModel"/>
+
+<div class="filter">
+
+        <!-- DEPARTMENT -->
+    <div class="filter__section">
+        <h3>Department</h3>
+
+        <ul class="filter__department" data-sly-list.tag="${model.departmentTags}">
+            <li>
+                <a href="#">${tag}</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- PRICE -->
+    <div class="filter__section">
+        <h3>Price</h3>
+
+        <div class="range-slider">
+            <!-- FIX: use dialog values -->
+            <input type="range" id="minRange" min="${model.minPrice}" max="${model.maxPrice}" value="${model.minPrice}">
+            <input type="range" id="maxRange" min="${model.minPrice}" max="${model.maxPrice}" value="${model.maxPrice}">
+            <div class="slider-track"></div>
+        </div>
+
+        <p class="filter__price">
+            $<span id="minPrice">${model.minPrice}</span> -
+            $<span id="maxPrice">${model.maxPrice}</span>
+        </p>
+    </div>
+
+    <!-- COLORS -->
+    <div class="filter__section">
+        <h3>Colors</h3>
+
+        <div class="filter__colors" data-sly-list.color="${model.colors}">
+            <label class="color-item">
+                <input type="checkbox" class="color-filter" value="${color}">
+
+                <span class="color-dot" data-color="${color}"></span>
+                <span class="color-name">${color}</span>
+            </label>
+        </div>
+    </div>
+
+    <!-- SIZES -->
+    <div class="filter__section">
+        <h3>Popular Size</h3>
+
+        <div class="filter__sizes" data-sly-list.size="${model.sizes}">
+            <button type="button" class="size-filter" data-size="${size}">
+                ${size}
+            </button>
+        </div>
+    </div>
+
+</div>

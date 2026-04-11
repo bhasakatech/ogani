@@ -1,0 +1,150 @@
+/* FILTER */
+.filter {
+    padding: 40px 30px;
+    background: #f5f5f5;
+    font-family: "Cairo", sans-serif;
+    width: 254px;
+    padding-left: 175px;
+}
+
+.filter__section {
+    margin-bottom: 45px;
+}
+
+.filter__section h3 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #1c1c1c;
+}
+
+/* SLIDER */
+.range-slider {
+    position: relative;
+    height: 30px;
+}
+
+.range-slider input {
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    background: none;
+    pointer-events: none;
+    -webkit-appearance: none;
+    z-index: 2;
+}
+
+.range-slider input::-webkit-slider-thumb {
+    pointer-events: all;
+    width: 14px;
+    height: 14px;
+    background: #ffffff;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -5px;
+}
+
+.slider-track {
+    position: absolute;
+    height: 6px;
+    width: 100%;
+    background: #ddd;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 2px;
+    z-index: 1;
+}
+
+
+/* ===== DEPARTMENT LIST ===== */
+.filter__department {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.filter__department li {
+    margin-bottom: 14px;
+}
+
+.filter__department a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #1c1c1c;
+    transition: all 0.2s ease;
+}
+
+/* hover like original */
+.filter__department a:hover {
+    color: #dd2222;
+    padding-left: 5px;
+}
+
+/* PRICE TEXT */
+.filter__price {
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: 800;
+    color: #dd2222;
+}
+
+/* COLORS */
+.filter__colors {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 5px 5px;
+    padding-right: 100px;
+}
+
+.color-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.color-item input {
+    display: none;
+}
+
+.color-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    background: unset; 
+}
+
+.color-item input:checked + .color-dot {
+    border: 2px solid #000;
+}
+
+.color-name {
+    font-size: 15px;
+    color: #333;
+}
+
+/* SIZE (NO CHANGE ON CLICK OR HOVER) */
+.filter__sizes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.filter__sizes button {
+    padding: 12px 0;
+    background: #f0f0f0;
+    border: none;
+    font-size: 14px;
+    color: #666;
+    cursor: default;
+}
+
+/* IMPORTANT: remove ALL state change */
+.filter__sizes button:hover,
+.filter__sizes button.active {
+    background: #f0f0f0;
+    color: #666;
+}

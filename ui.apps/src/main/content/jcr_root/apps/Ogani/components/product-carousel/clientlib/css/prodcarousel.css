@@ -1,9 +1,10 @@
 /* ======ROOT ================= */
 .pc__product-carousel {
-    padding: 60px 100px;
-    padding-left:400px;
-    background: #ffffff; 
+    padding: 60px 0 60px 20px;
+    background: #fff;
     font-family: "Cairo", sans-serif;
+    width: 68%;
+    margin-left: 31%;
 }
 
 /* ================= HEADER ================= */
@@ -226,18 +227,29 @@ h2{
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 992px) {
-    .pc__product-card {
-        flex: 0 0 calc(100% / 2 - 20px);
+    .pc__product-carousel {
+        width: 100%;
+        margin-left: 0;
+        padding: 40px 20px;
     }
 }
 
 /* Mobile (1 card) */
 @media (max-width: 576px) {
     .pc__product-carousel {
-        padding: 40px 20px; 
+        width: 100%;
+        margin-left: 0;
+        padding: 30px 15px;
     }
 
     .pc__product-card {
         flex: 0 0 100%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .pc__product-carousel {
+        width: 100%;
+        margin-left: 0;
     }
 }

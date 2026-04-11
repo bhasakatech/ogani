@@ -1,10 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     /* ================= NAVIGATION ================= */
-    document.querySelectorAll(".cp__nav-btn").forEach(btn => {
+    document.querySelectorAll(".nav-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
-            const href = this.dataset.href;
-            if (href) window.location.href = href;
+            const href = this.getAttribute("data-href");
+
+            if (href && href.trim() !== "") {
+                // AEM safe redirect (ensures .html if missing)
+                const finalUrl = href.endsWith(".html") ? href : href + ".html";
+                window.location.href = finalUrl;
+            } else {
+                console.error("Navigation failed: data-href is empty");
+            }
         });
     });
 

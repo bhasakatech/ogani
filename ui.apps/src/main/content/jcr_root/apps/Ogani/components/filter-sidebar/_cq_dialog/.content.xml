@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root
+    xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    xmlns:cq="http://www.day.com/jcr/cq/1.0"
+    xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Filter Component"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/tabs">
+
+        <items jcr:primaryType="nt:unstructured">
+
+            <!-- DEPARTMENT TAB -->
+            <departmentTab
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Department"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+
+                <items jcr:primaryType="nt:unstructured">
+
+                    <tagPath
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                        emptyText="Select the root tag for departments..."
+                        fieldLabel="Departments Tag Root Path"
+                        name="./tagRootPath"
+                        rootPath="/content/cq:tags/ogani/"/>
+                        
+                </items>
+            </departmentTab>
+
+            <!-- PRICE TAB -->
+            <priceTab
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Price"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+
+                <items jcr:primaryType="nt:unstructured">
+
+                    <minPrice
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                        fieldLabel="Minimum Price"
+                        name="./minPrice"/>
+
+                    <maxPrice
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                        fieldLabel="Maximum Price"
+                        name="./maxPrice"/>
+                </items>
+            </priceTab>
+
+            <!-- COLOR TAB -->
+            <colorTab
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Colors"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+
+                <items jcr:primaryType="nt:unstructured">
+
+                    <colors
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                        composite="{Boolean}false"
+                        fieldLabel="Colors">
+
+                        <field
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            name="./colors"/>
+                    </colors>
+
+                </items>
+            </colorTab>
+
+            <!-- SIZE TAB -->
+            <sizeTab
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Popular Size"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+
+                <items jcr:primaryType="nt:unstructured">
+
+                    <sizes
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                        fieldLabel="Sizes">
+
+                        <field
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            name="./sizes"/>
+                    </sizes>
+
+                </items>
+            </sizeTab>
+
+        </items>
+    </content>
+</jcr:root>
