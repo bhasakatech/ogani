@@ -78,7 +78,7 @@
                         sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
                         fieldLabel="Add to cart Path"
                         name="./addButton"
-                        rootPath="/content/Ogani/us/en/home"/>
+                        rootPath="/content/Ogani"/>
                 </items>
             </metaTab>
             <productInformation
