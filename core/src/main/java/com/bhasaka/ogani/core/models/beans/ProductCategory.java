@@ -10,8 +10,7 @@ public class ProductCategory {
         this.image = image;
         this.link = link;
     }
-
-
+    
     public String getTitle() {
         return title;
     }

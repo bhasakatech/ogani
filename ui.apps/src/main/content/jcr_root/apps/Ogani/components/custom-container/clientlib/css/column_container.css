@@ -1,0 +1,36 @@
+.cmp-column {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;   
+    gap: 20px;                 
+}
+
+/* column should NOT stretch */
+.column-item {
+    width: auto;               
+    flex: 0 0 auto;            
+}
+
+/* ===== 3 columns ===== */
+.cmp-column--3 .column-item {
+    width: calc(33.33% - 14px);
+}
+
+/* ===== 4 columns (2 per row) ===== */
+.cmp-column--4 .column-item {
+    width: calc(50% - 10px);
+}
+
+/* ===== Tablet ===== */
+@media (max-width: 1024px) {
+    .column-item {
+        width: calc(50% - 10px) !important;
+    }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+    .column-item {
+        width: 100% !important;
+    }
+}

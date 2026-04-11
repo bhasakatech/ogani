@@ -17,7 +17,7 @@
                         sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
                         fieldLabel="Content Fragment Path"
                         name="./cfPath"
-                        rootPath="/content/dam/Ogani/productdetailscf"/>
+                        rootPath="/content/dam/Ogani"/>
                 </items>
             </cfTab>
             <metaTab
@@ -73,11 +73,17 @@
                         sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
                         fieldLabel="Pinterest URL"
                         name="./pinterest"/>
+                    <addButton
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                        fieldLabel="Add to cart Path"
+                        name="./addButton"
+                        rootPath="/content/Ogani"/>
                 </items>
             </metaTab>
             <productInformation
                 jcr:primaryType="nt:unstructured"
-                jcr:title="Product Meta"
+                jcr:title="Product Info"
                 sling:resourceType="granite/ui/components/coral/foundation/container">
                 <items jcr:primaryType="nt:unstructured">
                     <descrption

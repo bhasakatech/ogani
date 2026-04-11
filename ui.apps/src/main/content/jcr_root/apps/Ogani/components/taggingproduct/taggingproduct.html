@@ -1,13 +1,16 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='Ogani.tagging-container'}"/>
+
 <sly data-sly-use.model="com.bhasaka.ogani.core.models.taggingproducts.ProductListingModel" />
 <div class="product">
     <div class="product__topbar">
         <div class="product__sort">
 
-            <span>Sort By</span>
-            <select onchange="applySort(this.value)">
-                <option value="">Default</option>
-                <option value="low" ${param.sort == 'low' ? 'selected' : ''}>Price Low to High</option>
-                <option value="high" ${param.sort == 'high' ? 'selected' : ''}>Price High to Low</option>
+            <span>Sort By</span>s
+            <select onchange="ProductListing.applySort(this.value)">
+                <option value="">${model.defaultSorting}</option>
+                <option value="low" ${param.sort == 'low' ? 'selected' : ''}>${model.lowSorting}</option>
+                <option value="high" ${param.sort == 'high' ? 'selected' : ''}>${model.highSorting}</option>
             </select>
 
         </div>
