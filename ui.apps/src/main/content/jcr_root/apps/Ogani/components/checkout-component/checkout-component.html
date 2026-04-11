@@ -1,6 +1,16 @@
 <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
      data-sly-call="${clientlib.all @ categories='ogani.checkout-container'}"/>
 
+<div class = "main-checkout-container">
+
+  <div class="checkout-coupon-bar">
+    <span>
+        <i class="fa fa-tag coupon-icon"></i>
+        Have a coupon? 
+        <a href="#">Click here</a> to enter your code
+    </span>
+  </div>
+
 <div class="checkout-container"
      data-sly-use.model="${'com.bhasaka.ogani.core.models.CheckoutModel'}">
 
@@ -8,6 +18,7 @@
     <div class="checkout-left">
 
         <h2 class="checkout-title">${model.checkoutTitle}</h2>
+        <hr>
 
         <div class="checkout-form">
 
@@ -30,26 +41,33 @@
 
             <!-- Create Account -->
             <div class="form-checkbox">
-                <label><input type="checkbox" value = "${model.createAccount}"/>Create an account ?</label>
+                <label><input type="checkbox" value = "${model.createAccount}"/> &nbsp; Create an account ?</label>
             </div>
 
             <div class="account-info">
                 <p>
-                    ${model.accountInformation}
+                    ${model.accountInformation} 
                 </p>
+                
+                <br/>
+                
+                <label class="accountPasswordHeader"> ${model.accountPasswordPlaceholder} </label> 
+                <br/> <br/>
+                
                 <input type="password" placeholder="${model.accountPasswordPlaceholder}" autocomplete="new-password" class="form-input" value = "${model.accountPassword}"/>
             </div>
 
             <!-- Ship -->
             <div class="form-checkbox">
-                <label><input type="checkbox" value = "${model.shipToDifferentAddress}"/> Ship to a different address?</label>
+                <label><input type="checkbox" value = "${model.shipToDifferentAddress}"/> &nbsp; Ship to a different address?</label>
             </div>
 
             <!-- Notes -->
             <div class="order-notes">
-                <label>Order notes*</label>
+                <label class = "orderNotesLabel">Order notes*</label>
+                <br/> <br/>
                 <textarea placeholder="${model.orderNotesPlaceholder}">${model.orderNotes}</textarea>
-            </div>
+            </div> 
 
         </div>
     </div>
@@ -58,11 +76,10 @@
 
     <div class="checkout-right">
 
-        <h3 class="order-title">${model.orderTitle}</h3>
+        <h3 class="order-title">${model.orderTitle}</h3> <hr>
 
         <div class="order-header">
             <span>Products</span>
-            <span>Price</span>
             <span>Total</span>
         </div>
 
@@ -78,27 +95,30 @@
             <sly data-sly-list.product="${model.products}">
                 <div class="order-row">
                     <span class="product-name">${product.title}</span>
-                    <span class="product-price">₹ ${product.currentPrice}</span>
-                    <span class="product-total">₹ ${product.currentPrice}</span>
+                    <span class="product-total">$ ${product.currentPrice}</span>
                 </div>
             </sly>
 
         </div>
+        
 
         <!-- SUMMARY -->
         <div class="order-summary">
 
             <div class="summary-row">
                 <span>${model.subtotalLabel}</span>
-                <span class="amount">₹ ${model.subtotal}</span>
+                <span class="amount">$ ${model.subtotal}</span>
             </div>
+            
+            <hr>
 
             <div class="summary-row total">
                 <span>${model.finalTotalLabel}</span>
-                <span class="amount total-amount">₹ ${model.total}</span>
+                <span class="amount total-amount">$ ${model.total}</span>
             </div>
-
         </div>
+        
+        <hr>
 
         <!-- PAYMENT -->
         <div class="payment-section">
@@ -113,11 +133,11 @@
             <br/>
 
             <label>
-                <input type="radio" name="payment"/> Check Payment
+                <input type="checkbox" name="payment"/> &nbsp; Check Payment
             </label>
 
             <label>
-                <input type="radio" name="payment"/> Paypal
+                <input type="checkbox" name="payment"/> &nbsp; Paypal
             </label>
 
         </div>
@@ -128,5 +148,7 @@
         </button>
 
     </div>
+    
+   </div>
 
 </div>
