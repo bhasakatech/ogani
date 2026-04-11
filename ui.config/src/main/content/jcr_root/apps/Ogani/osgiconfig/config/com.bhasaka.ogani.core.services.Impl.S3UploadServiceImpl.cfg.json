@@ -1,0 +1,5 @@
+{
+  "secretKey":"$[secret:S3_ACCESS_KEY]",
+  "bucketName":"$[env:S3_BUCKET]",
+  "accessKey":"$[secret:S3_ACCESS_KEY]"
+}
