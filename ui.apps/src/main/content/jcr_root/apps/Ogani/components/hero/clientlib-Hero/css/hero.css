@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  margin: 50px auto 80px auto;  /* auto centers horizontally */
+  margin: 10px auto 80px auto;  /* auto centers horizontally */
   max-width: 1200px;            /* contain width */
   width: 100%;                  /* responsive width */
   padding: 0 20px;
@@ -18,7 +18,7 @@
 .image-cmp {
   position: absolute;
   inset: 0;
-  width: 70%;
+  width: 75%;
   height: 100%;
 }
 

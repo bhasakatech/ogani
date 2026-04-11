@@ -1,0 +1,25 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='Ogani.column_container'}"/>
+
+<!-- Default value -->
+<sly data-sly-set.colCount="${properties.columnCount || '4'}"/>
+
+<div class="cmp-column cmp-column--${colCount}">
+
+    <div class="column-item" data-sly-test="${colCount == '2' || colCount == '3' || colCount == '4'}">
+        <div data-sly-resource="${'cl-1' @ resourceType='core/wcm/components/container/v1/container'}"></div>
+    </div>
+
+    <div class="column-item" data-sly-test="${colCount == '2' || colCount == '3' || colCount == '4'}">
+        <div data-sly-resource="${'cl-2' @ resourceType='core/wcm/components/container/v1/container'}"></div>
+    </div>
+
+    <div class="column-item" data-sly-test="${colCount == '3' || colCount == '4'}">
+        <div data-sly-resource="${'cl-3' @ resourceType='core/wcm/components/container/v1/container'}"></div>
+    </div>
+
+    <div class="column-item" data-sly-test="${colCount == '4'}">
+        <div data-sly-resource="${'cl-4' @ resourceType='core/wcm/components/container/v1/container'}"></div>
+    </div>
+
+</div>

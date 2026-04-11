@@ -1,6 +1,5 @@
 package com.bhasaka.ogani.core.models;
 
-
 import com.bhasaka.ogani.core.models.beans.Product;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.*;
@@ -37,6 +36,7 @@ public class ProductDetail {
     @ValueMapValue private String twitter;
     @ValueMapValue private String instagram;
     @ValueMapValue private String pinterest;
+    @ValueMapValue private String addButton;
 
     @ValueMapValue private String prdDescTitle;
     @ValueMapValue private String prdInfoTitle;
@@ -105,5 +105,9 @@ public class ProductDetail {
 
     public String getPrdReviewTitle() {
         return prdReviewTitle;
+    }
+
+    public String getAddButton() {
+        return addButton;
     }
 }
