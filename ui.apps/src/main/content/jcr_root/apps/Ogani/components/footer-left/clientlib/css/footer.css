@@ -6,14 +6,14 @@
     
 }
 
-/* TOP LAYOUT */
+
 /* Main container */
 .f__footer-top {
-    padding:0px 20px;
+
+    padding:0px 60px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 50px;
     background-color: #f5f5f5;
     flex-wrap: wrap;
 }
@@ -45,10 +45,10 @@
 }
 
 /* USEFUL LINKS HEADING + WRAPPER */
-.f__links-column h4 {
+.f__links-column h5 {
     color: black;
-    font-weight: 700;
-    font-size: 18px;
+    font-weight: 800;
+    font-size: 16px ;
     margin-bottom: 15px;
 }
 
@@ -138,9 +138,9 @@
     height: auto;
 }
 
-.f__footer-newsletter h3 {
-    font-size: 18px;
-    font-weight: 700;
+.f__footer-newsletter h5 {
+    font-size: 16px;
+    font-weight: 800;
     margin-bottom: 10px;
 }
 
@@ -241,7 +241,7 @@
     color: #ffffff;
 }
 
-/* BOTTOM */
+/* BOTTOM 
 .f__footer-bottom-wrapper {
     border-top: 1px solid #ebebeb;
     margin-top: 30px;
@@ -255,7 +255,7 @@
     align-items: center;
     flex-wrap: wrap;
 }
-
+*/
 /* COPYRIGHT */
 .f__footer-bottom-left p {
     font-size: 14px;
@@ -294,5 +294,109 @@
         flex-direction: column;
         gap: 15px;
         text-align: center;
+    }
+}
+
+/* ===== DEFAULT (Desktop First) ===== */
+.f__footer-bottom-wrapper {
+    border-top: 1px solid #ebebeb;
+    margin-top: 30px;
+    padding: 20px 47px;
+}
+
+.f__footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px; /* better spacing */
+}
+
+/* LEFT TEXT */
+.f__footer-bottom-left p {
+    font-size: 14px;
+    color: #6f6f6f;
+    margin: 0;
+}
+
+/* RIGHT IMAGE */
+.f__footer-bottom-right img {
+    height: 25px;
+    object-fit: contain;
+    max-width: 100%;
+}
+
+/* ===== LARGE DEVICES (≤1200px) ===== */
+@media (max-width: 1200px) {
+    .f__footer-bottom-wrapper {
+        padding: 20px 30px;
+    }
+}
+
+/* ===== LAPTOP / TABLET (≤992px) ===== */
+@media (max-width: 992px) {
+    .f__footer-container {
+        padding: 30px 30px 0;
+    }
+
+    .f__footer-top {
+        gap: 30px;
+    }
+
+    .f__footer-bottom-wrapper {
+        padding: 18px 25px;
+    }
+}
+
+/* ===== TABLET (≤768px) ===== */
+@media (max-width: 768px) {
+    .f__footer-top {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .f__footer-top > div {
+        width: 100%;
+    }
+
+    .f__footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .f__footer-bottom-wrapper {
+        padding: 15px 20px;
+    }
+}
+
+/* ===== MOBILE (≤576px) ===== */
+@media (max-width: 576px) {
+    .f__footer-bottom-left p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .f__footer-bottom-right img {
+        height: 22px;
+    }
+
+    .f__footer-bottom-wrapper {
+        padding: 15px;
+    }
+}
+
+/* ===== SMALL MOBILE (≤375px like iPhone SE) ===== */
+@media (max-width: 375px) {
+    .f__footer-bottom-left p {
+        font-size: 12px;
+    }
+
+    .f__footer-bottom {
+        gap: 10px;
+    }
+
+    .f__footer-bottom-right img {
+        height: 20px;
     }
 }
