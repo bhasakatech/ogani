@@ -1,2 +1,0 @@
-#base=js
-cart-page.js
