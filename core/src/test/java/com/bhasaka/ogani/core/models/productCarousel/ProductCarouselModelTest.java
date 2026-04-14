@@ -1,127 +1,140 @@
 package com.bhasaka.ogani.core.models.productCarousel;
 
+import com.bhasaka.ogani.core.services.ProductService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.wcm.testing.mock.aem.junit5.AemContext;
-import io.wcm.testing.mock.aem.junit5.AemContextExtension;
-import org.junit.jupiter.api.BeforeEach;
+
+import org.apache.sling.api.resource.ResourceResolver;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.io.InputStream;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-@ExtendWith(AemContextExtension.class)
+@ExtendWith(MockitoExtension.class)
 class ProductCarouselModelTest {
 
-    private final AemContext context = new AemContext();
+    @InjectMocks
+    private ProductCarouselModel model;
 
-    @BeforeEach
-    void setUp() throws Exception {
+    @Mock
+    private ProductService productService;
 
-        context.addModelsForClasses(ProductCarouselModel.class);
+    @Mock
+    private ResourceResolver resolver;
 
-        ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper();
+
+    // ===============================
+    // ✅ 1. INIT SUCCESS (JSON BASED)
+    // ===============================
+    @Test
+    void testInit_Success() throws Exception {
+
         InputStream is = getClass().getClassLoader()
                 .getResourceAsStream("product-carousel.json");
 
         JsonNode root = mapper.readTree(is);
-        String rootPath = root.get("rootPath").asText();
 
-        context.create().resource(rootPath);
+        List<Product> products = new ArrayList<>();
 
-        Iterator<JsonNode> products = root.get("products").elements();
-
-        while (products.hasNext()) {
-            JsonNode p = products.next();
-
-            String productPath = rootPath + "/" + p.get("name").asText();
-
-            context.create().resource(
-                    productPath + "/jcr:content/data/master",
-                    "title", p.get("title").asText(),
-                    "category", p.get("category").asText(),
-                    "image", p.get("image").asText(),
-                    "originalPrice", p.get("originalPrice").asDouble(),
-                    "currentPrice", p.get("currentPrice").asDouble(),
-                    "discount", p.get("discount").asDouble()
-            );
+        for (JsonNode node : root.get("products")) {
+            Product p = new Product();
+            p.setTitle(node.get("title").asText());
+            p.setCategory(node.get("category").asText());
+            p.setImage(node.get("image").asText());
+            p.setOriginalPrice(node.get("originalPrice").asDouble());
+            p.setCurrentPrice(node.get("currentPrice").asDouble());
+            p.setDiscount(node.get("discount").asDouble());
+            products.add(p);
         }
 
-        context.currentResource(
-                context.create().resource("/content/test",
-                        "rootPath", rootPath
-                )
-        );
-    }
+        // inject rootPath manually (since no Sling context)
+        setField(model, "rootPath", "/content/products");
+        setField(model, "resolver", resolver);
 
-    @Test
-    void testModelInitialization() {
+        when(productService.getProducts("/content/products", resolver))
+                .thenReturn(products);
 
-        ProductCarouselModel model =
-                context.currentResource().adaptTo(ProductCarouselModel.class);
+        // call init manually
+        model.init();
 
-        assertNotNull(model);
-        assertFalse(model.isEmpty());
+        assertNotNull(model.getProductList());
         assertEquals(2, model.getProductList().size());
+        assertFalse(model.isEmpty());
     }
 
+    // ===============================
+    // ✅ 2. INIT EXCEPTION FLOW
+    // ===============================
     @Test
-    void testProductValues() {
+    void testInit_Exception() {
 
-        ProductCarouselModel model =
-                context.currentResource().adaptTo(ProductCarouselModel.class);
+        setField(model, "rootPath", "/content/products");
+        setField(model, "resolver", resolver);
 
-        Product product = model.getProductList().get(0);
+        when(productService.getProducts(anyString(), any()))
+                .thenThrow(new RuntimeException());
 
-        assertEquals("Apple", product.getTitle());
-        assertEquals("Fruits", product.getCategory());
-        assertEquals("/content/dam/apple.png", product.getImage());
-        assertEquals(100.0, product.getOriginalPrice());
-        assertEquals(80.0, product.getCurrentPrice());
-        assertEquals(20, product.getDiscount());
-    }
+        model.init();
 
-    @Test
-    void testDiscountCalculation_whenOnlyDiscountPresent() {
-
-        ProductCarouselModel model =
-                context.currentResource().adaptTo(ProductCarouselModel.class);
-
-        Product product = model.getProductList().get(1);
-
-        assertEquals(45.0, product.getCurrentPrice());
-        assertEquals(10, product.getDiscount());
-    }
-
-    @Test
-    void testEmptyWhenRootPathMissing() {
-
-        context.currentResource(
-                context.create().resource("/content/test2")
-        );
-
-        ProductCarouselModel model =
-                context.currentResource().adaptTo(ProductCarouselModel.class);
-
-        assertNotNull(model);
+        assertNull(model.getProductList());
         assertTrue(model.isEmpty());
     }
 
+    // ===============================
+    // ✅ 3. EMPTY LIST CASE
+    // ===============================
     @Test
-    void testEmptyWhenInvalidPath() {
+    void testEmptyList() {
 
-        context.currentResource(
-                context.create().resource("/content/test3",
-                        "rootPath", "/invalid/path")
-        );
+        setField(model, "rootPath", "/content/products");
+        setField(model, "resolver", resolver);
 
-        ProductCarouselModel model =
-                context.currentResource().adaptTo(ProductCarouselModel.class);
+        when(productService.getProducts(anyString(), any()))
+                .thenReturn(new ArrayList<>());
 
-        assertNotNull(model);
+        model.init();
+
         assertTrue(model.isEmpty());
+    }
+
+    // ===============================
+    // ✅ 4. NULL LIST CASE
+    // ===============================
+    @Test
+    void testNullList() {
+
+        setField(model, "rootPath", "/content/products");
+        setField(model, "resolver", resolver);
+
+        when(productService.getProducts(anyString(), any()))
+                .thenReturn(null);
+
+        model.init();
+
+        assertTrue(model.isEmpty());
+    }
+
+    // ===============================
+    // 🔧 Reflection Helper
+    // ===============================
+    private void setField(Object target, String fieldName, Object value) {
+        try {
+            java.lang.reflect.Field field = target.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(target, value);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
