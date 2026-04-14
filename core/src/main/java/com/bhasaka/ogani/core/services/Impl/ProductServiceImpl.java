@@ -12,52 +12,85 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of ProductService for retrieving product data from JCR.
+ *
+ * This class is registered as an OSGi component and can be injected into
+ * Sling Models using @OSGiService.
+ *
+ * Responsibilities:
+ * - Read product data from repository
+ * - Navigate JCR structure (jcr:content/data/master)
+ * - Map properties to Product objects
+ * - Apply pricing and discount logic
+ * - Resolve image paths
+ *
+ * Error Handling:
+ * - Logs warnings for invalid input or missing resources
+ * - Logs errors for exceptions
+ * - Returns empty list in failure scenarios
+ */
 @Component(service = ProductService.class)
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     private static final Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
 
+    /**
+     * Fetches product data from the given root path.
+     *
+     * Execution flow:
+     * - Validate rootPath
+     * - Fetch root resource
+     * - Iterate child resources
+     * - Read product data from nested node
+     * - Apply business logic for pricing
+     * - Build Product objects
+     *
+     * @param rootPath the JCR path containing product nodes
+     * @param resolver the ResourceResolver used to access repository
+     * @return list of Product objects
+     */
     @Override
     public List<Product> getProducts(String rootPath, ResourceResolver resolver) {
 
         List<Product> productList = new ArrayList<>();
 
-        try{
-            if(rootPath == null || rootPath.isEmpty()){
+        try {
+            if (rootPath == null || rootPath.isEmpty()) {
                 log.warn("Root path is empty or null");
                 return productList;
             }
 
             Resource rootResource = resolver.getResource(rootPath);
 
-            if(rootResource == null){
+            if (rootResource == null) {
                 log.warn("No resource found at path: {}", rootPath);
                 return productList;
             }
 
-            for(Resource child : rootResource.getChildren()){
-                try{
+            for (Resource child : rootResource.getChildren()) {
+                try {
                     Resource dataResource = child.getChild("jcr:content/data/master");
 
-                    if(dataResource == null){
-                        log.debug("skipping child without data node: {}", child.getPath());
+                    if (dataResource == null) {
+                        log.debug("Skipping child without data node: {}", child.getPath());
                         continue;
                     }
 
                     ValueMap valueMap = dataResource.getValueMap();
                     Product product = new Product();
 
-                    product.setTitle(valueMap.get("title",""));
-                    product.setCategory(valueMap.get("category",""));
+                    product.setTitle(valueMap.get("title", ""));
+                    product.setCategory(valueMap.get("category", ""));
 
                     String imageValue = valueMap.get("image", String.class);
                     product.setImage(resolveImage(imageValue, resolver));
 
                     double originalPrice = getDouble(valueMap, "originalPrice");
-                    double currentPrice = getDouble(valueMap,"currentPrice");
-                    double discount = getDouble(valueMap,"discount");
+                    double currentPrice = getDouble(valueMap, "currentPrice");
+                    double discount = getDouble(valueMap, "discount");
 
-                    // Business logic
+                    // Pricing logic
                     if (discount > 0 && originalPrice > 0) {
                         currentPrice = originalPrice - (originalPrice * discount / 100);
                     } else if (originalPrice > 0 && currentPrice > 0) {
@@ -69,6 +102,7 @@ public class ProductServiceImpl implements ProductService{
                     product.setDiscount(Math.round(discount));
 
                     productList.add(product);
+
                 } catch (Exception e) {
                     log.error("Error processing child resource: {}", child.getPath(), e);
                 }
@@ -81,6 +115,15 @@ public class ProductServiceImpl implements ProductService{
         return productList;
     }
 
+    /**
+     * Safely retrieves a numeric value from ValueMap.
+     *
+     * If the value is null or invalid, returns 0.0.
+     *
+     * @param vm  the ValueMap containing properties
+     * @param key the property key
+     * @return numeric value or 0.0
+     */
     private double getDouble(ValueMap vm, String key) {
         try {
             Number num = vm.get(key, Number.class);
@@ -91,6 +134,18 @@ public class ProductServiceImpl implements ProductService{
         }
     }
 
+    /**
+     * Resolves the image path.
+     *
+     * Logic:
+     * - If null or empty, return empty string
+     * - If DAM path, return as is
+     * - Otherwise resolve using ResourceResolver
+     *
+     * @param value image path
+     * @param resolver ResourceResolver
+     * @return resolved image path or empty string
+     */
     private String resolveImage(String value, ResourceResolver resolver) {
 
         try {
