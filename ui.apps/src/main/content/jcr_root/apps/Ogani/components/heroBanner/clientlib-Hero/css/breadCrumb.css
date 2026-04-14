@@ -1,5 +1,4 @@
 
-
 .breadcrumb-section {
     font-family: "Cairo", sans-serif;
 	display: flex;
@@ -7,8 +6,7 @@
 	padding: 45px 0 40px;
     justify-content:center;
     margin-top: 20px;
-    margin-bottom: 20px;
-    
+    margin-bottom: 20px;    
 }
 
 .breadcrumb__text h2 {

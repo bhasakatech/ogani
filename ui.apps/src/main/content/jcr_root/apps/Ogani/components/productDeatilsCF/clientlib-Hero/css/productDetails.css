@@ -51,7 +51,6 @@
   border-color: #7fad39;
 }
 
-
 .product__info {
   width: 50%;
 }
@@ -86,7 +85,6 @@
   margin: 0 0 15px 0;
 }
 
-/* QTY */
 .qty-box {
   display: flex;
   align-items: center;
