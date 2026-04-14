@@ -1,0 +1,15 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='Ogani.header'}"/>
+     
+     <div class="header__container">
+     
+     <div class="headertopBar__container"
+                    data-sly-resource="${'headertopBar' @ resourceType='/apps/Ogani/components/headerTopBar'}">
+     </div>
+           
+      <div class="mainHeader__container"
+                    data-sly-resource="${'mainHeader' @ resourceType='/apps/Ogani/components/mainHeader'}">
+      </div>     
+
+     </div>
+
