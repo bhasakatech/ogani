@@ -43,5 +43,5 @@ public class Product {
     public void setCurrentPrice(double currentPrice) { this.currentPrice = currentPrice; }
 
     public double getDiscount() { return discount; }
-    public void setDiscount(int discount) { this.discount = discount; }
+    public void setDiscount(double discount) { this.discount = discount; }
 }

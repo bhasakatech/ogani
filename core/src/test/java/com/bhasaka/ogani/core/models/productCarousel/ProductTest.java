@@ -35,11 +35,13 @@ class ProductTest {
         product = resource.adaptTo(Product.class);
     }
 
+    //BASIC MODEL TEST
     @Test
     void testModel_NotNull() {
         assertNotNull(product);
     }
 
+    //GETTERS FROM RESOURCE
     @Test
     void testGetters_FromResource() {
 
@@ -52,6 +54,7 @@ class ProductTest {
         assertEquals(20.0, product.getDiscount());
     }
 
+    //SETTERS NORMAL FLOW
     @Test
     void testSetters() {
 
@@ -107,5 +110,51 @@ class ProductTest {
         assertEquals(50.0, partialProduct.getOriginalPrice());
         assertEquals(0.0, partialProduct.getCurrentPrice());
         assertEquals(0.0, partialProduct.getDiscount());
+    }
+
+    @Test
+    void testSetters_NullAndEmptyValues() {
+
+        product.setTitle(null);
+        product.setCategory("");
+        product.setImage(null);
+
+        assertNull(product.getTitle());
+        assertEquals("", product.getCategory());
+        assertNull(product.getImage());
+    }
+
+    @Test
+    void testSetters_NegativeAndZeroValues() {
+
+        product.setOriginalPrice(-100.0);
+        product.setCurrentPrice(0.0);
+        product.setDiscount(-10.0);
+
+        assertEquals(-100.0, product.getOriginalPrice());
+        assertEquals(0.0, product.getCurrentPrice());
+        assertEquals(-10.0, product.getDiscount());
+    }
+
+    @Test
+    void testSetters_OverwriteValues() {
+
+        product.setTitle("Apple");
+        product.setTitle("Orange");
+
+        assertEquals("Orange", product.getTitle());
+    }
+
+    @Test
+    void testAdaptTo_NullResource() {
+
+        Resource resource = context.resourceResolver().getResource("/invalid/path");
+
+        Product result = null;
+        if (resource != null) {
+            result = resource.adaptTo(Product.class);
+        }
+
+        assertNull(result);
     }
 }
