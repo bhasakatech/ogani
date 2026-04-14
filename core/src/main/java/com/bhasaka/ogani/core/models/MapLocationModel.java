@@ -17,7 +17,6 @@ import javax.annotation.PostConstruct;
 /**
  * Sling model for the map location widget.
  *
- * @author Chandraprakash
  * <p>Provides map coordinates and optional widget details such as title,
  * phone number, and address. Missing coordinates are replaced with default
  * fallback values during initialization.</p>

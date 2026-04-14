@@ -18,13 +18,12 @@ import org.slf4j.LoggerFactory;
 import com.day.cq.tagging.Tag;
 import com.day.cq.tagging.TagManager;
 
-@Model(adaptables = SlingHttpServletRequest.class,
+@Model(adaptables = Resource.class,
         adapters = Header.class,
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 /**
  * Sling model for the header component.
  *
- * @author Chandraprakash
  * <p>Resolves top bar data from the sibling {@code headertopbar} resource and
  * optionally loads department names from the configured tag root path.</p>
  */
@@ -75,7 +74,7 @@ public class Header {
                     }
                 }
             }
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             LOGGER.error("Failed to initialize top header from resource tree", e);
         }
 
@@ -107,7 +106,7 @@ public class Header {
                     LOGGER.warn("TagManager adaptation returned null");
                 }
             }
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             LOGGER.error("Failed to load department tags for path: {}", tagRootPath, e);
         }
     }

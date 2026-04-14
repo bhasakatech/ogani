@@ -14,7 +14,6 @@ import java.util.List;
 /**
  * Sling model representing header top bar content.
  *
- * @author Chandraprakash
  * <p>Provides author-configured values such as support email, promotional text,
  * login metadata, social icons, and available languages.</p>
  */
