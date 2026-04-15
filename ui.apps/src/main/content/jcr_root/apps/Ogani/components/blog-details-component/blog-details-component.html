@@ -1,7 +1,7 @@
 <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
-     data-sly-call="${clientlib.all @ categories='ogani.blogdeatils-container'}"/>
+    data-sly-call="${clientlib.all @ categories='ogani.blogdeatils-container'}" />
 
-<sly data-sly-use.model="com.bhasaka.ogani.core.models.BlogDetailModel"/>
+<sly data-sly-use.model="com.bhasaka.ogani.core.models.BlogDetailModel" />
 
 <div class="blog-container">
 
@@ -12,14 +12,8 @@
         <div class="sidebar-block">
             <form method="get" class="search-form">
 
-                <input type="text"
-                       name="search"
-                       placeholder="${model.searchPlaceholder}"
-                       value="${param.search}" />
-
-                <input type="hidden"
-                       name="category"
-                       value="${param.category}"/>
+                <input type="text" name="search" placeholder="${model.searchPlaceholder}" value="${param.search}" />
+                <input type="hidden" name="category" value="${param.category}" />
 
                 <button type="submit" class="search-btn">
                     <i class="fa fa-search"></i>
@@ -34,8 +28,7 @@
             <ul class="category-list">
 
                 <li>
-                    <a href="?category=&search=${param.search}"
-                       class="${!param.category ? 'active' : ''}">
+                    <a href="?category=&search=${param.search}" class="${!param.category ? 'active' : ''}">
                         All
                     </a>
                 </li>
@@ -77,14 +70,13 @@
 
             <div class="tag-box">
 
-                <a href="?category=&search=${param.search}"
-                   class="tag ${!param.category ? 'active' : ''}">
+                <a href="?category=&search=${param.search}" class="tag ${!param.category ? 'active' : ''}">
                     All
                 </a>
 
                 <sly data-sly-list.categoriesData="${model.categories}">
                     <a href="?category=${categoriesData.tagId}&search=${param.search}"
-                       class="tag ${param.category == categoriesData.tagId ? 'active' : ''}">
+                        class="tag ${param.category == categoriesData.tagId ? 'active' : ''}">
                         ${categoriesData.title}
                     </a>
                 </sly>
@@ -122,16 +114,16 @@
         <div class="blog-details-rightside-below-flex">
 
             <section class="author-section">
-                <img src="${model.authorImage}" alt="author"/>
+                <img src="${model.authorImage}" alt="author" />
                 <div>
-                    <span>${model.authorName}</span><br/>
+                    <span>${model.authorName}</span><br />
                     <span>Admin</span>
                 </div>
             </section>
 
             <!-- CATEGORY + TAGS + SOCIAL -->
             <section class="meta-section">
-				<br/>
+                <br />
                 <p>
                     <strong>Categories:</strong> ${model.category}
                 </p>
