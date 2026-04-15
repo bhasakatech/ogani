@@ -12,11 +12,17 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for the {@link Header} model.
+ */
 @ExtendWith(AemContextExtension.class)
 class HeaderTest {
 
     private final AemContext ctx = new AemContext();
 
+    /**
+     * Loads the header fixture and registers the top bar adapter used by the model.
+     */
     @BeforeEach
     void setUp() throws Exception {
         ctx.load().json("/headerTest.json", "/content");
@@ -42,6 +48,9 @@ class HeaderTest {
         field.set(target, value);
     }
 
+    /**
+     * Verifies the model adapts correctly from valid header content.
+     */
     @Test
     void testHeaderWithValidData() {
         Resource headerResource = ctx.resourceResolver().getResource("/content/parent/header");
@@ -62,12 +71,18 @@ class HeaderTest {
         assertEquals("meat", header.getDepartmentTags().get(0));
     }
 
+    /**
+     * Verifies the default phone number is returned when no content value is present.
+     */
     @Test
     void testPhoneNumberFallback() {
         Header header = new Header();
         assertEquals("+65 11.188.888", header.getPhoneNumber());
     }
 
+    /**
+     * Verifies initialization safely handles a missing resource.
+     */
     @Test
     void testInitResourceIsNull() {
         Header header = new Header();
@@ -75,6 +90,9 @@ class HeaderTest {
         assertNull(header.getTopHeader());
     }
 
+    /**
+     * Verifies initialization safely handles a resource without a parent.
+     */
     @Test
     void testInitParentResourceIsNull() throws Exception {
         Header header = new Header();
@@ -84,6 +102,9 @@ class HeaderTest {
         assertNull(header.getTopHeader());
     }
 
+    /**
+     * Verifies the model tolerates a missing top bar child resource.
+     */
     @Test
     void testInitTopBarResourceIsNull() {
         Resource headerResource = ctx.resourceResolver().getResource("/content/noTopBarParent/header");
@@ -93,6 +114,9 @@ class HeaderTest {
         assertNull(header.getTopHeader());
     }
 
+    /**
+     * Verifies an empty tag root path produces no department tags.
+     */
     @Test
     void testInitTagRootPathBlank() {
         Resource headerResource = ctx.resourceResolver().getResource("/content/blankTagParent/header");
@@ -102,6 +126,9 @@ class HeaderTest {
         assertTrue(header.getDepartmentTags().isEmpty());
     }
 
+    /**
+     * Verifies an invalid tag root path produces no department tags.
+     */
     @Test
     void testInitRootTagNull() {
         Resource headerResource = ctx.resourceResolver().getResource("/content/invalidTagParent/header");
@@ -111,6 +138,9 @@ class HeaderTest {
         assertTrue(header.getDepartmentTags().isEmpty());
     }
 
+    /**
+     * Verifies a tag root with no children produces no department tags.
+     */
     @Test
     void testInitNoChildTags() {
         Resource headerResource = ctx.resourceResolver().getResource("/content/emptyTagParent/header");
@@ -120,6 +150,9 @@ class HeaderTest {
         assertTrue(header.getDepartmentTags().isEmpty());
     }
 
+    /**
+     * Verifies initialization safely handles a missing resource resolver.
+     */
     @Test
     void testInitResourceResolverNull() throws Exception {
         Header header = new Header();
