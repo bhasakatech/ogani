@@ -1,155 +1,136 @@
 /* ================= WRAPPER ================= */
-.category-carousel {
+.category-ogani-carousel {
     position: relative;
-    padding: 60px 0;
-    max-width: 1200px;   
+    padding: 60px 50px;
+    max-width: 1200px;
     margin: 0 auto;
+    overflow: visible;
 }
 
 /* ================= VIEWPORT ================= */
-.carousel-viewport {
+.category-ogani-carousel-viewport {
     overflow: hidden;
-    margin: 0;  
+    width: 100%;
 }
 
 /* ================= TRACK ================= */
-.carousel-track {
+.category-ogani-carousel-track {
     display: flex;
     gap: 15px;
     transition: transform 0.5s ease-in-out;
+    will-change: transform;
 }
 
-/* ================= ITEMS ================= */
-.product-carousel-item {
-    flex: 0 0 calc((100% - 45px) / 4); /* 4 cards with 15px gap */
+/* ================= ITEM ================= */
+.category-ogani-carousel-item {
+    box-sizing: border-box;
+    flex: 0 0 calc((100% - (3 * 15px)) / 4);
 }
 
 /* ================= CARD ================= */
-.carousel-link {
+.category-ogani-carousel-link {
     display: block;
     width: 100%;
     height: 100%;
     background: #f5f5f5;
-    padding: 30px 20px;  /* balanced like original */
+    padding: 22px 16px; 
     text-align: center;
     text-decoration: none;
     box-sizing: border-box;
 }
 
-/* ================= IMAGE ================= */
-.carousel-image {
-    height: 150px;
+/* ================= IMAGE (SMALLER) ================= */
+.category-ogani-carousel-image {
+    height: 150px; 
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.carousel-image img {
-    max-width: 140px;
-    max-height: 140px;
+.category-ogani-carousel-image img {
+    max-width: 130px; 
+    max-height: 130px;
+    width: auto;
+    height: auto;
     object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* hover effect */
+.category-ogani-carousel-link:hover img {
+    transform: scale(1.06);
 }
 
 /* ================= TITLE ================= */
-.carousel-title {
-    margin-top: 12px;
+.category-ogani-carousel-title {
+    margin-top: 10px;
     background: #ffffff;
-    padding: 12px 10px;
+    padding: 10px 8px;
 }
 
-.carousel-title h3 {
+.category-ogani-carousel-title h3 {
     margin: 0;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
-    color: #1c1c1c;
-    font-family: "Cairo", sans-serif;
+     color: #252525; 
 }
 
 /* ================= ARROWS ================= */
-.carousel-btn {
+.category-ogani-carousel-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
+    width: 28px;
     height: 70px;
     border: 1px solid #ddd;
+    background: #fff;
     cursor: pointer;
     z-index: 10;
 }
 
-.carousel-btn.prev { left: -50px; }  /* slightly outside like original */
-.carousel-btn.next { right: -50px; }
-/* ================= LARGE DESKTOP (default already OK) ================= */
-
-
-/* ================= LAPTOP ================= */
-@media (max-width: 1200px) {
-    .category-carousel {
-        max-width: 1000px;
-    }
-
-    .carousel-btn.prev { left: -40px; }
-    .carousel-btn.next { right: -40px; }
-}
-
+.category-ogani-carousel-btn.prev { left: 10px; }
+.category-ogani-carousel-btn.next { right: 10px; }
 
 /* ================= TABLET ================= */
 @media (max-width: 992px) {
-    .category-carousel {
-        max-width: 90%;
+    .category-ogani-carousel-item {
+        flex: 0 0 calc((100% - (2 * 15px)) / 3);
     }
 
-    .carousel-viewport {
-        margin: 0 20px;
+    .category-ogani-carousel-image {
+        height: 140px;
     }
 
-    .product-carousel-item {
-        flex: 0 0 calc((100% - 15px) / 2);
+    .category-ogani-carousel-image img {
+        max-width: 120px;
+        max-height: 120px;
     }
-
-    .carousel-btn.prev { left: 0; }
-    .carousel-btn.next { right: 0; }
 }
-
 
 /* ================= MOBILE ================= */
 @media (max-width: 576px) {
-    .category-carousel {
-        max-width: 100%;
-        padding: 40px 0;
-    }
-
-    .carousel-viewport {
-        margin: 0 15px;
-    }
-
-    .carousel-track {
-        gap: 10px;
-    }
-
-    .product-carousel-item {
+    .category-ogani-carousel-item {
         flex: 0 0 100%;
     }
 
-    .carousel-link {
-        padding: 20px 15px; /* compact mobile */
+    .category-ogani-carousel-track {
+        gap: 10px;
     }
 
-    .carousel-image {
-        height: 120px;
+    .category-ogani-carousel-btn {
+        display: none;
     }
 
-    .carousel-image img {
-        max-width: 100px;
-        max-height: 100px;
+    .category-ogani-carousel {
+        padding: 40px 15px;
     }
 
-    @media (max-width: 576px) {
-    .carousel-btn {
-        display: none; 
+    .category-ogani-carousel-image {
+        height: 130px;
     }
-}
 
-    .carousel-btn.prev { left: 5px; }
-    .carousel-btn.next { right: 5px; }
+    .category-ogani-carousel-image img {
+        max-width: 110px;
+        max-height: 110px;
+    }
 }
