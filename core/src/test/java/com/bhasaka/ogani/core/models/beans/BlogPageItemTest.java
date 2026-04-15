@@ -1,15 +1,27 @@
 package com.bhasaka.ogani.core.models.beans;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import io.wcm.testing.mock.aem.junit5.AemContextExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.util.Date;
 
+/**
+ * Test class for {@link BlogPageItem}.
+ * <p>
+ * This class verifies constructor initialization, getter methods,
+ * and handling of null, empty, and different date values.
+ */
 @ExtendWith({AemContextExtension.class, MockitoExtension.class})
 class BlogPageItemTest {
 
+    /**
+     * Validates that constructor initializes all fields correctly
+     * and getters return expected values.
+     */
     @Test
     void testConstructorAndGetters() {
 
@@ -32,6 +44,9 @@ class BlogPageItemTest {
         assertEquals(date, item.getDate());
     }
 
+    /**
+     * Verifies that the object correctly handles null values.
+     */
     @Test
     void testWithNullValues() {
 
@@ -52,6 +67,9 @@ class BlogPageItemTest {
         assertNull(item.getDate());
     }
 
+    /**
+     * Verifies that the object correctly handles empty string values.
+     */
     @Test
     void testWithEmptyValues() {
 
@@ -74,6 +92,9 @@ class BlogPageItemTest {
         assertEquals(date, item.getDate());
     }
 
+    /**
+     * Validates correct handling of different date values.
+     */
     @Test
     void testWithDifferentDates() {
 
@@ -87,6 +108,9 @@ class BlogPageItemTest {
         assertEquals(futureDate, item2.getDate());
     }
 
+    /**
+     * Verifies that the object instance is successfully created.
+     */
     @Test
     void testObjectNotNull() {
 

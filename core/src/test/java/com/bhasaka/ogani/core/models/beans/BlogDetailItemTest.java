@@ -3,11 +3,21 @@ package com.bhasaka.ogani.core.models.beans;
 import io.wcm.testing.mock.aem.junit5.AemContextExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for {@link BlogDetailItem}.
+ * <p>
+ * This class verifies constructor initialization and getter methods,
+ * including handling of null and empty values.
+ */
 @ExtendWith({AemContextExtension.class})
 class BlogDetailItemTest {
 
+    /**
+     * Verifies that the object is correctly created with valid values.
+     */
     @Test
     void shouldCreateBlogDetailItemWithAllValues() {
         BlogDetailItem item = new BlogDetailItem(
@@ -23,6 +33,9 @@ class BlogDetailItemTest {
         assertEquals("Apr 14, 2026", item.getPublishDate());
     }
 
+    /**
+     * Verifies that the object correctly handles null values.
+     */
     @Test
     void shouldHandleNullValues() {
         BlogDetailItem item = new BlogDetailItem(null, null, null, null);
@@ -33,6 +46,9 @@ class BlogDetailItemTest {
         assertNull(item.getPublishDate());
     }
 
+    /**
+     * Verifies that the object correctly handles empty string values.
+     */
     @Test
     void shouldHandleEmptyStrings() {
         BlogDetailItem item = new BlogDetailItem("", "", "", "");
@@ -43,6 +59,9 @@ class BlogDetailItemTest {
         assertEquals("", item.getPublishDate());
     }
 
+    /**
+     * Verifies that getter methods return the expected values.
+     */
     @Test
     void gettersShouldReturnCorrectValues() {
         String title = "AEM Tutorial";
