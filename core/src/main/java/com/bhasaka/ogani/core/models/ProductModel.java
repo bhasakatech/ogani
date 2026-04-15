@@ -6,8 +6,12 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.*;
 import org.apache.sling.models.annotations.injectorspecific.*;
 
+import com.adobe.cq.dam.cfm.ContentElement;
+import com.adobe.cq.dam.cfm.ContentFragment;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -71,9 +75,40 @@ public List<List<Product>> getSlides() {
                 continue;
             }
 
-            Resource dataNode = child.getChild("jcr:content/data/master");
+          ContentFragment cf =  child.adaptTo(ContentFragment.class);
 
-            if (dataNode != null) {
+
+          if(cf!=null ){
+
+           products.add(new Product (
+
+                getElementValue(cf,"image"),
+                getElementValue(cf, "title"),
+                getElementValue(cf,"price")
+            ));
+            }
+
+
+
+         /*  if (cf != null) {
+            String image = "";
+              Iterator<ContentElement> cfElements =  cf.getElements();
+              while (cfElements.hasNext()) {
+                ContentElement cfElement = cfElements.next();
+                String cfName = cfElement.getName();
+
+                switch (cfName) {
+                    case "image":
+                       image = cfElement.getContent();
+                        break;
+                
+                    default:
+                        break;
+                }  
+              }
+          }
+               */
+                /*  if (dataNode != null) {
 
                 String image = dataNode.getValueMap().get("image", String.class);
                 String title = dataNode.getValueMap().get("title", String.class);
@@ -81,8 +116,16 @@ public List<List<Product>> getSlides() {
 
                 products.add(new Product(image, title, price));
             }
+            */
+
         }
     }
+
+    private String getElementValue(ContentFragment cf, String elementName) {
+        ContentElement element = cf.getElement(elementName);
+        return element != null ? element.getContent():"";
+    }
+
 
     public static class Product {
 
