@@ -9,14 +9,49 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Unit test class for Product Sling Model.
+ *
+ * This class verifies the behavior of the Product model using AEM Mock context.
+ *
+ * Coverage includes:
+ * - Adaptation of Resource to Product model
+ * - Getter methods populated from JCR properties
+ * - Setter methods and value updates
+ * - Default values when properties are missing
+ * - Partial property injection scenarios
+ * - Handling of null, empty, and negative values
+ * - Overwriting existing values
+ * - Adaptation failure for invalid resource paths
+ *
+ * Testing Approach:
+ * - Uses AemContext to simulate Sling and JCR environment
+ * - Creates mock resources with properties
+ * - Adapts resources to Product model
+ * - Validates behavior using assertions
+ *
+ * Goal:
+ * Ensure full coverage of getters, setters, and edge cases in the Product model.
+ */
 @ExtendWith(AemContextExtension.class)
 class ProductTest {
 
+    /**
+     * AEM context used to mock Sling environment and resources.
+     */
     private final AemContext context = new AemContext();
 
+    /**
+     * Product model instance used across tests.
+     */
     private Product product;
 
+    /**
+     * Initializes test data before each test.
+     *
+     * Registers the Product model and creates a resource with
+     * complete product properties for testing.
+     */
     @BeforeEach
     void setUp() {
 
@@ -35,13 +70,19 @@ class ProductTest {
         product = resource.adaptTo(Product.class);
     }
 
-    //BASIC MODEL TEST
+    /**
+     * Verifies that the Product model is successfully adapted from resource.
+     */
     @Test
     void testModel_NotNull() {
         assertNotNull(product);
     }
 
-    //GETTERS FROM RESOURCE
+    /**
+     * Tests getter methods when values are injected from resource.
+     *
+     * Verifies that all properties are correctly mapped from JCR.
+     */
     @Test
     void testGetters_FromResource() {
 
@@ -54,7 +95,11 @@ class ProductTest {
         assertEquals(20.0, product.getDiscount());
     }
 
-    //SETTERS NORMAL FLOW
+    /**
+     * Tests setter methods with normal values.
+     *
+     * Verifies that updated values are reflected correctly.
+     */
     @Test
     void testSetters() {
 
@@ -74,6 +119,13 @@ class ProductTest {
         assertEquals(25.0, product.getDiscount());
     }
 
+    /**
+     * Tests default values when no properties are present in resource.
+     *
+     * Verifies that:
+     * - String fields are null
+     * - Numeric fields default to 0.0
+     */
     @Test
     void testDefaultValues_WhenPropertiesMissing() {
 
@@ -93,6 +145,13 @@ class ProductTest {
         assertEquals(0.0, emptyProduct.getDiscount());
     }
 
+    /**
+     * Tests partial property injection.
+     *
+     * Verifies that:
+     * - Available properties are injected correctly
+     * - Missing properties use default values
+     */
     @Test
     void testPartialValues() {
 
@@ -112,6 +171,13 @@ class ProductTest {
         assertEquals(0.0, partialProduct.getDiscount());
     }
 
+    /**
+     * Tests setter behavior with null and empty values.
+     *
+     * Verifies that:
+     * - Null values are accepted
+     * - Empty strings are stored correctly
+     */
     @Test
     void testSetters_NullAndEmptyValues() {
 
@@ -124,6 +190,11 @@ class ProductTest {
         assertNull(product.getImage());
     }
 
+    /**
+     * Tests setter behavior with negative and zero values.
+     *
+     * Verifies that numeric fields accept edge values.
+     */
     @Test
     void testSetters_NegativeAndZeroValues() {
 
@@ -136,6 +207,11 @@ class ProductTest {
         assertEquals(-10.0, product.getDiscount());
     }
 
+    /**
+     * Tests overwriting of values using setters.
+     *
+     * Verifies that the latest value replaces the previous one.
+     */
     @Test
     void testSetters_OverwriteValues() {
 
@@ -145,6 +221,11 @@ class ProductTest {
         assertEquals("Orange", product.getTitle());
     }
 
+    /**
+     * Tests adaptation failure when resource does not exist.
+     *
+     * Verifies that adapting a null resource returns null.
+     */
     @Test
     void testAdaptTo_NullResource() {
 
