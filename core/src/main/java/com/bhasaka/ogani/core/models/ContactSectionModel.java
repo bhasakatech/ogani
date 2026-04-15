@@ -12,11 +12,22 @@ import java.util.List;
         adaptables = Resource.class,
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
 )
+/**
+ * Sling model for the contact section component.
+ * @author Chandraprakash
+ * <p>Exposes the configured list of contact items and returns an empty list
+ * when no child resources are present.</p>
+ */
 public class ContactSectionModel {
 
     @ChildResource
     private List<ContactItem> contactItems;
 
+    /**
+     * Returns the configured contact items.
+     *
+     * @return contact items, or an empty list when none are configured
+     */
     public List<ContactItem> getContactItems() {
 
         return contactItems != null ? contactItems : Collections.emptyList();

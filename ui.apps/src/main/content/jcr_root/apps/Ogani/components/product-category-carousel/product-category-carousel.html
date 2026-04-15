@@ -1,39 +1,35 @@
 <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
-     data-sly-call="${clientlib.all @ categories='Ogani.productcarousal-container'}"/>
-     
+     data-sly-call="${clientlib.all @ categories='Ogani.productcarousal-category'}"/>
+    
 <sly data-sly-use.model="com.bhasaka.ogani.core.models.CategoryCarouselModel" />
+<div class="category-ogani-carousel">
 
-<div class="category-carousel">
-
-    <!-- Empty State -->
     <sly data-sly-test="${model.categories.size == 0}">
-        <p class="carousel-empty">No categories available</p>
+        <p class="category-ogani-carousel-empty">No categories available</p>
     </sly>
 
-    <!-- Carousel -->
     <sly data-sly-test="${model.categories.size > 0}">
 
         <!-- Navigation Buttons -->
-        <button class="carousel-btn prev" aria-label="Previous">&#10094;</button>
-        <button class="carousel-btn next" aria-label="Next">&#10095;</button>
+        <button class="category-ogani-carousel-btn prev" aria-label="Previous">&#10094;</button>
+        <button class="category-ogani-carousel-btn next" aria-label="Next">&#10095;</button>
 
-        <div class="carousel-viewport">
+        <div class="category-ogani-carousel-viewport">
 
-            <!-- Track -->
-            <div class="carousel-track">
+            <div class="category-ogani-carousel-track">
 
                 <sly data-sly-list.item="${model.categories}">
-                    <div class="product-carousel-item">
+                    <div class="category-ogani-carousel-item">
 
-                        <a href="${item.link}.html" class="carousel-link">
+                        <a href="${item.link}.html" class="category-ogani-carousel-link">
 
-                            <div class="carousel-image">
+                            <div class="category-ogani-carousel-image">
                                 <img src="${item.image @ context='uri'}"
                                      alt="${item.title}"
                                      loading="lazy" />
                             </div>
 
-                            <div class="carousel-title">
+                            <div class="category-ogani-carousel-title">
                                 <h3>${item.title}</h3>
                             </div>
 
