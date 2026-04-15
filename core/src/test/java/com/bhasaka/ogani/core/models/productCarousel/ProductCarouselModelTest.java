@@ -19,24 +19,61 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
+/**
+ * Unit test class for ProductCarouselModel.
+ *
+ * This class verifies the behavior of ProductCarouselModel using Mockito.
+ *
+ * Coverage includes:
+ * - Initialization logic in init method
+ * - Interaction with ProductService
+ * - Handling of valid data, empty data, null data, and exceptions
+ * - Behavior of helper methods like isEmpty and getProductList
+ *
+ * Testing Approach:
+ * - Uses Mockito to mock ProductService and ResourceResolver
+ * - Uses JSON input to simulate realistic product data
+ * - Uses reflection to inject private fields such as rootPath and resolver
+ *
+ * Goal:
+ * Ensure high method and branch coverage by testing all execution paths.
+ */
 @ExtendWith(MockitoExtension.class)
 class ProductCarouselModelTest {
 
+    /**
+     * Model instance under test.
+     * InjectMocks is used to inject mocked dependencies.
+     */
     @InjectMocks
     private ProductCarouselModel model;
 
+    /**
+     * Mocked ProductService used to simulate service layer behavior.
+     */
     @Mock
     private ProductService productService;
 
+    /**
+     * Mocked ResourceResolver required by the model.
+     */
     @Mock
     private ResourceResolver resolver;
 
+    /**
+     * ObjectMapper used to read JSON test data.
+     */
     private final ObjectMapper mapper = new ObjectMapper();
 
-    // ===============================
-    // ✅ 1. INIT SUCCESS (JSON BASED)
-    // ===============================
+    /**
+     * Tests successful initialization of the model.
+     *
+     * Verifies that:
+     * - Product data is loaded correctly from JSON
+     * - Service returns expected list
+     * - productList is populated
+     * - isEmpty returns false
+     */
     @Test
     void testInit_Success() throws Exception {
 
@@ -58,14 +95,12 @@ class ProductCarouselModelTest {
             products.add(p);
         }
 
-        // inject rootPath manually (since no Sling context)
         setField(model, "rootPath", "/content/products");
         setField(model, "resolver", resolver);
 
         when(productService.getProducts("/content/products", resolver))
                 .thenReturn(products);
 
-        // call init manually
         model.init();
 
         assertNotNull(model.getProductList());
@@ -73,9 +108,14 @@ class ProductCarouselModelTest {
         assertFalse(model.isEmpty());
     }
 
-    // ===============================
-    // ✅ 2. INIT EXCEPTION FLOW
-    // ===============================
+    /**
+     * Tests initialization when service throws an exception.
+     *
+     * Verifies that:
+     * - Exception is handled internally
+     * - productList remains null
+     * - isEmpty returns true
+     */
     @Test
     void testInit_Exception() {
 
@@ -91,9 +131,13 @@ class ProductCarouselModelTest {
         assertTrue(model.isEmpty());
     }
 
-    // ===============================
-    // ✅ 3. EMPTY LIST CASE
-    // ===============================
+    /**
+     * Tests initialization when service returns an empty list.
+     *
+     * Verifies that:
+     * - productList is empty
+     * - isEmpty returns true
+     */
     @Test
     void testEmptyList() {
 
@@ -108,9 +152,13 @@ class ProductCarouselModelTest {
         assertTrue(model.isEmpty());
     }
 
-    // ===============================
-    // ✅ 4. NULL LIST CASE
-    // ===============================
+    /**
+     * Tests initialization when service returns null.
+     *
+     * Verifies that:
+     * - productList remains null
+     * - isEmpty returns true
+     */
     @Test
     void testNullList() {
 
@@ -125,9 +173,16 @@ class ProductCarouselModelTest {
         assertTrue(model.isEmpty());
     }
 
-    // ===============================
-    // 🔧 Reflection Helper
-    // ===============================
+    /**
+     * Utility method to set private fields using reflection.
+     *
+     * Used to inject values into private fields such as rootPath and resolver,
+     * since Sling injection is not available in unit tests.
+     *
+     * @param target object where field is to be set
+     * @param fieldName name of the field
+     * @param value value to assign
+     */
     private void setField(Object target, String fieldName, Object value) {
         try {
             java.lang.reflect.Field field = target.getClass().getDeclaredField(fieldName);
