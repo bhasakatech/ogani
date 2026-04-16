@@ -4,6 +4,9 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.*;
 import org.apache.sling.models.annotations.injectorspecific.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.adobe.cq.dam.cfm.ContentElement;
 import com.adobe.cq.dam.cfm.ContentFragment;
 import java.util.ArrayList;
@@ -15,6 +18,9 @@ import javax.annotation.PostConstruct;
     defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
 )
 public class ProductModel {
+
+        private static final Logger log = LoggerFactory.getLogger(ProductModel.class);
+
 
     @ValueMapValue
     private String text;
@@ -53,41 +59,55 @@ public List<List<Product>> getSlides() {
     @PostConstruct
     protected void init() {
 
+        try{
+
         if (fragmentFolder == null || fragmentFolder.isEmpty()) {
+            log.warn("Fragment folder path is empty");
             return;
         }
 
         Resource folderResource = resourceResolver.getResource(fragmentFolder);
 
         if (folderResource == null) {
+            log.warn("No resource found for path: {}", fragmentFolder);
             return;
         }
 
         for (Resource child : folderResource.getChildren()) {
 
-            if ("jcr:content".equals(child.getName())) {
-                continue;
-            }
-
           ContentFragment cf =  child.adaptTo(ContentFragment.class);
 
+           if(cf!=null ){
 
-          if(cf!=null ){
+            products.add(new Product (
 
-           products.add(new Product (
-
-                getElementValue(cf,"image"),
-                getElementValue(cf, "title"),
-                getElementValue(cf,"price")
+                       getElementValue(cf,"image"),
+                       getElementValue(cf, "title"),
+                       getElementValue(cf,"price")
             ));
+
             }
 
         }
+
     }
 
+        catch (Exception e) {
+            log.error("Error while loading product content fragments", e);
+        }
+    }
+
+
     private String getElementValue(ContentFragment cf, String elementName) {
-        ContentElement element = cf.getElement(elementName);
-        return element != null ? element.getContent():"";
+        try{
+             ContentElement element = cf.getElement(elementName);
+             return element != null ? element.getContent():"";
+        }
+        catch (Exception e) {
+            log.error("Error reading CF element: {}", elementName, e);
+            return "";
+        }
+
     }
 
 
