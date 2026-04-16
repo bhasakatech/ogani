@@ -7,39 +7,21 @@
     justify-content: flex-end;
 
 }
- 
-.hero aem-GridColumn.aem-GridColumn--default--12 {
-
-    margin: auto;
-
-    max-width: 1200px;
-
-}
- 
+  
 .hero__item {
-
-    box-sizing: border-box;
-
-    font-family: "Cairo", sans-serif;
-
-    position: relative;
-
-    height: 431px;
-
-    display: flex;
-
-    align-items: center;
-
-    overflow: hidden;
-
-    width: 70%;
-
+  box-sizing: border-box;
+  font-family: "Cairo", sans-serif;
+  position: relative;
+  height: 431px;                /* fixed height */
+  display: flex;
+  align-items: center;
+  overflow: hidden;          
+  width: 70%;
+  
 }
- 
-/* Image */
 
 .image-cmp {
-
+  
     position: absolute;
 
     z-index: 1;
@@ -65,25 +47,16 @@
 /* Overlay Content */
 
 .overlay-content {
-
-    position: absolute;
-
-    z-index: 2;
-
-    padding-left: 50px;
-
-    color: #252525;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    height: 100%;
-
-    font-size: 17px;
-
+  position: absolute;
+  z-index: 2;
+  padding: 0 0px 0 50px;
+  color: #252525;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  font-size: 17px;
 }
  
 /* Text */

@@ -57,13 +57,6 @@
     gap: 40px;
 }
 
-
-/* Create spacing from top (simulate heading gap) 
-.f__second-column,
-.f__third-column {
-    padding-top: 20px;
-}
-*/
 .f__second-column li,
 .f__third-column li {
     margin-bottom: 10px;
@@ -241,21 +234,7 @@
     color: #ffffff;
 }
 
-/* BOTTOM 
-.f__footer-bottom-wrapper {
-    border-top: 1px solid #ebebeb;
-    margin-top: 30px;
-    padding: 20px;
-    padding-right: 47px;
-}
 
-.f__footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-*/
 /* COPYRIGHT */
 .f__footer-bottom-left p {
     font-size: 14px;

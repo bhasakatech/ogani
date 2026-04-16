@@ -16,6 +16,7 @@
             <overlay
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                fieldLabel="EnableOverlay"
                 text="Enable Overlay"
                 name="./overlay"
                 value="true"/>
