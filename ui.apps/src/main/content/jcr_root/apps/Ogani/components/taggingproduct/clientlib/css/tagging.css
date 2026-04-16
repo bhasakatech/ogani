@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: space-between;
     max-width: 800px;
-    margin: 20px auto 20px;
+    margin: 45px auto 20px;
 }
 
 /* ===== SORT ===== */
@@ -185,7 +185,7 @@
     flex-wrap: wrap;
     gap: 6px;
     max-width: 800px;          
-    margin: 0 auto;            
+    margin: 0 auto 80px;            
 }
 
 /* ALL LINKS */
