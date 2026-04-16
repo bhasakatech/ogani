@@ -1,19 +1,13 @@
 
 package com.bhasaka.ogani.core.models;
-
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.*;
 import org.apache.sling.models.annotations.injectorspecific.*;
-
 import com.adobe.cq.dam.cfm.ContentElement;
 import com.adobe.cq.dam.cfm.ContentFragment;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 
 @Model(
@@ -87,36 +81,6 @@ public List<List<Product>> getSlides() {
                 getElementValue(cf,"price")
             ));
             }
-
-
-
-         /*  if (cf != null) {
-            String image = "";
-              Iterator<ContentElement> cfElements =  cf.getElements();
-              while (cfElements.hasNext()) {
-                ContentElement cfElement = cfElements.next();
-                String cfName = cfElement.getName();
-
-                switch (cfName) {
-                    case "image":
-                       image = cfElement.getContent();
-                        break;
-                
-                    default:
-                        break;
-                }  
-              }
-          }
-               */
-                /*  if (dataNode != null) {
-
-                String image = dataNode.getValueMap().get("image", String.class);
-                String title = dataNode.getValueMap().get("title", String.class);
-                String price = dataNode.getValueMap().get("price", String.class);
-
-                products.add(new Product(image, title, price));
-            }
-            */
 
         }
     }
