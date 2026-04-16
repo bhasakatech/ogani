@@ -27,6 +27,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Model class for fetching and preparing Featured Products data.
+ * <p>
+ * This class retrieves Content Fragment data from DAM based on a predefined path,
+ * processes it, and exposes product and category information to the frontend.
+ */
 @Model(
         adaptables = Resource.class,
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
@@ -34,8 +40,11 @@ import java.util.Map;
 public class FeaturedProductsModel {
 
     private static final Logger LOG = LoggerFactory.getLogger(FeaturedProductsModel.class);
+
+    /** Path where featured product content fragments are stored */
     private static final String CF_PARENT_PATH = "/content/dam/Ogani/content-fragments/featured";
 
+    /** List to store processed product data */
     private final List<Product> products = new ArrayList<>();
 
     @ValueMapValue
@@ -56,16 +65,27 @@ public class FeaturedProductsModel {
     @ChildResource(name = "categoryTags")
     private List<CategoryItemModel> categoryItems;
 
+    /**
+     * Initializes the model after injection.
+     */
     @PostConstruct
     protected void init() {
+        LOG.info("Initializing FeaturedProductsModel");
         loadProducts();
     }
 
+    /**
+     * Loads products from Content Fragments using QueryBuilder.
+     */
     private void loadProducts() {
 
-        if (resourceResolver == null || queryBuilder == null) return;
+        if (resourceResolver == null || queryBuilder == null) {
+            LOG.error("ResourceResolver or QueryBuilder is null");
+            return;
+        }
 
         int limit = (numberOfProducts != null && numberOfProducts > 0) ? numberOfProducts : 8;
+        LOG.info("Fetching products with limit: {}", limit);
 
         Map<String, String> predicate = new HashMap<>();
         predicate.put("path", CF_PARENT_PATH);
@@ -75,21 +95,35 @@ public class FeaturedProductsModel {
         predicate.put("p.limit", String.valueOf(limit));
 
         Session session = resourceResolver.adaptTo(Session.class);
-        if (session == null) return;
+        if (session == null) {
+            LOG.error("Session is null, cannot execute query");
+            return;
+        }
 
         Query query = queryBuilder.createQuery(PredicateGroup.create(predicate), session);
         SearchResult result = query.getResult();
 
+        LOG.info("Total hits found: {}", result.getHits().size());
+
         for (Hit hit : result.getHits()) {
             try {
                 Resource contentFragment = resourceResolver.getResource(hit.getPath());
-                if (contentFragment == null) continue;
+                if (contentFragment == null) {
+                    LOG.error("Content Fragment resource is null for path: {}", hit.getPath());
+                    continue;
+                }
 
-                Resource metadataResource  = contentFragment.getChild("jcr:content/data/master");
-                if (metadataResource == null) continue;
+                Resource metadataResource = contentFragment.getChild("jcr:content/data/master");
+                if (metadataResource == null) {
+                    LOG.error("Metadata resource not found for: {}", hit.getPath());
+                    continue;
+                }
 
                 ProductCFModel productCFModel = metadataResource.adaptTo(ProductCFModel.class);
-                if (productCFModel == null) continue;
+                if (productCFModel == null) {
+                    LOG.error("Failed to adapt resource to ProductCFModel for: {}", hit.getPath());
+                    continue;
+                }
 
                 List<String> cleanCategories = new ArrayList<>();
                 if (productCFModel.getCategory() != null) {
@@ -105,6 +139,9 @@ public class FeaturedProductsModel {
                             productCFModel.getImage(),
                             cleanCategories
                     ));
+                    LOG.info("Product added: {}", productCFModel.getTitle());
+                } else {
+                    LOG.error("Product skipped due to missing title or price");
                 }
 
             } catch (RepositoryException e) {
@@ -113,6 +150,11 @@ public class FeaturedProductsModel {
         }
     }
 
+    /**
+     * Returns list of categories derived from category tags.
+     *
+     * @return list of Category objects
+     */
     public List<Category> getCategories() {
         List<Category> list = new ArrayList<>();
 
@@ -127,13 +169,26 @@ public class FeaturedProductsModel {
                 }
             }
         }
+        LOG.info("Total categories processed: {}", list.size());
         return list;
     }
 
+    /**
+     * Extracts key from tag path.
+     *
+     * @param tag full tag path
+     * @return extracted key
+     */
     private String extractKey(String tag) {
         return tag.substring(tag.lastIndexOf("/") + 1);
     }
 
+    /**
+     * Converts string to Title Case format.
+     *
+     * @param str input string
+     * @return formatted string
+     */
     private String toTitleCase(String str) {
         if (str == null || str.isEmpty()) return str;
 
@@ -150,14 +205,29 @@ public class FeaturedProductsModel {
         return result.toString().trim();
     }
 
+    /**
+     * Returns section title.
+     *
+     * @return section title or default value
+     */
     public String getSectionTitle() {
         return sectionTitle != null ? sectionTitle : "Featured Products";
     }
 
+    /**
+     * Returns list of products.
+     *
+     * @return list of Product objects
+     */
     public List<Product> getProducts() {
         return products;
     }
 
+    /**
+     * Indicates whether hover actions are enabled.
+     *
+     * @return true if enabled, false otherwise
+     */
     public boolean isEnableHoverActions() {
         return enableHoverActions != null && enableHoverActions;
     }

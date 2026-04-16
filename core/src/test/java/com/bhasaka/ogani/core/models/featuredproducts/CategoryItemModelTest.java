@@ -10,6 +10,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for {@link CategoryItemModel}.
+ * <p>
+ * This class verifies that the Sling Model correctly adapts
+ * from a resource and retrieves the category tag property.
+ */
 @ExtendWith({AemContextExtension.class, MockitoExtension.class})
 class CategoryItemModelTest {
 
@@ -17,6 +23,10 @@ class CategoryItemModelTest {
 
     private CategoryItemModel model;
 
+    /**
+     * Sets up the test resource with required properties
+     * and adapts it to the model.
+     */
     @BeforeEach
     void setUp() {
         // Create mock resource with property
@@ -27,10 +37,12 @@ class CategoryItemModelTest {
         model = resource.adaptTo(CategoryItemModel.class);
     }
 
+    /**
+     * Verifies that the category tag is correctly retrieved from the model.
+     */
     @Test
     void testGetCategoryTag() {
         assertNotNull(model);
         assertEquals("fruits", model.getCategoryTag());
     }
-
 }

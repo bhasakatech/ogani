@@ -7,11 +7,22 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for {@link Product}.
+ * <p>
+ * This class verifies the constructor and getter methods
+ * of the Product POJO.
+ */
 @ExtendWith({AemContextExtension.class, MockitoExtension.class})
 class ProductTest {
 
+    /**
+     * Validates that the constructor correctly initializes
+     * all fields and getters return expected values.
+     */
     @Test
     void testConstructorAndGetters() {
 

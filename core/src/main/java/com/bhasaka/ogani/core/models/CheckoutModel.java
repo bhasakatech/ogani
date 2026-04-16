@@ -6,13 +6,15 @@ import org.apache.sling.models.annotations.*;
 import org.apache.sling.models.annotations.injectorspecific.*;
 import javax.annotation.PostConstruct;
 import java.util.*;
-import org.apache.sling.api.resource.*;
-import org.apache.sling.models.annotations.*;
-import org.apache.sling.models.annotations.injectorspecific.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.*;
 
+/**
+ * Model class for Checkout component.
+ * <p>
+ * Handles cart product retrieval, subtotal calculation,
+ * and exposes checkout form fields and placeholders.
+ */
 @Model(
         adaptables = {Resource.class, SlingHttpServletRequest.class},
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
@@ -20,6 +22,8 @@ import java.util.*;
 public class CheckoutModel {
 
     private static final Logger LOG = LoggerFactory.getLogger(CheckoutModel.class);
+
+    /** Path to cart products inside cart page */
     private static final String cartPageChildData = "jcr:content/root/container/container/cart_page/products";
 
     @ValueMapValue
@@ -82,42 +86,19 @@ public class CheckoutModel {
     @ValueMapValue
     private String orderNotes;
 
-    // Placeholder related
-    @ValueMapValue
-    private String firstNamePlaceholder;
-
-    @ValueMapValue
-    private String lastNamePlaceholder;
-
-    @ValueMapValue
-    private String countryPlaceholder;
-
-    @ValueMapValue
-    private String addressPlaceholder;
-
-    @ValueMapValue
-    private String apartmentPlaceholder;
-
-    @ValueMapValue
-    private String townOrCityPlaceholder;
-
-    @ValueMapValue
-    private String stateOrCountryPlaceholder;
-
-    @ValueMapValue
-    private String zipCodePlaceholder;
-
-    @ValueMapValue
-    private String phonePlaceholder;
-
-    @ValueMapValue
-    private String emailPlaceholder;
-
-    @ValueMapValue
-    private String accountPasswordPlaceholder;
-
-    @ValueMapValue
-    private String orderNotesPlaceholder;
+    // Placeholder fields
+    @ValueMapValue private String firstNamePlaceholder;
+    @ValueMapValue private String lastNamePlaceholder;
+    @ValueMapValue private String countryPlaceholder;
+    @ValueMapValue private String addressPlaceholder;
+    @ValueMapValue private String apartmentPlaceholder;
+    @ValueMapValue private String townOrCityPlaceholder;
+    @ValueMapValue private String stateOrCountryPlaceholder;
+    @ValueMapValue private String zipCodePlaceholder;
+    @ValueMapValue private String phonePlaceholder;
+    @ValueMapValue private String emailPlaceholder;
+    @ValueMapValue private String accountPasswordPlaceholder;
+    @ValueMapValue private String orderNotesPlaceholder;
 
     @ValueMapValue
     private String accountInformation;
@@ -125,51 +106,59 @@ public class CheckoutModel {
     @ValueMapValue
     private String paymentDescription;
 
+    /** List of cart products */
     private List<ProductCart> products = new ArrayList<>();
+
+    /** Total subtotal value */
     private double subtotal = 0;
 
+    /**
+     * Initializes checkout model and loads cart products.
+     */
     @PostConstruct
     protected void init() {
 
+        LOG.info("Initializing CheckoutModel");
+
         if (cartPath == null || cartPath.isEmpty()) {
-            LOG.info("Cart path missing");
+            LOG.error("Cart path is missing");
             return;
         }
 
         Resource cartPage = resolver.getResource(cartPath);
 
         if (cartPage == null) {
-            LOG.info("Cart page not found");
+            LOG.error("Cart page not found at path: {}", cartPath);
             return;
         }
 
         Resource productsNode = cartPage.getChild(cartPageChildData);
 
         if (productsNode == null) {
-            LOG.info("Products node NOT FOUND");
+            LOG.error("Products node NOT FOUND at: {}", cartPageChildData);
             return;
         }
 
         LOG.info("Products node FOUND");
+
         for (Resource item : productsNode.getChildren()) {
 
-            LOG.info("Item Node: {}", item.getPath());
+            LOG.info("Processing item node: {}", item.getPath());
 
             ValueMap vm = item.getValueMap();
-            LOG.info("Properties: {}", vm.keySet());
-
             String cfPath = vm.get("cfPath", String.class);
+
             LOG.info("cfPath value: {}", cfPath);
 
             if (cfPath == null || cfPath.isEmpty()) {
-                LOG.error("cfPath is NULL or EMPTY");
+                LOG.error("cfPath is NULL or EMPTY for item: {}", item.getPath());
                 continue;
             }
 
             Resource data = resolver.getResource(cfPath + "/jcr:content/data/master");
 
             if (data == null) {
-                LOG.error("CF DATA NOT FOUND for: {}", cfPath);
+                LOG.error("Content Fragment data NOT FOUND for: {}", cfPath);
                 continue;
             }
 
@@ -178,7 +167,7 @@ public class CheckoutModel {
             String title = cfVm.get("title", "");
             double price = cfVm.get("currentPrice", 0.0);
 
-            LOG.info("Product Loaded: {}",  title + " | " + price);
+            LOG.info("Product Loaded: {} | {}", title, price);
 
             ProductCart p = new ProductCart();
             p.setTitle(title);
@@ -188,10 +177,17 @@ public class CheckoutModel {
             products.add(p);
             subtotal += price;
         }
-        LOG.info("TOTAL PRODUCTS: {}", products.size());
+
+        LOG.info("Total products loaded: {}", products.size());
+        LOG.info("Subtotal calculated: {}", subtotal);
     }
 
-    // Resolve Image
+    /**
+     * Resolves image path.
+     *
+     * @param value image reference
+     * @return resolved path
+     */
     private String resolveImage(String value) {
 
         if (value == null || value.isEmpty()) return "";
@@ -204,6 +200,12 @@ public class CheckoutModel {
         return resolved != null ? resolved.getPath() : value;
     }
 
+    /**
+     * Recursively finds cart component resource.
+     *
+     * @param resource root resource
+     * @return cart component resource if found
+     */
     private Resource findCartComponent(Resource resource) {
 
         if (resource == null) return null;
@@ -220,129 +222,79 @@ public class CheckoutModel {
         return null;
     }
 
+    /** Getters */
+
     public List<ProductCart> getProducts() { return products; }
+
     public double getSubtotal() { return subtotal; }
+
     public double getTotal() { return subtotal; }
+
     public boolean isEmpty() { return products.isEmpty(); }
 
     public String getOrderTitle() { return orderTitle != null ? orderTitle : "Your Order"; }
+
     public String getSubtotalLabel() { return subtotalLabel != null ? subtotalLabel : "Subtotal"; }
+
     public String getFinalTotalLabel() { return finalTotalLabel != null ? finalTotalLabel : "Total"; }
+
     public String getPlaceOrderLabel() { return placeOrderLabel != null ? placeOrderLabel : "PLACE ORDER"; }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getFirstName() { return firstName; }
 
-    public String getLastName() {
-        return lastName;
-    }
+    public String getLastName() { return lastName; }
 
-    public String getCountry() {
-        return country;
-    }
+    public String getCountry() { return country; }
 
-    public String getAddress() {
-        return address;
-    }
+    public String getAddress() { return address; }
 
-    public String getApartment() {
-        return apartment;
-    }
+    public String getApartment() { return apartment; }
 
-    public String getTownOrCity() {
-        return townOrCity;
-    }
+    public String getTownOrCity() { return townOrCity; }
 
-    public String getStateOrCountry() {
-        return stateOrCountry;
-    }
+    public String getStateOrCountry() { return stateOrCountry; }
 
-    public String getZipCode() {
-        return zipCode;
-    }
+    public String getZipCode() { return zipCode; }
 
-    public String getPhone() {
-        return phone;
-    }
+    public String getPhone() { return phone; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() { return email; }
 
-    public String getCartPath() {
-        return cartPath;
-    }
+    public String getCartPath() { return cartPath; }
 
-    public String getFragmentFolder() {
-        return fragmentFolder;
-    }
+    public String getFragmentFolder() { return fragmentFolder; }
 
-    public String getOrderNotes() {
-        return orderNotes;
-    }
+    public String getOrderNotes() { return orderNotes; }
 
-    public String getAccountPassword() {
-        return accountPassword;
-    }
+    public String getAccountPassword() { return accountPassword; }
 
-    public String getCheckoutTitle() {
-        return checkoutTitle;
-    }
+    public String getCheckoutTitle() { return checkoutTitle; }
 
-    public String getFirstNamePlaceholder() {
-        return firstNamePlaceholder;
-    }
+    public String getFirstNamePlaceholder() { return firstNamePlaceholder; }
 
-    public String getLastNamePlaceholder() {
-        return lastNamePlaceholder;
-    }
+    public String getLastNamePlaceholder() { return lastNamePlaceholder; }
 
-    public String getCountryPlaceholder() {
-        return countryPlaceholder;
-    }
+    public String getCountryPlaceholder() { return countryPlaceholder; }
 
-    public String getAddressPlaceholder() {
-        return addressPlaceholder;
-    }
+    public String getAddressPlaceholder() { return addressPlaceholder; }
 
-    public String getApartmentPlaceholder() {
-        return apartmentPlaceholder;
-    }
+    public String getApartmentPlaceholder() { return apartmentPlaceholder; }
 
-    public String getTownOrCityPlaceholder() {
-        return townOrCityPlaceholder;
-    }
+    public String getTownOrCityPlaceholder() { return townOrCityPlaceholder; }
 
-    public String getStateOrCountryPlaceholder() {
-        return stateOrCountryPlaceholder;
-    }
+    public String getStateOrCountryPlaceholder() { return stateOrCountryPlaceholder; }
 
-    public String getZipCodePlaceholder() {
-        return zipCodePlaceholder;
-    }
+    public String getZipCodePlaceholder() { return zipCodePlaceholder; }
 
-    public String getPhonePlaceholder() {
-        return phonePlaceholder;
-    }
+    public String getPhonePlaceholder() { return phonePlaceholder; }
 
-    public String getEmailPlaceholder() {
-        return emailPlaceholder;
-    }
+    public String getEmailPlaceholder() { return emailPlaceholder; }
 
-    public String getAccountPasswordPlaceholder() {
-        return accountPasswordPlaceholder;
-    }
+    public String getAccountPasswordPlaceholder() { return accountPasswordPlaceholder; }
 
-    public String getOrderNotesPlaceholder() {
-        return orderNotesPlaceholder;
-    }
+    public String getOrderNotesPlaceholder() { return orderNotesPlaceholder; }
 
-    public String getAccountInformation() {
-        return accountInformation;
-    }
+    public String getAccountInformation() { return accountInformation; }
 
-    public String getPaymentDescription() {
-        return paymentDescription;
-    }
+    public String getPaymentDescription() { return paymentDescription; }
 }
