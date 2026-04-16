@@ -14,17 +14,26 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import io.wcm.testing.mock.aem.junit5.AemContext;
 import io.wcm.testing.mock.aem.junit5.AemContextExtension;
 
+/**
+ * Unit tests for the {@link HeaderTopBar} model.
+ */
 @ExtendWith(AemContextExtension.class)
 class HeaderTopBarTest {
 
     public final AemContext ctx = new AemContext();
 
+    /**
+     * Loads the header top bar fixtures and registers the model package.
+     */
     @BeforeEach
     void setUp() {
        ctx.addModelsForPackage("com.bhasaka.ogani.core.models");
         ctx.load().json("/headerTopBarTest.json", "/content/ogani/headertopbar");
     }
 
+    /**
+     * Verifies all header top bar properties are read from a fully populated resource.
+     */
     @Test
     void testGetters_HappyPath() {
         String resourcePath = "/content/ogani/headertopbar/happy-path";
@@ -46,6 +55,9 @@ class HeaderTopBarTest {
         assertEquals(2, topBar.getSocialIcons().size(), "Should load 2 items from the iconList JSON node");
     }
 
+    /**
+     * Verifies the model adapts safely when optional properties are absent.
+     */
     @Test
     void testGetters_EmptyPath() {
         String resourcePath = "/content/ogani/headertopbar/empty-path";

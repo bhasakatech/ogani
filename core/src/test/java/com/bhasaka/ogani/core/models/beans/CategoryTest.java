@@ -1,10 +1,21 @@
 package com.bhasaka.ogani.core.models.beans;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for {@link Category}.
+ * <p>
+ * This class verifies constructor initialization and getter methods,
+ * including handling of null, empty, and different values.
+ */
 class CategoryTest {
 
+    /**
+     * Validates that constructor initializes fields correctly
+     * and getters return expected values.
+     */
     @Test
     void testConstructorAndGetters() {
         String tag = "electronics";
@@ -17,14 +28,21 @@ class CategoryTest {
         assertEquals(name, category.getName());
     }
 
+    /**
+     * Verifies that the object correctly handles null values.
+     */
     @Test
     void testNullValues() {
         Category category = new Category(null, null);
+
         assertNotNull(category);
         assertNull(category.getTag());
         assertNull(category.getName());
     }
 
+    /**
+     * Verifies that the object correctly handles empty string values.
+     */
     @Test
     void testEmptyValues() {
         Category category = new Category("", "");
@@ -34,6 +52,9 @@ class CategoryTest {
         assertEquals("", category.getName());
     }
 
+    /**
+     * Validates behavior with different input values.
+     */
     @Test
     void testDifferentValues() {
         Category category = new Category("food", "Food Items");

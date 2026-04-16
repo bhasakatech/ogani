@@ -1,0 +1,15 @@
+{
+  "blog-detail": {
+    "jcr:primaryType": "cq:Page",
+    "jcr:content": {
+      "jcr:title": "Test Blog Title",
+      "jcr:description": "Test Description",
+      "subtitle": "Test Subtitle",
+      "authorName": "John Doe",
+      "cq:tags": ["test:tag1", "test:tag2"],
+      "cq:featuredimage": {
+        "fileReference": "/content/dam/test.png"
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-    <filter root="/conf/Ogani" mode="merge"/>
+    <filter root="/conf/Ogani" />
     <filter root="/content/Ogani" mode="merge"/>
     <filter root="/content/dam/Ogani" mode="merge">
         <exclude pattern="/content/dam/Ogani(/.*)?"/>
