@@ -1,8 +1,7 @@
 .product-detail {
   padding: 40px;
-  margin-left: 120px;
   font-family: "Cairo", sans-serif;
-    margin-right:100px;
+
 }
 
 .product-wrapper {
@@ -39,7 +38,7 @@
 }
 
 .product__thumbnails .thumb {
-  width: 125px;
+  width: 120px;
   height: 100px;
   object-fit: cover;
   cursor: pointer;
@@ -51,7 +50,6 @@
 .product__thumbnails .thumb.active {
   border-color: #7fad39;
 }
-
 
 .product__info {
   width: 50%;
@@ -87,7 +85,6 @@
   margin: 0 0 15px 0;
 }
 
-/* QTY */
 .qty-box {
   display: flex;
   align-items: center;
@@ -355,7 +352,3 @@
 .thumb.active {
   border-color: #7fad39;
 }
-
-
-
-
