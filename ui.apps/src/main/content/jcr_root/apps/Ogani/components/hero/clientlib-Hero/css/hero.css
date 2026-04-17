@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;          
-  width: 69%;
+  width: 70%;
   
 }
 
@@ -25,7 +25,7 @@
 
     z-index: 1;
 
-    width: 84%;
+    width: 86%;
 
     height: 100%;
 
@@ -148,7 +148,7 @@
 
     .main-hero {
 
-        justify-content: start;
+        justify-content: center;
 
     }
  

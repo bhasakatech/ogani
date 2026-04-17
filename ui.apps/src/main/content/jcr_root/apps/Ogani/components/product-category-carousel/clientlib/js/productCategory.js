@@ -1,36 +1,45 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    const carousel = document.querySelector(".category-carousel");
+    const carousel = document.querySelector(".category-ogani-carousel");
     if (!carousel) return;
 
-    const track = carousel.querySelector(".carousel-track");
+    const track = carousel.querySelector(".category-ogani-carousel-track");
     const nextBtn = carousel.querySelector(".next");
     const prevBtn = carousel.querySelector(".prev");
-    
-    let items = Array.from(track.children);
+
+    let originalItems = Array.from(track.children);
+    let items = [];
     let index = 0;
-    
+    let visibleItems = getVisibleItems();
 
     function getVisibleItems() {
-        if (window.innerWidth <= 480) return 1;
-        if (window.innerWidth <= 768) return 2;
+        if (window.innerWidth <= 576) return 1;
+        if (window.innerWidth <= 992) return 3;
         return 4;
     }
 
-    let visibleItems = getVisibleItems();
+    
+    function setupCarousel() {
+        track.innerHTML = ""; // clear
+        visibleItems = getVisibleItems();
 
-    function cloneItems() {
-        const clones = items.slice(0, visibleItems).map(item => item.cloneNode(true));
-        clones.forEach(clone => track.appendChild(clone));
+        // add original items
+        originalItems.forEach(item => {
+            track.appendChild(item.cloneNode(true));
+        });
+
+        // clone for infinite loop
+        originalItems.slice(0, visibleItems).forEach(item => {
+            track.appendChild(item.cloneNode(true));
+        });
 
         items = Array.from(track.children);
+        index = 0;
+        updateCarousel(false);
     }
 
-    cloneItems();
-
     function getItemWidth() {
-        const item = track.querySelector(".product-carousel-item");
-
+        const item = track.querySelector(".category-ogani-carousel-item");
         const style = window.getComputedStyle(track);
         const gap = parseInt(style.gap || 0);
 
@@ -40,10 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateCarousel(withTransition = true) {
         const itemWidth = getItemWidth();
 
-        track.style.transition = withTransition
-            ? "transform 0.5s ease"
-            : "none";
-
+        track.style.transition = withTransition ? "transform 0.5s ease" : "none";
         track.style.transform = `translateX(-${index * itemWidth}px)`;
     }
 
@@ -72,18 +78,18 @@ document.addEventListener("DOMContentLoaded", function () {
     nextBtn.addEventListener("click", nextSlide);
     prevBtn.addEventListener("click", prevSlide);
 
-    let autoSlide = setInterval(nextSlide, 3000);
+    let autoSlide = setInterval(nextSlide, 2000);
 
     carousel.addEventListener("mouseenter", () => clearInterval(autoSlide));
     carousel.addEventListener("mouseleave", () => {
-        autoSlide = setInterval(nextSlide, 3000);
+        autoSlide = setInterval(nextSlide, 2000);
     });
 
+    
     window.addEventListener("resize", () => {
-        visibleItems = getVisibleItems();
-        index = 0;
-        updateCarousel(false);
+        setupCarousel();
     });
 
-    updateCarousel(false);
+    
+    setupCarousel();
 });

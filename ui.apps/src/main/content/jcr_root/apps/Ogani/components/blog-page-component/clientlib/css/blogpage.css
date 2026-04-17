@@ -20,7 +20,7 @@
     display: flex;
     align-items: flex-start;   
     gap: 40px;
-    padding: 40px;
+    padding: 60px 180px 35px 180px;
 }
 
 .blog-sidebar {
@@ -74,7 +74,7 @@
 .search-form {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 310px;
 }
 
 /* Input */
@@ -186,8 +186,8 @@
    SEARCH BY (TAGS)
 ========================= */
 .tag-box {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
 }
 
@@ -199,6 +199,9 @@
     text-decoration: none;
     background: #f5f5f5;
     transition: all 0.3s ease;
+    text-align: center;
+    display: block;
+}
 }
 
 .tag-box a:hover {
@@ -226,6 +229,13 @@
 /* =========================
    BLOG CARD
 ========================= */
+
+.blog-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .blog-meta,
 .blog-card p {
     font-size: 16px;
@@ -238,6 +248,10 @@
 
 .blog-card:hover {
     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.blog-image {
+    flex-shrink: 0;
 }
 
 .blog-card h3 {
@@ -379,6 +393,34 @@
     }
 }
 
+@media (max-width: 1024px) {
+
+    .blog-container {
+        padding: 30px 60px;   /* reduce side padding */
+    }
+
+    .blog-sidebar {
+        width: 28%;           /* slightly smaller */
+    }
+
+    .blog-content {
+        width: 72%;
+    }
+
+    .search-form {
+        max-width: 100%;      /* prevent overflow */
+    }
+
+    .search-form input[type="text"] {
+        font-size: 14px;      /* slightly smaller text */
+        padding: 0 12px;
+    }
+
+    .search-btn {
+        width: 55px;          /* reduce button width */
+    }
+}
+
 /* ----------- Tablets (≤992px) ----------- */
 @media (max-width: 992px) {
 
@@ -435,6 +477,10 @@
     .blog-body p {
         font-size: 13px;
     }
+    
+    .tag-box {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* ----------- Mobile (≤576px) ----------- */
@@ -470,6 +516,12 @@
         min-width: 35px;
         height: 35px;
         font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tag-box {
+        grid-template-columns: 1fr;
     }
 }
 

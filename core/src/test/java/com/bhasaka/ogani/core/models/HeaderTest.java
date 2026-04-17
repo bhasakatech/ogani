@@ -1,168 +1,163 @@
 package com.bhasaka.ogani.core.models;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import io.wcm.testing.mock.aem.junit5.AemContext;
+import io.wcm.testing.mock.aem.junit5.AemContextExtension;
 import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import io.wcm.testing.mock.aem.junit5.AemContext;
-import io.wcm.testing.mock.aem.junit5.AemContextExtension;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Unit tests for the {@link Header} model.
+ */
 @ExtendWith(AemContextExtension.class)
 class HeaderTest {
 
-    public final AemContext ctx = new AemContext();
+    private final AemContext ctx = new AemContext();
 
+    /**
+     * Loads the header fixture and registers the top bar adapter used by the model.
+     */
     @BeforeEach
-    void setUp() {
-        ctx.addModelsForPackage("com.bhasaka.ogani.core.models");
-        ctx.load().json("/headerTest.json", "/content/ogani");
+    void setUp() throws Exception {
+        ctx.load().json("/headerTest.json", "/content");
+
+        ctx.create().tag("/content/cq:tags/departments");
+        ctx.create().tag("/content/cq:tags/departments/meat");
+        ctx.create().tag("/content/cq:tags/empty");
+
+        HeaderTopBar topBar = new HeaderTopBar();
+        setField(topBar, "email", "support@bhasaka.com");
+        setField(topBar, "loginLink", "/login");
+        setField(topBar, "loginIcon", "icon");
+        setField(topBar, "promotionalText", "Promo");
+        setField(topBar, "languages", new String[]{"en"});
+        setField(topBar, "socialIcons", new ArrayList<>());
+
+        ctx.registerAdapter(Resource.class, HeaderTopBar.class, topBar);
     }
 
+    private void setField(Object target, String fieldName, Object value) throws Exception {
+        Field field = target.getClass().getDeclaredField(fieldName);
+        field.setAccessible(true);
+        field.set(target, value);
+    }
+
+    /**
+     * Verifies the model adapts correctly from valid header content.
+     */
     @Test
-    void testInitAndGetters_HappyPath() {
-        ctx.create().resource("/content/cq:tags/departments", "jcr:primaryType", "cq:Tag");
-        ctx.create().resource("/content/cq:tags/departments/cardiology",
-                "jcr:primaryType", "cq:Tag",
-                "jcr:title", "Cardiology");
+    void testHeaderWithValidData() {
+        Resource headerResource = ctx.resourceResolver().getResource("/content/parent/header");
+        Header header = headerResource.adaptTo(Header.class);
 
-        Resource currentResource = ctx.resourceResolver().getResource("/content/ogani/parent/happy-path");
-        ctx.currentResource(currentResource);
-        ctx.request().setResource(currentResource);
-
-        Header header = ctx.request().adaptTo(Header.class);
-
-        assertNotNull(header, "Model should adapt successfully.");
-        assertEquals("+1 234 567 8900", header.getPhoneNumber());
-        assertEquals("24/7 Customer Support", header.getSupportText());
+        assertNotNull(header);
+        assertEquals("123-456-7890", header.getPhoneNumber());
+        assertEquals("24/7 Support", header.getSupportText());
         assertTrue(header.isEnableCart());
-
-        assertEquals("test@test.com", header.getEmail());
-        assertEquals("/content/login", header.getLoginLink());
-        assertEquals("icon-user", header.getLoginIcon());
-        assertEquals("Promo!", header.getPromotionalText());
-        assertArrayEquals(new String[]{"en", "fr"}, header.getLanguages());
-        assertEquals(1, header.getSocialIcons().size());
         assertNotNull(header.getTopHeader());
-
+        assertEquals("support@bhasaka.com", header.getEmail());
+        assertEquals("/login", header.getLoginLink());
+        assertEquals("icon", header.getLoginIcon());
+        assertEquals("Promo", header.getPromotionalText());
+        assertEquals(1, header.getLanguages().length);
+        assertNotNull(header.getSocialIcons());
         assertFalse(header.getDepartmentTags().isEmpty());
-        assertEquals("Cardiology", header.getDepartmentTags().get(0));
+        assertEquals("meat", header.getDepartmentTags().get(0));
     }
 
+    /**
+     * Verifies the default phone number is returned when no content value is present.
+     */
     @Test
-    void testGetPhoneNumber_FallbackPath() {
-        Resource currentResource = ctx.resourceResolver().getResource("/content/ogani/parent/fallback-phone");
-        ctx.currentResource(currentResource);
-        ctx.request().setResource(currentResource);
-
-        Header header = ctx.request().adaptTo(Header.class);
-
-        assertNotNull(header);
-        assertEquals("+65 11.188.888", header.getPhoneNumber(), "Should fall back to default phone number");
-        assertNull(header.getSupportText());
-        assertFalse(header.isEnableCart());
+    void testPhoneNumberFallback() {
+        Header header = new Header();
+        assertEquals("+65 11.188.888", header.getPhoneNumber());
     }
 
+    /**
+     * Verifies initialization safely handles a missing resource.
+     */
     @Test
-    void testInit_BlankTagRootPath() {
-        Resource currentResource = ctx.resourceResolver().getResource("/content/ogani/parent/blank-tag");
-        ctx.currentResource(currentResource);
-        ctx.request().setResource(currentResource);
-
-        Header header = ctx.request().adaptTo(Header.class);
-
-        assertNotNull(header);
-        assertTrue(header.getDepartmentTags().isEmpty(), "Tags list should be empty if root path is blank");
-    }
-
-    @Test
-    void testInit_NullRootTag() {
-        Resource currentResource = ctx.resourceResolver().getResource("/content/ogani/parent/invalid-tag");
-        ctx.currentResource(currentResource);
-        ctx.request().setResource(currentResource);
-
-        Header header = ctx.request().adaptTo(Header.class);
-
-        assertNotNull(header);
-        assertTrue(header.getDepartmentTags().isEmpty(), "Tags list should be empty if root tag fails to resolve");
-    }
-
-    @Test
-    void testInit_MissingTopHeader() {
-        Resource currentResource = ctx.resourceResolver().getResource("/content/ogani/parent-missing-topbar/current");
-        ctx.currentResource(currentResource);
-        ctx.request().setResource(currentResource);
-
-        Header header = ctx.request().adaptTo(Header.class);
-
-        assertNotNull(header);
-        assertNull(header.getTopHeader(), "Top header should be null");
-        assertNull(header.getEmail(), "Email should be null because top header is missing");
-    }
-
-    @Test
-    void testInit_EmptyTags() {
-        ctx.create().resource("/content/cq:tags/departments", "jcr:primaryType", "cq:Tag");
-
-        Resource currentResource = ctx.resourceResolver().getResource("/content/ogani/parent/happy-path");
-        ctx.currentResource(currentResource);
-        ctx.request().setResource(currentResource);
-
-        Header header = ctx.request().adaptTo(Header.class);
-
-        assertNotNull(header);
-        assertTrue(header.getDepartmentTags().isEmpty(), "Department tags should be empty if rootTag has no children");
-    }
-
-    @Test
-    void testInit_NullParent() {
-        Resource rootResource = ctx.resourceResolver().getResource("/");
-        ctx.currentResource(rootResource);
-        ctx.request().setResource(rootResource);
-
-        Header header = ctx.request().adaptTo(Header.class);
-
-        assertNotNull(header);
-        assertNull(header.getTopHeader(), "Top header should be null because parent resource is null");
-    }
-
-    @Test
-    void testInit_NullCurrentResource() {
+    void testInitResourceIsNull() {
         Header header = new Header();
         header.init();
-
-        assertNull(header.getTopHeader(), "Top header should be null because currentResource is null");
-        assertTrue(header.getDepartmentTags().isEmpty(), "Department tags should be empty");
+        assertNull(header.getTopHeader());
     }
 
+    /**
+     * Verifies initialization safely handles a resource without a parent.
+     */
     @Test
-    void testInit_NullTagManager() throws Exception {
+    void testInitParentResourceIsNull() throws Exception {
         Header header = new Header();
-
-       ResourceResolver proxyResolver = (ResourceResolver) java.lang.reflect.Proxy.newProxyInstance(
-                HeaderTest.class.getClassLoader(),
-                new Class<?>[]{ResourceResolver.class},
-                (proxy, method, args) -> null
-        );
-
-        java.lang.reflect.Field rrField = Header.class.getDeclaredField("resourceResolver");
-        rrField.setAccessible(true);
-        rrField.set(header, proxyResolver);
-
-        java.lang.reflect.Field pathField = Header.class.getDeclaredField("tagRootPath");
-        pathField.setAccessible(true);
-        pathField.set(header, "/content/tags");
-
+        Resource res = ctx.create().resource("/orphan");
+        setField(header, "resource", res);
         header.init();
+        assertNull(header.getTopHeader());
+    }
 
-        assertTrue(header.getDepartmentTags().isEmpty(), "Tags list should be empty if TagManager is null");
+    /**
+     * Verifies the model tolerates a missing top bar child resource.
+     */
+    @Test
+    void testInitTopBarResourceIsNull() {
+        Resource headerResource = ctx.resourceResolver().getResource("/content/noTopBarParent/header");
+        Header header = headerResource.adaptTo(Header.class);
+
+        assertNotNull(header);
+        assertNull(header.getTopHeader());
+    }
+
+    /**
+     * Verifies an empty tag root path produces no department tags.
+     */
+    @Test
+    void testInitTagRootPathBlank() {
+        Resource headerResource = ctx.resourceResolver().getResource("/content/blankTagParent/header");
+        Header header = headerResource.adaptTo(Header.class);
+
+        assertNotNull(header);
+        assertTrue(header.getDepartmentTags().isEmpty());
+    }
+
+    /**
+     * Verifies an invalid tag root path produces no department tags.
+     */
+    @Test
+    void testInitRootTagNull() {
+        Resource headerResource = ctx.resourceResolver().getResource("/content/invalidTagParent/header");
+        Header header = headerResource.adaptTo(Header.class);
+
+        assertNotNull(header);
+        assertTrue(header.getDepartmentTags().isEmpty());
+    }
+
+    /**
+     * Verifies a tag root with no children produces no department tags.
+     */
+    @Test
+    void testInitNoChildTags() {
+        Resource headerResource = ctx.resourceResolver().getResource("/content/emptyTagParent/header");
+        Header header = headerResource.adaptTo(Header.class);
+
+        assertNotNull(header);
+        assertTrue(header.getDepartmentTags().isEmpty());
+    }
+
+    /**
+     * Verifies initialization safely handles a missing resource resolver.
+     */
+    @Test
+    void testInitResourceResolverNull() throws Exception {
+        Header header = new Header();
+        setField(header, "tagRootPath", "/content/cq:tags/departments");
+        header.init();
+        assertTrue(header.getDepartmentTags().isEmpty());
     }
 }

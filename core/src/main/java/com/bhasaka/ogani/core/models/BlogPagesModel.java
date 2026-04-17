@@ -9,16 +9,26 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.*;
 import org.apache.sling.models.annotations.*;
 import org.apache.sling.models.annotations.injectorspecific.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.annotation.PostConstruct;
 import javax.jcr.Session;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * Model class for Blog Pages component.
+ * <p>
+ * Handles blog listing with pagination, category filtering,
+ * search functionality, and recent blogs.
+ */
 @Model(
         adaptables = {Resource.class, SlingHttpServletRequest.class},
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
 )
 public class BlogPagesModel {
+
+    private static final Logger LOG = LoggerFactory.getLogger(BlogPagesModel.class);
 
     @ValueMapValue
     private String blogParentPath;
@@ -53,22 +63,33 @@ public class BlogPagesModel {
     private Map<String, CategoryItem> categories = new LinkedHashMap<>();
     private List<BlogPageItem> recentBlogs = new ArrayList<>();
 
+    /**
+     * Initializes the model and loads all required data.
+     */
     @PostConstruct
     protected void init() {
+        LOG.info("Initializing BlogPagesModel");
         loadCategories();
         loadBlogs();
         loadRecentBlogs();
     }
 
-    // LOAD BLOGS
+    /**
+     * Loads blogs with pagination, search, and category filters.
+     */
     private void loadBlogs() {
 
         Map<String, String> map = new HashMap<>();
-        if (resourceResolver == null || blogParentPath == null) return;
+
+        if (resourceResolver == null || blogParentPath == null) {
+            LOG.error("ResourceResolver or blogParentPath is null");
+            return;
+        }
 
         String search = request.getParameter("search");
         if (search != null && !search.isEmpty() && search.length() >= minSearchLength) {
             map.put("fulltext", search);
+            LOG.info("Search applied: {}", search);
         }
 
         String category = request.getParameter("category");
@@ -78,7 +99,9 @@ public class BlogPagesModel {
         currentPage = 1;
         try {
             currentPage = Integer.parseInt(request.getParameter("page"));
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+            LOG.info("Invalid page parameter, defaulting to page 1");
+        }
 
         int offset = (currentPage - 1) * limit;
 
@@ -92,15 +115,14 @@ public class BlogPagesModel {
         map.put("orderby", "@jcr:content/jcr:created");
         map.put("orderby.sort", "desc");
 
-        // SEARCH
         if (search != null && !search.isEmpty()) {
             map.put("fulltext", search);
         }
 
-        // CATEGORY FILTER
         if (category != null && !category.isEmpty()) {
             map.put("property", "jcr:content/cq:tags");
             map.put("property.value", category);
+            LOG.info("Category filter applied: {}", category);
         }
 
         Query query = queryBuilder.createQuery(
@@ -113,11 +135,16 @@ public class BlogPagesModel {
         int totalMatches = (int) result.getTotalMatches();
         totalPages = (int) Math.ceil((double) totalMatches / limit);
 
+        LOG.info("Total blog matches: {}, Total pages: {}", totalMatches, totalPages);
+
         for (Iterator<Resource> iterator = result.getResources(); iterator.hasNext(); ) {
             Resource res = iterator.next();
 
             Resource content = res.getChild("jcr:content");
-            if (content == null) continue;
+            if (content == null) {
+                LOG.error("Content resource missing for: {}", res.getPath());
+                continue;
+            }
 
             ValueMap valueMap = content.getValueMap();
 
@@ -128,6 +155,8 @@ public class BlogPagesModel {
             Resource imageRes = findImageResource(content);
             if (imageRes != null) {
                 image = imageRes.getValueMap().get("fileReference", "");
+            } else {
+                LOG.error("Image not found for: {}", res.getPath());
             }
 
             Date date = valueMap.get("jcr:created", Date.class);
@@ -145,23 +174,32 @@ public class BlogPagesModel {
                     formattedDate,
                     date
             ));
+
+            LOG.info("Blog page added: {}", title);
         }
     }
 
-    // Load Categories
+    /**
+     * Loads categories with blog count for each category.
+     */
     private void loadCategories() {
 
-        if (categoryRootPath == null || blogParentPath == null || queryBuilder == null) return;
+        if (categoryRootPath == null || blogParentPath == null || queryBuilder == null) {
+            LOG.error("Category configuration is missing");
+            return;
+        }
 
         Resource root = resourceResolver.getResource(categoryRootPath);
-        if (root == null) return;
+        if (root == null) {
+            LOG.error("Category root resource not found: {}", categoryRootPath);
+            return;
+        }
 
         Session session = resourceResolver.adaptTo(Session.class);
 
         for (Resource child : root.getChildren()) {
 
             ValueMap vm = child.getValueMap();
-
             String title = vm.get("jcr:title", child.getName());
 
             String tagId = child.getPath()
@@ -184,13 +222,18 @@ public class BlogPagesModel {
             int count = (int) result.getTotalMatches();
 
             categories.put(tagId, new CategoryItem(tagId, title, count));
+
+            LOG.info("Category added: {} with count {}", title, count);
         }
     }
 
-    // Recent Blogs
+    /**
+     * Loads recent blogs based on created date.
+     */
     private void loadRecentBlogs() {
 
         if (resourceResolver == null || blogParentPath == null || queryBuilder == null) {
+            LOG.error("Cannot load recent blogs due to missing dependencies");
             return;
         }
 
@@ -208,23 +251,22 @@ public class BlogPagesModel {
 
         SearchResult result = query.getResult();
 
-        for (Iterator<Resource> searchResultIterator = result.getResources(); searchResultIterator.hasNext();) {
+        for (Iterator<Resource> it = result.getResources(); it.hasNext();) {
 
-            Resource res = searchResultIterator.next();
+            Resource res = it.next();
             Resource content = res.getChild("jcr:content");
 
-            if (content == null) continue;
+            if (content == null) {
+                LOG.error("Content missing for recent blog: {}", res.getPath());
+                continue;
+            }
 
-            ValueMap contentValueMap = content.getValueMap();
+            ValueMap vm = content.getValueMap();
 
-            // Title
-            String title = contentValueMap.get("jcr:title", "");
-
-            // Path
+            String title = vm.get("jcr:title", "");
             String path = res.getPath() + ".html";
 
-            // Image
-            String image = contentValueMap.get("cq:featuredimage/fileReference", String.class);
+            String image = vm.get("cq:featuredimage/fileReference", String.class);
 
             if (image == null || image.isEmpty()) {
                 Resource featured = content.getChild("cq:featuredimage");
@@ -233,7 +275,7 @@ public class BlogPagesModel {
                 }
             }
 
-            Date date = contentValueMap.get("jcr:created", Date.class);
+            Date date = vm.get("jcr:created", Date.class);
 
             String formattedDate = "";
             if (date != null) {
@@ -248,10 +290,14 @@ public class BlogPagesModel {
                     formattedDate,
                     date
             ));
+
+            LOG.info("Recent blog added: {}", title);
         }
     }
 
-    // IMAGE FINDER Method
+    /**
+     * Recursively finds featured image resource.
+     */
     private Resource findImageResource(Resource resource) {
         if (resource == null) return null;
 
@@ -266,7 +312,7 @@ public class BlogPagesModel {
         return null;
     }
 
-    // PAGINATION
+    /** Pagination helpers */
     public int getPrevPage() {
         return currentPage > 1 ? currentPage - 1 : 1;
     }
@@ -287,7 +333,7 @@ public class BlogPagesModel {
         return pages;
     }
 
-    // GETTERS
+    /** Getters */
     public List<BlogPageItem> getPaginatedBlogs() {
         return paginatedBlogs;
     }

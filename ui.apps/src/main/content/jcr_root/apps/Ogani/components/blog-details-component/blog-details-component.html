@@ -1,0 +1,152 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+    data-sly-call="${clientlib.all @ categories='ogani.blogdeatils-container'}" />
+
+<sly data-sly-use.model="com.bhasaka.ogani.core.models.BlogDetailModel" />
+
+<div class="blog-container">
+
+    <!-- ================= SIDEBAR (LEFT-SIDE) ================= -->
+    <aside class="blog-sidebar">
+
+        <!-- SEARCH -->
+        <div class="sidebar-block">
+            <form method="get" class="search-form">
+
+                <input type="text" name="search" placeholder="${model.searchPlaceholder}" value="${param.search}" />
+                <input type="hidden" name="category" value="${param.category}" />
+
+                <button type="submit" class="search-btn">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- CATEGORIES -->
+        <div class="sidebar-block">
+            <h3>Categories</h3>
+
+            <ul class="category-list">
+
+                <li>
+                    <a href="?category=&search=${param.search}" class="${!param.category ? 'active' : ''}">
+                        All
+                    </a>
+                </li>
+
+                <sly data-sly-list.categoryData="${model.categories}">
+                    <li>
+                        <a href="?category=${categoryData.tagId}&search=${param.search}">
+                            ${categoryData.title}
+                        </a>
+                    </li>
+                </sly>
+
+            </ul>
+        </div>
+
+        <!-- RECENT NEWS -->
+        <div class="sidebar-block">
+            <h3>Recent News</h3>
+
+            <div class="recent-news">
+                <sly data-sly-list.item="${model.recentBlogs}">
+                    <div class="recent-item">
+
+                        <img src="${item.image @ context='uri'}" alt="${item.title}" />
+
+                        <div class="recent-text">
+                            <a href="${item.path @ context='uri'}">${item.title}</a>
+                            <span>${item.publishDate}</span>
+                        </div>
+
+                    </div>
+                </sly>
+            </div>
+        </div>
+
+        <!-- SEARCH BY -->
+        <div class="sidebar-block">
+            <h3>Search By</h3>
+
+            <div class="tag-box">
+
+                <a href="?category=&search=${param.search}" class="tag ${!param.category ? 'active' : ''}">
+                    All
+                </a>
+
+                <sly data-sly-list.categoriesData="${model.categories}">
+                    <a href="?category=${categoriesData.tagId}&search=${param.search}"
+                        class="tag ${param.category == categoriesData.tagId ? 'active' : ''}">
+                        ${categoriesData.title}
+                    </a>
+                </sly>
+
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= CONTENT (RIGHT-SIDE) ================= -->
+    <div class="blog-details-right-side">
+
+        <!-- IMAGE -->
+        <div class="blog-details-rightside-image">
+            <img src="${model.image @ context='uri'}" alt="${model.title}" />
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class="blog-details-rightside-description">
+            <p>${model.description @ context='html'}</p>
+        </div>
+
+        <!-- TITLE -->
+        <div class="blog-details-rightside-title">
+            <h4>${model.title}</h4>
+        </div>
+
+        <!-- SUB DESCRIPTION -->
+        <div class="blog-details-rightside-sub-description">
+            <p>${model.subDescription}</p>
+        </div>
+
+        <!-- AUTHOR + META -->
+        <div class="blog-details-rightside-below-flex">
+
+            <section class="author-section">
+                <img src="${model.authorImage}" alt="author" />
+                <div>
+                    <span>${model.authorName}</span><br />
+                    <span>Admin</span>
+                </div>
+            </section>
+
+            <!-- CATEGORY + TAGS + SOCIAL -->
+            <section class="meta-section">
+                <br />
+                <p>
+                    <strong>Categories:</strong> ${model.category}
+                </p>
+
+                <p>
+                    <strong>Tags:</strong>
+                    <sly data-sly-list.tag="${model.tags}">
+                        <span>${tag}</span>
+                    </sly>
+                </p>
+
+                <div class="social-icons">
+                    <i class="social_facebook"></i>
+                    <i class="social_twitter"></i>
+                    <i class="social_googleplus"></i>
+                    <i class="social_linkedin"></i>
+                    <i class="fa fa-envelope"></i>
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</div>

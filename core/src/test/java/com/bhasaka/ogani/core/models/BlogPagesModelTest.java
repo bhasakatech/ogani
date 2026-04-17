@@ -1,6 +1,7 @@
 package com.bhasaka.ogani.core.models;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import com.day.cq.search.*;
 import com.day.cq.search.result.SearchResult;
 import io.wcm.testing.mock.aem.junit5.AemContext;
@@ -11,11 +12,20 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import javax.jcr.Session;
 import java.util.*;
+
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * Test class for {@link BlogPagesModel}.
+ * <p>
+ * This class verifies model initialization, pagination logic,
+ * category loading, search and category filters using AEM Mocks
+ * and Mockito for QueryBuilder interactions.
+ */
 @ExtendWith({AemContextExtension.class, MockitoExtension.class})
 class BlogPagesModelTest {
 
@@ -33,11 +43,16 @@ class BlogPagesModelTest {
 
     private final AemContext context = new AemContext();
 
+    /**
+     * Sets up the test environment by mocking QueryBuilder,
+     * registering services, and preparing test resources.
+     */
     @BeforeEach
     void setUp() {
 
         context.registerService(QueryBuilder.class, queryBuilder);
         context.registerAdapter(ResourceResolver.class, Session.class, session);
+
         when(queryBuilder.createQuery(any(PredicateGroup.class), eq(session))).thenReturn(query);
         when(query.getResult()).thenReturn(searchResult);
         when(searchResult.getResources()).thenReturn(Collections.emptyIterator());
@@ -55,12 +70,19 @@ class BlogPagesModelTest {
         context.request().setParameterMap(new HashMap<>());
     }
 
+    /**
+     * Verifies that the model initializes successfully.
+     */
     @Test
     void testModelInitialization() {
         BlogPagesModel model = context.request().adaptTo(BlogPagesModel.class);
         assertNotNull(model);
     }
 
+    /**
+     * Validates paginated blog list is initialized and empty
+     * when no search results are returned.
+     */
     @Test
     void testPaginatedBlogs() {
         BlogPagesModel model = context.request().adaptTo(BlogPagesModel.class);
@@ -68,12 +90,18 @@ class BlogPagesModelTest {
         assertTrue(model.getPaginatedBlogs().isEmpty());
     }
 
+    /**
+     * Verifies recent blogs list is initialized.
+     */
     @Test
     void testRecentBlogs() {
         BlogPagesModel model = context.request().adaptTo(BlogPagesModel.class);
         assertNotNull(model.getRecentBlogs());
     }
 
+    /**
+     * Validates category loading from tag structure.
+     */
     @Test
     void testCategories() {
 
@@ -87,6 +115,9 @@ class BlogPagesModelTest {
         assertNotNull(model.getCategories());
     }
 
+    /**
+     * Verifies basic pagination boundary conditions.
+     */
     @Test
     void testPagination() {
         BlogPagesModel model = context.request().adaptTo(BlogPagesModel.class);
@@ -94,6 +125,9 @@ class BlogPagesModelTest {
         assertTrue(model.getNextPage() >= 0);
     }
 
+    /**
+     * Validates previous and next page logic.
+     */
     @Test
     void testPrevNextPage() {
         BlogPagesModel model = context.request().adaptTo(BlogPagesModel.class);
@@ -102,6 +136,9 @@ class BlogPagesModelTest {
         assertTrue(model.getNextPage() <= 1);
     }
 
+    /**
+     * Verifies model behavior when search parameter is provided.
+     */
     @Test
     void testSearchParameter() {
         context.request().setParameterMap(
@@ -112,6 +149,9 @@ class BlogPagesModelTest {
         assertNotNull(model);
     }
 
+    /**
+     * Verifies model behavior when category filter is applied.
+     */
     @Test
     void testCategoryFilter() {
         context.request().setParameterMap(

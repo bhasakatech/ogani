@@ -1,0 +1,43 @@
+
+
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.css @ categories='Ogani.related-product'}" />
+
+<sly data-sly-use.model="com.bhasaka.ogani.core.models.RelatedProducts" />
+
+<div class="RC__product-section">
+
+    <!-- Title from Dialog -->
+    <h2 class="RC__section-title">${model.sectionTitle}</h2>
+
+    <div class="RC__product-grid">
+        <sly data-sly-list.product="${model.products}">
+            
+            <div class="RC__product-card">
+                
+                <!-- Image -->
+                <div class="RC__product-image">
+                    <img src="${product.image}" alt="${product.title}" />
+
+                    <!-- Hover Actions -->
+                    <div class="RC__actions">
+                        <button class="RC__icon wishlist"><i class="fa fa-heart"></i></button>
+                        <button class="RC__icon compare"><i class="fa fa-exchange"></i></button>
+                        <button class="RC__icon cart"><i class="fa fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+
+                <!-- Name -->
+                <h4 class="RC__product-name">${product.title}</h4>
+
+                <!-- Price -->
+                <p class="RC__product-price">
+                    $${product.currentPrice}
+                </p>
+
+            </div>
+
+        </sly>
+    </div>
+
+</div>

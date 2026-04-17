@@ -7,12 +7,42 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Unit test class for ProductCartModel.
+ *
+ * This class verifies the behavior of ProductCartModel using AEM Mock context
+ * and JSON-based content.
+ *
+ * Coverage includes:
+ * - Initialization of ProductCartModel from resource
+ * - Population of product list
+ * - Validation of product data inside the list
+ * - Verification of label fields
+ * - Handling of empty product scenarios
+ *
+ * Testing Approach:
+ * - Uses AemContext to simulate Sling and JCR environment
+ * - Loads structured JSON to represent component data
+ * - Adapts resource to ProductCartModel
+ * - Validates output using assertions
+ *
+ * Goal:
+ * Ensure correct mapping of product list and component properties,
+ * along with proper handling of empty data cases.
+ */
 @ExtendWith(AemContextExtension.class)
 class ProductCartModelTest {
 
+    /**
+     * AEM context used to mock Sling environment and repository.
+     */
     private final AemContext context = new AemContext();
 
+    /**
+     * Initializes test data before each test.
+     *
+     * Loads JSON content and sets the current resource.
+     */
     @BeforeEach
     void setUp() {
 
@@ -23,6 +53,14 @@ class ProductCartModelTest {
         context.currentResource("/content/test");
     }
 
+    /**
+     * Tests model initialization.
+     *
+     * Verifies that:
+     * - Model is created successfully
+     * - Product list is populated
+     * - isEmpty returns false
+     */
     @Test
     void testModelInitialization() {
 
@@ -34,6 +72,11 @@ class ProductCartModelTest {
         assertEquals(2, model.getProductList().size());
     }
 
+    /**
+     * Tests product values inside the product list.
+     *
+     * Verifies that product fields are correctly mapped.
+     */
     @Test
     void testProductValues() {
 
@@ -48,6 +91,11 @@ class ProductCartModelTest {
         assertEquals(80.0, product.getCurrentPrice());
     }
 
+    /**
+     * Tests label fields in the model.
+     *
+     * Verifies that component labels are correctly injected.
+     */
     @Test
     void testLabels() {
 
@@ -60,11 +108,17 @@ class ProductCartModelTest {
         assertEquals("Total", model.getTotalLabel());
     }
 
+    /**
+     * Tests behavior when no products are available.
+     *
+     * Verifies that:
+     * - Model is created successfully
+     * - isEmpty returns true
+     */
     @Test
     void testEmptyWhenNoProducts() {
 
         context.create().resource("/content/empty");
-
         context.currentResource("/content/empty");
 
         ProductCartModel model =

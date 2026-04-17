@@ -10,29 +10,63 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import io.wcm.testing.mock.aem.junit5.AemContextExtension;
 
 import java.util.List;
-
+/**
+ * Unit test class for FooterNewsletterModel.
+ *
+ * This class verifies the behavior of FooterNewsletterModel using AEM Mock context.
+ *
+ * Coverage includes:
+ * - Adaptation of Resource to FooterNewsletterModel
+ * - Injection of basic fields such as title and description
+ * - Mapping of child resources for socialLinks
+ * - Validation of social link properties like url and iconClass
+ * - Handling of empty resource scenarios
+ *
+ * Testing Approach:
+ * - Uses AemContext to simulate Sling and JCR environment
+ * - Loads JSON data to represent realistic component structure
+ * - Adapts resource to model
+ * - Validates fields and child resources using assertions
+ *
+ * Goal:
+ * Ensure correct mapping of component properties and social links,
+ * including cases where data is missing.
+ */
 @ExtendWith(AemContextExtension.class)
 class FooterNewsletterModelTest {
 
+    /**
+     * AEM context used to mock Sling environment and repository.
+     */
     private final AemContext context = new AemContext();
 
+    /**
+     * Model instance under test.
+     */
     private FooterNewsletterModel model;
 
+    /**
+     * Initializes test data before each test.
+     *
+     * Loads JSON content into mock context, registers model,
+     * and adapts resource to FooterNewsletterModel.
+     */
     @BeforeEach
     void setUp() {
-        // Load JSON
         context.load().json("/footer-newsletter.json", "/content/newsletter");
 
-        // Register model
         context.addModelsForClasses(FooterNewsletterModel.class);
 
-        // Get resource
         Resource resource = context.resourceResolver().getResource("/content/newsletter");
-
-        // Adapt
         model = resource.adaptTo(FooterNewsletterModel.class);
     }
 
+    /**
+     * Tests basic field injection from resource.
+     *
+     * Verifies that title and description
+     * are correctly populated from JCR.
+     */
     @Test
     void testBasicFields() {
         assertNotNull(model);
@@ -41,6 +75,13 @@ class FooterNewsletterModelTest {
         assertEquals("Get updates about latest products", model.getDescription());
     }
 
+    /**
+     * Tests mapping of social links.
+     *
+     * Verifies that:
+     * - socialLinks list is correctly populated
+     * - Each link contains correct url and icon class
+     */
     @Test
     void testSocialLinks() {
         List<FooterNewsletterModel.SocialLink> links = model.getSocialLinks();
@@ -55,9 +96,16 @@ class FooterNewsletterModelTest {
         assertEquals("fa-twitter", links.get(1).getIconClass());
     }
 
+    /**
+     * Tests behavior when resource has no properties or child resources.
+     *
+     * Verifies that:
+     * - Model is still created successfully
+     * - All fields return null
+     */
     @Test
     void testEmptyModel() {
-        // Create empty resource
+
         context.create().resource("/content/empty-newsletter");
 
         Resource resource = context.resourceResolver().getResource("/content/empty-newsletter");

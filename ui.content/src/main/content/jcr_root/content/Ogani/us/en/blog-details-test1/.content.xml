@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2026-04-14T14:49:14.725+05:30"
+        cq:lastModifiedBy="admin"
+        cq:tags="[ogani:blog-categories/beauty,ogani:blog-categories/food,ogani:blog-categories/sports,ogani:blog-categories/nature]"
+        cq:template="/conf/Ogani/settings/wcm/templates/blog-detail-page-template"
+        jcr:description="A blog detail page provides a comprehensive view of a single blog post, presenting its full content in a clear and engaging layout. It typically includes the blog title, featured image, author information, and publication date at the top. The main body displays the complete article with headings, paragraphs, images, and other rich content elements. Additional sections may include related posts, categories, tags, and a comments area for user interaction. This page is designed to give readers an immersive reading experience while making it easy to explore more content."
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Blog Details Test1"
+        sling:resourceType="Ogani/components/blog-details-ogani-page"
+        authorImage="/content/dam/Ogani/blog-details/Shahnawaz.jpeg"
+        authorName="Shaikh Shahnawaz"
+        pageTitle="The corner window forms a place within a place that is a resting point within the large space."
+        pwaCachestrategy="staleWhileRevalidate"
+        pwaDisplay="standalone"
+        pwaOrientation="any"
+        subtitle="The study area is located at the back with a view of the vast nature. Together with the other buildings, a congruent story has been managed in which the whole has a reinforcing effect on the components. The use of materials seeks connection to the main house, the adjacent stables">
+        <root
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="Ogani/components/container"
+            layout="responsiveGrid">
+            <container
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="Ogani/components/container"
+                layout="responsiveGrid"/>
+        </root>
+        <cq:featuredimage
+            jcr:lastModified="{Date}2026-04-14T14:49:14.712+05:30"
+            jcr:lastModifiedBy="admin"
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="core/wcm/components/image/v3/image"
+            altValueFromDAM="true"
+            fileReference="/content/dam/Ogani/blog-details/strawberry.jpg"/>
+    </jcr:content>
+</jcr:root>
