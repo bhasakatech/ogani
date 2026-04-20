@@ -1,12 +1,17 @@
 package com.bhasaka.ogani.core.models;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 import java.util.List;
 
+import org.apache.sling.api.resource.Resource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import com.adobe.cq.dam.cfm.ContentElement;
+import com.adobe.cq.dam.cfm.ContentFragment;
 
 import io.wcm.testing.mock.aem.junit5.AemContext;
 import io.wcm.testing.mock.aem.junit5.AemContextExtension;
@@ -21,37 +26,49 @@ class ProductModelTest {
     @BeforeEach
     void setUp() {
 
+        // Component authored properties
         context.create().resource("/content/component",
                 "text", "Latest Products",
                 "fragmentFolder", "/content/dam/products");
 
+        // DAM folder
         context.create().resource("/content/dam/products");
 
-        context.create().resource(
-                "/content/dam/products/product1/jcr:content/data/master",
-                "image", "/content/dam/images/spinach.png",
-                "title", "Spinach",
-                "price", "30"
-        );
+        // Product resources
+        context.create().resource("/content/dam/products/product1");
+        context.create().resource("/content/dam/products/product2");
+        context.create().resource("/content/dam/products/product3");
 
-        context.create().resource(
-                "/content/dam/products/product2/jcr:content/data/master",
-                "image", "/content/dam/images/capsicum.png",
-                "title", "Capsicum",
-                "price", "40"
-        );
+        // Register Content Fragment mock adapter
+        mockContentFragment("Spinach", "30", "/content/dam/images/spinach.png");
 
-        context.create().resource(
-                "/content/dam/products/product3/jcr:content/data/master",
-                "image", "/content/dam/images/carrot.png",
-                "title", "Carrot",
-                "price", "25"
-        );
-
+        // Set current resource
         context.currentResource("/content/component");
 
-        
+        // Adapt to model
         model = context.currentResource().adaptTo(ProductModel.class);
+    }
+
+    private void mockContentFragment(String title,
+                                     String price,
+                                     String image) {
+
+        ContentFragment cf = mock(ContentFragment.class);
+
+        ContentElement titleElement = mock(ContentElement.class);
+        when(titleElement.getContent()).thenReturn(title);
+
+        ContentElement priceElement = mock(ContentElement.class);
+        when(priceElement.getContent()).thenReturn(price);
+
+        ContentElement imageElement = mock(ContentElement.class);
+        when(imageElement.getContent()).thenReturn(image);
+
+        when(cf.getElement("title")).thenReturn(titleElement);
+        when(cf.getElement("price")).thenReturn(priceElement);
+        when(cf.getElement("image")).thenReturn(imageElement);
+
+        context.registerAdapter(Resource.class, ContentFragment.class, cf);
     }
 
     @Test
@@ -62,6 +79,8 @@ class ProductModelTest {
     @Test
     void testProductsLoaded() {
         assertNotNull(model.getProducts());
+
+        // Since 3 product resources exist
         assertEquals(3, model.getProducts().size());
     }
 
@@ -79,36 +98,32 @@ class ProductModelTest {
         List<List<ProductModel.Product>> slides = model.getSlides();
 
         assertNotNull(slides);
+
+        // 3 items → 1 slide
         assertEquals(1, slides.size());
+
+        // 3 products in slide 1
         assertEquals(3, slides.get(0).size());
     }
 
     @Test
     void testMultipleSlides() {
 
-        context.create().resource(
-                "/content/dam/products/product4/jcr:content/data/master",
-                "image", "/content/dam/images/onion.png",
-                "title", "Onion",
-                "price", "20"
-        );
-
-        context.create().resource(
-                "/content/dam/products/product5/jcr:content/data/master",
-                "image", "/content/dam/images/potato.png",
-                "title", "Potato",
-                "price", "15"
-        );
+        // Add 2 more products
+        context.create().resource("/content/dam/products/product4");
+        context.create().resource("/content/dam/products/product5");
 
         context.currentResource("/content/component");
 
-        
         ProductModel updatedModel =
                 context.currentResource().adaptTo(ProductModel.class);
 
-        List<List<ProductModel.Product>> slides = updatedModel.getSlides();
+        List<List<ProductModel.Product>> slides =
+                updatedModel.getSlides();
 
+        // 5 products => 2 slides
         assertEquals(2, slides.size());
+
         assertEquals(3, slides.get(0).size());
         assertEquals(2, slides.get(1).size());
     }
@@ -122,7 +137,6 @@ class ProductModelTest {
 
         context.currentResource("/content/emptyComponent");
 
-        
         ProductModel emptyModel =
                 context.currentResource().adaptTo(ProductModel.class);
 

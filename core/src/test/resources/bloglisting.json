@@ -1,0 +1,50 @@
+{
+  "content": {
+    "blogParent": {
+      "jcr:primaryType": "cq:Page",
+      "jcr:content": {
+        "jcr:primaryType": "cq:PageContent",
+        "jcr:title": "Blog Parent"
+      },
+
+      "child1": {
+        "jcr:primaryType": "cq:Page",
+        "jcr:content": {
+          "jcr:primaryType": "cq:PageContent",
+          "jcr:title": "Blog One",
+          "jcr:description": "Desc One",
+          "jcr:created": "2025-04-10T10:00:00.000Z",
+          "cq:featuredimage": {
+            "fileReference": "/content/dam/img1.jpg"
+          }
+        }
+      },
+
+      "child2": {
+        "jcr:primaryType": "cq:Page",
+        "jcr:content": {
+          "jcr:primaryType": "cq:PageContent",
+          "jcr:title": "Blog Two",
+          "jcr:description": "Desc Two",
+          "jcr:created": "2025-04-12T10:00:00.000Z",
+          "cq:featuredimage": {
+            "fileReference": "/content/dam/img2.jpg"
+          }
+        }
+      },
+
+      "child3": {
+        "jcr:primaryType": "cq:Page",
+        "jcr:content": {
+          "jcr:primaryType": "cq:PageContent",
+          "jcr:title": "Blog Three",
+          "jcr:description": "Desc Three",
+          "jcr:created": "2025-04-11T10:00:00.000Z",
+          "cq:featuredimage": {
+            "fileReference": "/content/dam/img3.jpg"
+          }
+        }
+      }
+    }
+  }
+}

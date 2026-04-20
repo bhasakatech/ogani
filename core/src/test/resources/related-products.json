@@ -1,0 +1,46 @@
+{
+  "test": {
+    "sectionTitle": "Related Products",
+    "products": {
+      "item0": {
+        "productPath": "/content/dam/products/apple"
+      },
+      "item1": {
+        "productPath": "/content/dam/products/banana"
+      }
+    }
+  },
+
+  "dam": {
+    "products": {
+      "apple": {
+        "jcr:content": {
+          "data": {
+            "master": {
+              "title": "Apple",
+              "category": "Fruits",
+              "image": "/content/dam/apple.png",
+              "originalPrice": 100,
+              "currentPrice": 80,
+              "discount": 20
+            }
+          }
+        }
+      },
+      "banana": {
+        "jcr:content": {
+          "data": {
+            "master": {
+              "title": "Banana",
+              "category": "Fruits",
+              "image": "/content/dam/banana.png",
+              "originalPrice": 50,
+              "currentPrice": 45,
+              "discount": 10
+            }
+          }
+        }
+      }
+    }
+  }
+}

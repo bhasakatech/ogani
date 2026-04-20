@@ -24,6 +24,21 @@
                 fieldLabel="Products per Page"
                 name="./pageSize"
                 value="6"/>
+            <defaultsorting
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                fieldLabel="Default Sorting"
+                name="./defaultSorting"/>
+            <lowtohighsorting
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                fieldLabel="Low to High Sorting"
+                name="./lowSorting"/>
+            <hightolowsorting
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                fieldLabel="High to Low Sorting"
+                name="./highSorting"/>
         </items>
     </content>
 </jcr:root>

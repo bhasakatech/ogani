@@ -1,0 +1,25 @@
+{
+  "blogs": {
+    "jcr:primaryType": "sling:Folder",
+    "blog1": {
+      "jcr:primaryType": "cq:Page",
+      "jcr:content": {
+        "jcr:title": "Recent Blog 1",
+        "jcr:created": "2025-04-01T10:30:00.000+05:30",
+        "cq:featuredimage": {
+          "fileReference": "/content/dam/recent-blog1.png"
+        }
+      }
+    },
+    "blog2": {
+      "jcr:primaryType": "cq:Page",
+      "jcr:content": {
+        "jcr:title": "Recent Blog 2",
+        "jcr:created": "2025-04-05T14:20:00.000+05:30",
+        "cq:featuredimage": {
+          "fileReference": "/content/dam/recent-blog2.png"
+        }
+      }
+    }
+  }
+}

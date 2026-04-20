@@ -1,0 +1,31 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"/>
+<sly data-sly-call="${clientlib.css @ categories='Ogani.contactform'}"/>
+ <div class="contact-form spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="contact__form__title">
+                        <h2>${properties.heading}</h2>
+                    </div>
+                </div>
+            </div>           
+<form id="contactForm" method="post" action="${resource.path}.json">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <input type="text" id="name" name="name" placeholder="${properties.namePlaceholder}" required>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <input type="email" id="email" name="email" placeholder="${properties.emailPlaceholder}" required>
+        </div>
+        <div class="col-lg-12 text-center">
+            <textarea id="message" name="message" placeholder="${properties.messagePlaceholder}" required></textarea>
+            <button type="submit" class="site-btn">${properties.buttonText}</button>
+            <p id="responseMessage"></p>
+        </div>
+    </div>
+</form>
+
+</div>
+</div>
+
+<sly data-sly-call="${clientlib.js @ categories='Ogani.contactform'}"/>

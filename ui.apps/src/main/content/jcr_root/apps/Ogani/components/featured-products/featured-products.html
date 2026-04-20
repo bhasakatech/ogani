@@ -1,3 +1,6 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='ogani.featured-products-container'}"/>
+
 <sly data-sly-use.model="com.bhasaka.ogani.core.models.FeaturedProductsModel"/>
 
 <!-- Header -->
@@ -34,9 +37,9 @@
                 <div class="product-actions"
                      data-sly-test="${model.enableHoverActions}">
                      
-                    <a href="#" class="action-btn">❤️</a>
-                    <a href="#" class="action-btn">🔄</a>
-                    <a href="#" class="action-btn">🛒</a>
+                    <a href="#" class="action-btn"><i class="icon_heart_alt"></i></a>
+                    <a href="#" class="action-btn"><i class="icon_refresh"></i></a>
+                    <a href="#" class="action-btn"><i class="icon_cart_alt"></i></a>
 
                 </div>
 

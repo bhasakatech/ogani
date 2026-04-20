@@ -13,11 +13,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import io.wcm.testing.mock.aem.junit5.AemContext;
 import io.wcm.testing.mock.aem.junit5.AemContextExtension;
 
+/**
+ * Unit tests for the {@link ContactSectionModel} model.
+ */
 @ExtendWith(AemContextExtension.class)
 class ContactSectionModelTest {
 
     public final AemContext ctx = new AemContext();
 
+    /**
+     * Loads the contact section fixtures and registers the required models.
+     */
     @BeforeEach
     void setUp() {
         ctx.addModelsForClasses(ContactSectionModel.class, ContactItem.class);
@@ -25,6 +31,9 @@ class ContactSectionModelTest {
         ctx.load().json("/contact-Section-Test.json", "/content/contact");
     }
 
+    /**
+     * Verifies the model maps a populated contact section correctly.
+     */
     @Test
     void testGetters_HappyPath() {
         Resource resource = ctx.resourceResolver().getResource("/content/contact/happy-path");
@@ -47,6 +56,9 @@ class ContactSectionModelTest {
         assertEquals("hello@colorlib.com", item2.getValue());
     }
 
+    /**
+     * Verifies the model returns an empty list when no contact items are present.
+     */
     @Test
     void testContactSection_EmptyPath() {
         // Arrange
@@ -60,6 +72,9 @@ class ContactSectionModelTest {
         assertTrue(model.getContactItems().isEmpty(), "List should be empty");
     }
 
+    /**
+     * Verifies a contact item still adapts when optional properties are absent.
+     */
     @Test
     void testContactItem_EmptyPath() {
 

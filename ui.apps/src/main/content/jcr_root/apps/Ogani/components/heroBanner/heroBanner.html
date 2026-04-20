@@ -1,19 +1,20 @@
-
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"/>
+<sly data-sly-call="${clientlib.css @ categories='Ogani-hero-breadcrumb'}"/>
 <section class="breadcrumb-section"
          data-sly-use.model="com.bhasaka.ogani.core.models.HeroBanner"
-         style="background-image: url(${model.backgroundImage @ context='uri'}); background-size: cover; background-position: center;">
-
+         style="background-image: url(${properties.backgroundImage @ context='uri'}); background-size: cover; background-position: center;">
     <div class="hero-banner__overlay" data-sly-test="${model.overlay}"></div>
 
-    <div class="container" style="text-align: center;">
+    <div class="bCcontainer" style="text-align: center">
        
         <div class="breadcrumb__text">
-            <h2>${model.title}</h2>
+            <h2>${currentPage.title}</h2>
         </div>
-
+         
         <div class="breadcrumb__option"
-             data-sly-resource="${'breadcrumb' @ resourceType='core/wcm/components/breadcrumb/v2/breadcrumb'}">
+             data-sly-resource="${'breadcrumb' @ resourceType='/apps/Ogani/components/breadcrumb'}">
         </div>
-        
     </div>
 </section>
+
+

@@ -1,3 +1,5 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"/>
+<sly data-sly-call="${clientlib.all @ categories='Ogani-ProductDetails'}"/>
 <sly data-sly-use.model="com.bhasaka.ogani.core.models.ProductDetail"/>
 <div class="product-detail">
     <!-- MAIN PRODUCT -->
@@ -55,12 +57,8 @@
         <input type="number" value="1" class="qty-input"  id="qtyInput"/>
         <button class="qty-btn plus">+</button>
     </div>
-    
-    <!-- Add to Cart button -->
-    <button class="primary-btn">ADD TO CART</button>
-
     <!-- Heart / Wishlist -->
-    <button class="btn-heart" aria-label="Add to wishlist">
+    <a class="primary-btn" href="${model.addButton @ extension='html'}">ADD TO CART</a>
         <!-- Heart SVG -->
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
@@ -141,6 +139,5 @@
                     </div>
                 </div>
             </div>
-
     
 </section>

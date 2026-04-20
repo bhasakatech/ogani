@@ -18,6 +18,13 @@ import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * Test class for {@link FeaturedProductsModel}.
+ * <p>
+ * This class validates product loading from Content Fragments,
+ * handling of QueryBuilder interactions, edge cases such as
+ * null dependencies, missing nodes, and exception handling.
+ */
 @ExtendWith({AemContextExtension.class, MockitoExtension.class})
 class FeaturedProductsModelTest {
 
@@ -28,6 +35,10 @@ class FeaturedProductsModelTest {
     private SearchResult searchResult;
     private Hit hit;
 
+    /**
+     * Sets up test environment by registering models,
+     * mocking QueryBuilder flow, and creating test content fragments.
+     */
     @BeforeEach
     void setUp() throws Exception {
 
@@ -65,6 +76,9 @@ class FeaturedProductsModelTest {
         context.registerAdapter(ResourceResolver.class, Session.class, session);
     }
 
+    /**
+     * Verifies successful product loading from content fragments.
+     */
     @Test
     void testProductsLoadedSuccessfully() {
 
@@ -76,6 +90,9 @@ class FeaturedProductsModelTest {
         assertEquals(1, model.getProducts().size());
     }
 
+    /**
+     * Validates behavior when QueryBuilder service is not available.
+     */
     @Test
     void testNullQueryBuilder() {
 
@@ -90,6 +107,9 @@ class FeaturedProductsModelTest {
         assertTrue(model.getProducts().isEmpty());
     }
 
+    /**
+     * Validates handling when content fragment master node is missing.
+     */
     @Test
     void testNullMasterNode() throws Exception {
 
@@ -103,6 +123,9 @@ class FeaturedProductsModelTest {
         assertTrue(model.getProducts().isEmpty());
     }
 
+    /**
+     * Verifies repository exceptions are handled gracefully.
+     */
     @Test
     void testRepositoryExceptionHandled() throws Exception {
 
@@ -116,6 +139,9 @@ class FeaturedProductsModelTest {
         assertTrue(model.getProducts().isEmpty());
     }
 
+    /**
+     * Validates category extraction and mapping.
+     */
     @Test
     void testGetCategories() {
 
@@ -129,6 +155,9 @@ class FeaturedProductsModelTest {
         assertNotNull(model.getCategories());
     }
 
+    /**
+     * Verifies default section title when not configured.
+     */
     @Test
     void testGetSectionTitleDefault() {
 
@@ -139,6 +168,9 @@ class FeaturedProductsModelTest {
         assertEquals("Featured Products", model.getSectionTitle());
     }
 
+    /**
+     * Validates hover action flag behavior.
+     */
     @Test
     void testEnableHoverActions() {
 

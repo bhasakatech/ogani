@@ -1,0 +1,381 @@
+/*MAIN CONTAINER */
+.f__footer-container {
+    background: #f3f6fa;
+    padding: 40px 80px 0;
+    font-family: "Cairo", sans-serif;
+    
+}
+
+
+/* Main container */
+.f__footer-top {
+
+    padding:0px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #f5f5f5;
+    flex-wrap: wrap;
+}
+
+/* All columns */
+.f__footer-top > div {
+    flex: 1;
+    min-width: 220px;
+}
+
+/* FIRST COLUMN (Logo + Contact) */
+.f__first-column img {
+    width: 130px;
+    margin-bottom: 20px;
+}
+
+.f__first-column p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* SECOND & THIRD COLUMN (Links) */
+.f__second-column ul,
+.f__third-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* USEFUL LINKS HEADING + WRAPPER */
+.f__links-column h5 {
+    color: black;
+    font-weight: 800;
+    font-size: 16px ;
+    margin-bottom: 15px;
+}
+
+.f__links-wrapper {
+    display: flex;
+    gap: 40px;
+}
+
+.f__second-column li,
+.f__third-column li {
+    margin-bottom: 10px;
+}
+
+.f__second-column a,
+.f__third-column a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #555;
+    transition: 0.3s;
+}
+
+.f__second-column a:hover,
+.f__third-column a:hover {
+    color: #7fad39;
+}
+
+/* FOURTH COLUMN (Newsletter area) */
+.f__fourth-column {
+    max-width: 100%;
+    min-width: 300px;
+}
+
+/* Space from top */
+.f__fourth-column {
+    padding-right: 30px;
+ /*   padding-top: 20px;*/
+}
+
+.f__fourth-column p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Newsletter form inside child component */
+.f__fourth-column form,
+.f__fourth-column .f__newsletter-form {
+    display: flex;
+    align-items: center;
+}
+
+/* Input */
+.f__fourth-column input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    outline: none;
+    background: #fff;
+    font-size: 14px;
+}
+
+/* Button */
+.f__fourth-column button {
+    background-color: #7fad39;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* RIGHT SECTION */
+.f__footer-right {
+    width: 40%;
+}
+
+.f__footer-newsletter{
+    width: 100%;
+    height: auto;
+}
+
+.f__footer-newsletter h5 {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.f__footer-newsletter p {
+    font-size: 14px;
+    color: #6f6f6f;
+    margin-bottom: 20px;
+}
+
+/* NEWSLETTER INPUT */
+.f__newsletter-box {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+
+}
+
+.f__newsletter-box input {
+    flex: 1;
+    height: 45px;
+    min-width: 0;
+    border: none;
+    padding: 0 15px;
+    background: #ffffff;
+    outline: none;
+}
+
+.f__newsletter-box button {
+    height: 45px;
+    background: #7fad39;
+    color: #fff;
+    border: none;
+    padding: 0 25px;
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.f__newsletter-box button:hover {
+    background: #5e8f2d;
+}
+
+.f__footer-newsletter-title{
+    color:black;
+    font-size: 600;
+}
+
+/* SOCIAL ICONS CONTAINER */
+.f__social-icons {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 25px;
+    padding: 0;
+    list-style: none;
+}
+
+/* EACH ICON BOX */
+.f__social-icons li a {
+    width: 42px;
+    height: 42px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    /* subtle shadow like Ogani */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.f__social-icons li a:hover i {
+    color: #ffffff !important;
+}
+
+/* ICON */
+.f__social-icons li a i {
+    font-size: 15px;
+    color: #6f6f6f;
+    line-height: 1;
+    transition: all 0.3s ease;
+}
+
+/* HOVER EFFECT (important) */
+.f__social-icons li a:hover {
+    background: #7fad39;
+
+    /* lift effect */
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(127, 173, 57, 0.4);
+}
+
+/* ICON COLOR CHANGE ON HOVER */
+.f__social-icons li a:hover i {
+    color: #ffffff;
+}
+
+
+/* COPYRIGHT */
+.f__footer-bottom-left p {
+    font-size: 14px;
+    color: #6f6f6f;
+    margin: 0;
+}
+
+/* PAYMENT IMAGE */
+.f__footer-bottom-right img {
+    height: 25px;
+    object-fit: contain;
+}
+
+
+@media (max-width: 992px) {
+    .f__footer-container {
+        padding: 30px 30px 0;
+    }
+
+    .f__footer-top {
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .f__footer-top {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .f__footer-top > div {
+        width: 100%;
+    }
+
+    .f__footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+
+/* ===== DEFAULT (Desktop First) ===== */
+.f__footer-bottom-wrapper {
+    border-top: 1px solid #ebebeb;
+    margin-top: 30px;
+    padding: 20px 47px;
+}
+
+.f__footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px; /* better spacing */
+}
+
+/* LEFT TEXT */
+.f__footer-bottom-left p {
+    font-size: 14px;
+    color: #6f6f6f;
+    margin: 0;
+}
+
+/* RIGHT IMAGE */
+.f__footer-bottom-right img {
+    height: 25px;
+    object-fit: contain;
+    max-width: 100%;
+}
+
+/* ===== LARGE DEVICES (≤1200px) ===== */
+@media (max-width: 1200px) {
+    .f__footer-bottom-wrapper {
+        padding: 20px 30px;
+    }
+}
+
+/* ===== LAPTOP / TABLET (≤992px) ===== */
+@media (max-width: 992px) {
+    .f__footer-container {
+        padding: 30px 30px 0;
+    }
+
+    .f__footer-top {
+        gap: 30px;
+    }
+
+    .f__footer-bottom-wrapper {
+        padding: 18px 25px;
+    }
+}
+
+/* ===== TABLET (≤768px) ===== */
+@media (max-width: 768px) {
+    .f__footer-top {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .f__footer-top > div {
+        width: 100%;
+    }
+
+    .f__footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .f__footer-bottom-wrapper {
+        padding: 15px 20px;
+    }
+}
+
+/* ===== MOBILE (≤576px) ===== */
+@media (max-width: 576px) {
+    .f__footer-bottom-left p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .f__footer-bottom-right img {
+        height: 22px;
+    }
+
+    .f__footer-bottom-wrapper {
+        padding: 15px;
+    }
+}
+
+/* ===== SMALL MOBILE (≤375px like iPhone SE) ===== */
+@media (max-width: 375px) {
+    .f__footer-bottom-left p {
+        font-size: 12px;
+    }
+
+    .f__footer-bottom {
+        gap: 10px;
+    }
+
+    .f__footer-bottom-right img {
+        height: 20px;
+    }
+}

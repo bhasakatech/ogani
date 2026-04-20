@@ -49,7 +49,7 @@
                             <granite:data
                                 jcr:primaryType="nt:unstructured"
                                 thumbnail-validation="cfm.validation.thumbnail.show"/>
-                        </_x0031_774790260892>
+                        </_x0031_774790260892> 
                         <_x0031_774790290563
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/coral/foundation/form/textfield"

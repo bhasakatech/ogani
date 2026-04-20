@@ -1,20 +1,23 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='Ogani.cart-page-container'}"/>
+
 <sly data-sly-use.model="com.bhasaka.ogani.core.models.ProductCartModel"/>
 
-<div class="cart-container">
+<div class="cp__cart-container">
 
-    <table class="cart-table">
+    <table class="cp__cart-table">
         <tr>
             <th>${model.productsLabel}</th>
             <th>${model.priceLabel}</th>
-            <th class="quantity-header">${model.quantityLabel}</th>
+            <th class="cp__quantity-header">${model.quantityLabel}</th>
             <th>${model.totalLabel}</th>
             <th></th>
         </tr>
 
         <sly data-sly-list.item="${model.productList}">
-            <tr class="cart-row" data-price="${item.currentPrice}">
+            <tr class="cp__cart-row" data-price="${item.currentPrice}">
 
-                <td class="product-info">
+                <td class="cp__product-info">
                     <img src="${item.image}" alt="${item.title}">
                     <span>${item.title}</span>
                 </td>
@@ -22,17 +25,17 @@
                 <td>$${item.currentPrice}</td>
 
                 <td>
-                    <div class="qty-box">
-                        <button class="minus">-</button>
-                        <input type="text" value="1" class="qty"/>
-                        <button class="plus">+</button>
+                    <div class="cp__qty-box">
+                        <button class="cp__minus">-</button>
+                        <input type="text" value="1" class="cp__qty"/>
+                        <button class="cp__plus">+</button>
                     </div>
                 </td>
 
-                <td class="row-total">$${item.currentPrice}</td>
+                <td class="cp__row-total">$${item.currentPrice}</td>
 
                 <td>
-                    <button class="remove">x</button>
+                    <button class="cp__remove">x</button>
                 </td>
 
             </tr>
@@ -40,30 +43,30 @@
 
     </table>
 
-    <div class="cart-actions">
-        <button class="nav-btn" data-href="${model.continueShoppingLink @ extension='html'}">
+    <div class="cp__cart-actions">
+        <button class="cp__nav-btn" data-href="${model.continueShoppingLink @ extension='html'}">
             ${model.continueShoppingLabel}
         </button>
 
-        <button class="nav-btn" data-href="${model.updateCartLink @ extension='html'}">
+        <button class="cp__nav-btn" data-href="${model.updateCartLink @ extension='html'}">
             ${model.updateCartLabel}
         </button>
     </div>
 
-    <div class="coupon-section">
-        <h4 class="coupon-title">Discount Codes</h4>
+    <div class="cp__coupon-section">
+        <h4 class="cp__coupon-title">Discount Codes</h4>
     </div>
 
-    <div class="coupon">
+    <div class="cp__coupon">
         <input type="text" placeholder="${model.couponPlaceholder}" id="coupon-code">
         <button id="apply-coupon">${model.applyCouponLabel}</button>
     </div>
 
-    <div class="cart-summary">
+    <div class="cp__cart-summary">
         <h3>${model.cartTotalLabel}</h3>
         <p>${model.subtotalLabel} <span id="subtotal">$0</span></p>
         <p>${model.totalSummaryLabel} <span id="total">$0</span></p>
-        <button class="checkout nav-btn" data-href="${model.checkoutLink @ extension='html'}">
+        <button class="cp__checkout nav-btn" data-href="${model.checkoutLink @ extension='html'}">
             ${model.checkoutLabel}
         </button>
     </div>

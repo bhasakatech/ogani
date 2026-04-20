@@ -1,2 +1,0 @@
-#base=css
-productCategory.css

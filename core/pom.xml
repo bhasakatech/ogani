@@ -49,16 +49,23 @@
                             <goal>bnd-process</goal>
                         </goals>
                         <configuration>
-                            <bnd><![CDATA[
+              
+    <bnd><![CDATA[
 Import-Package: \
  javax.annotation;version=0.0.0, \
  com.day.cq.search;version="[1.0,2)", \
+ com.adobe.cq.dam.cfm;version="[1.0,2)", \
  org.apache.commons.lang3;version="[3.0,4)", \
  *
 
+-conditionalpackage: org.jsoup.*
+Embed-Dependency: aws-java-sdk-osgi
+Embed-Transitive: true
+
 Export-Package: \
  com.bhasaka.ogani.core.models.*
-                            ]]></bnd>
+    ]]></bnd>
+
                         </configuration>
                     </execution>
                 </executions>
@@ -167,6 +174,86 @@ Export-Package: \
             <version>1.4.14</version>
             <scope>test</scope>
         </dependency>
+
+        <!--for integration-->
+
+    <!--   <dependency>
+    <groupId>com.amazonaws</groupId>
+    <artifactId>aws-java-sdk-s3</artifactId>
+    <version>1.12.797</version>
+</dependency>
+-->
+
+
+<dependency>
+    <groupId>com.amazonaws</groupId>
+    <artifactId>aws-java-sdk-osgi</artifactId>
+    <version>1.11.961</version>
+    <scope>provided</scope>
+</dependency>
+
+<dependency>
+    <groupId>io.netty</groupId>
+    <artifactId>netty-codec-http</artifactId>
+    <version>4.1.59.Final</version>
+    <scope>provided</scope>
+</dependency>
+
+<dependency>
+    <groupId>io.netty</groupId>
+    <artifactId>netty-common</artifactId>
+    <version>4.1.59.Final</version>
+    <scope>provided</scope>
+</dependency>
+
+<dependency>
+    <groupId>io.netty</groupId>
+    <artifactId>netty-buffer</artifactId>
+    <version>4.1.59.Final</version>
+    <scope>provided</scope>
+</dependency>
+
+<dependency>
+    <groupId>io.netty</groupId>
+    <artifactId>netty-transport</artifactId>
+    <version>4.1.59.Final</version>
+    <scope>provided</scope>
+</dependency>
+
+<dependency>
+    <groupId>io.netty</groupId>
+    <artifactId>netty-codec</artifactId>
+    <version>4.1.59.Final</version>
+    <scope>provided</scope>
+</dependency>
+
+<dependency>
+    <groupId>io.netty</groupId>
+    <artifactId>netty-handler</artifactId>
+    <version>4.1.59.Final</version>
+    <scope>provided</scope>
+</dependency>
+
+<dependency>
+    <groupId>io.netty</groupId>
+    <artifactId>netty-resolver</artifactId>
+    <version>4.1.59.Final</version>
+    <scope>provided</scope>
+</dependency>
+
+<dependency>
+    <groupId>software.amazon.ion</groupId>
+    <artifactId>ion-java</artifactId>
+    <version>1.0.2</version>
+    <scope>provided</scope>
+</dependency>
+
+<dependency>
+    <groupId>com.fasterxml.jackson.dataformat</groupId>
+    <artifactId>jackson-dataformat-cbor</artifactId>
+    <version>2.11.3</version>
+    <scope>provided</scope>
+</dependency>
     </dependencies>
 
 </project>
