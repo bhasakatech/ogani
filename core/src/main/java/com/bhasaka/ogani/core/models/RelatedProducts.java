@@ -3,6 +3,7 @@ package com.bhasaka.ogani.core.models;
 import javax.annotation.PostConstruct;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.apache.sling.models.annotations.Model;
@@ -12,6 +13,10 @@ import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 
 import org.apache.sling.api.resource.Resource;
 import com.bhasaka.ogani.core.models.productCarousel.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static com.day.cq.wcm.foundation.TemplatedContainer.log;
 
 
 /**
@@ -55,6 +60,8 @@ import com.bhasaka.ogani.core.models.productCarousel.*;
 )
 public class RelatedProducts {
 
+    private static final Logger LOG = LoggerFactory.getLogger(RelatedProducts.class);
+
     /**
      * Title of the related products section.
      */
@@ -84,22 +91,45 @@ public class RelatedProducts {
      */
     @PostConstruct
     protected void init() {
+
         if (productResources != null) {
+
             products = productResources.stream()
                     .map(res -> {
-                        String path = res.getValueMap().get("productPath", String.class);
-                        if (path != null) {
+                        try {
+                            String path = res.getValueMap().get("productPath", String.class);
+
+                            if (path == null || path.isEmpty()) {
+                                return null;
+                            }
+
                             Resource cfResource = res.getResourceResolver()
                                     .getResource(path + "/jcr:content/data/master");
-                            return cfResource != null ? cfResource.adaptTo(Product.class) : null;
+
+                            if (cfResource == null) {
+                                return null;
+                            }
+
+                            return cfResource.adaptTo(Product.class);
+
+                        } catch (IllegalArgumentException e) {
+                            // invalid path or value issue
+                            log.warn("Invalid product path for resource: {}", res.getPath(), e);
+
+                        } catch (NullPointerException e) {
+                            // defensive safety (resolver/valueMap issues)
+                            log.warn("Null encountered while processing resource: {}", res.getPath(), e);
+
+                        } catch (Exception e) {
+                            log.error("Unexpected error while processing resource: {}", res.getPath(), e);
                         }
+
                         return null;
                     })
-                    .filter(p -> p != null)
+                    .filter(Objects::nonNull)
                     .collect(Collectors.toList());
         }
     }
-
     /**
      * Returns section title.
      * @return section title

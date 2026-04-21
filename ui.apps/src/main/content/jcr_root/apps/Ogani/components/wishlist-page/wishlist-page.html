@@ -1,0 +1,14 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='Ogani.wishlist-page'}"/>
+
+<div class="wl__container" id="wishlist-section">
+
+    <h3 class="wl__title">My Wishlist</h3>
+
+    <div id="wishlist-container" class="wl__grid"></div>
+
+    <div id="wishlist-empty" class="wl__empty" style="display:none;">
+        <p>Your wishlist is empty ❤️</p>
+    </div>
+
+</div>
