@@ -60,13 +60,10 @@
         document.body.style.overflow = "auto";
       });
     }
-  });
 
-  /*------------------
+    /*------------------
 		Navigation
 	--------------------*/
-
-  document.addEventListener("DOMContentLoaded", function () {
     const topLevelItems = document.querySelectorAll(
       ".humberger__menu__nav .cmp-navigation__item--level-0",
     );
@@ -98,6 +95,10 @@
   $(document).ready(function () {
     const $heroList = $(".hero__categories__list");
     const $searchList = $(".hero__search__categories__list");
+    const $searchInput = $('#cf-search-input');
+    const $suggestionsBox = $('#search-suggestions');
+    const $searchForm = $searchInput.closest('form');
+    let suggestionDebounceTimer;
 
     // Show dropdown by default if on home.html page
     if (window.location.pathname.includes("/home.html")) {
@@ -119,6 +120,72 @@
         $searchList.hide();
       } else {
         $searchList.show();
+      }
+    });
+    // search dropdown ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    const fetchSuggestions = async (query) => {
+      if (query.trim().length === 0) {
+        $suggestionsBox.hide();
+        return;
+      }
+
+      try {
+        const response = await fetch(`/bin/api/cfsuggestions?q=${encodeURIComponent(query)}`);
+        const data = await response.json();
+
+        $suggestionsBox.empty();
+
+        if (data.length > 0) {
+          data.forEach(item => {
+            const $div = $('<div>', { class: 'suggestion-item' });
+            
+            $div.html(`
+              <img src="${item.image || '/content/dam/default-fallback.png'}" class="suggestion-img" alt="${item.name}">
+              <span class="suggestion-name">${item.name}</span>
+            `);
+            
+            $div.on('click', function () {
+              $searchInput.val(item.name);
+              $suggestionsBox.hide();
+              
+            });
+
+            $suggestionsBox.append($div);
+          });
+        } else {
+          $suggestionsBox.html('<div style="padding: 15px; color: #666; font-size: 14px;">No results found.</div>');
+        }
+        
+        $suggestionsBox.show();
+
+      } catch (error) {
+        console.error('Error fetching suggestions:', error);
+      }
+    };
+
+    if ($searchInput.length > 0) {
+      $searchInput.on('input', function () {
+        clearTimeout(suggestionDebounceTimer);
+        const query = $(this).val();
+
+        suggestionDebounceTimer = setTimeout(function () {
+          fetchSuggestions(query);
+        }, 300);
+      });
+    }
+
+    if ($searchForm.length > 0) {
+      $searchForm.on('submit', function (e) {
+        e.preventDefault();
+        fetchSuggestions($searchInput.val()); 
+      });
+
+    }
+
+    $(document).on('click', function (e) {
+      if (!$(e.target).closest($searchForm).length && !$(e.target).closest($suggestionsBox).length) {
+        $suggestionsBox.hide();
       }
     });
   });

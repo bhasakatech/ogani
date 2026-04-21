@@ -332,10 +332,12 @@
             <page jcr:primaryType="nt:unstructured">
                 <policy
                     jcr:description="Includes the required client libraries."
+                    jcr:lastModified="{Date}2026-04-18T17:19:33.052+05:30"
+                    jcr:lastModifiedBy="admin"
                     jcr:primaryType="nt:unstructured"
                     jcr:title="Generic Page"
                     sling:resourceType="wcm/core/components/policy/policy"
-                    clientlibs="[Ogani.dependencies,Ogani.site]"
+                    clientlibs="[Ogani.common]"
                     clientlibsJsHead="Ogani.dependencies">
                     <jcr:content jcr:primaryType="nt:unstructured"/>
                 </policy>

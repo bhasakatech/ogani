@@ -98,7 +98,6 @@ a:hover,
 a:focus {
   text-decoration: none;
   outline: none;
-  color: #ffffff;
 }
 
 ul,
@@ -823,32 +822,6 @@ ol {
   color: #6f6f6f;
 }
 
-.hero__item {
-  height: 431px;
-  display: flex;
-  align-items: center;
-  padding-left: 75px;
-}
-
-.hero__text span {
-  font-size: 14px;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 4px;
-  color: #7fad39;
-}
-
-.hero__text h2 {
-  font-size: 46px;
-  color: #252525;
-  line-height: 52px;
-  font-weight: 700;
-  margin: 10px 0;
-}
-
-.hero__text p {
-  margin-bottom: 35px;
-}
 
 .bottom__header__right {
   display: flex;

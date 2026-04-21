@@ -1,6 +1,6 @@
 <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
-     data-sly-call="${clientlib.all @ categories='Ogani.header'}"/>
-     
+    data-sly-call="${clientlib.all @ categories='Ogani.header'}" />
+
 <div data-sly-use.topHeader="com.bhasaka.ogani.core.models.Header">
 
     <div class="container header">
@@ -68,7 +68,8 @@
             </div>
             <div id="mobile-menu-wrap"></div>
             <div class="header__top__right__social" data-sly-list.item="${topHeader.socialIcons}">
-                <a href="${item.link @ extension='html'}"><i class="fa-brands fa-${item.icon @ context='attribute'}"></i></a>
+                <a href="${item.link @ extension='html'}"><i
+                        class="fa-brands fa-${item.icon @ context='attribute'}"></i></a>
             </div>
             <div class="humberger__menu__contact">
                 <ul>
@@ -118,10 +119,11 @@
                             data-sly-test="${!topHeader.departmentTags}">
                             <li><a href="#">No tags found at path.</a></li>
                         </ul>
-                        <div class="search_input_button">
-                            <input type="text" placeholder="What do you need?">
+                        <div class="search_input_button" style="position: relative;">
+                            <input type="text" id="cf-search-input" autocomplete="off" placeholder="What do you need?">
                             <button type="submit" class="site-btn">SEARCH</button>
                         </div>
+                        <div id="search-suggestions" class="suggestions-dropdown" style="display: none;"></div>
                     </form>
                 </div>
                 <div class="hero__search__phone">
