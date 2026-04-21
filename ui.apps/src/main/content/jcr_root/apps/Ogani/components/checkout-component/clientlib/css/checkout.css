@@ -23,15 +23,12 @@ hr {
   margin: 20px 0;
 }
 
-/*
-
-* ->  color: #dd2222;
-
-*/
-
+/* =========================
+   COUPON BAR
+========================= */
 .checkout-coupon-bar {
-  max-width: 1170px;          
-  margin: 30px auto 20px;   
+  max-width: 1170px;
+  margin: 30px auto 20px;
   background: #f5f5f5;
   border-top: 2px solid #7fad39;
   padding: 14px 20px;
@@ -76,7 +73,6 @@ hr {
   gap: 15px;
 }
 
-/* Two column fields */
 .form-row {
   display: flex;
   gap: 20px;
@@ -94,20 +90,17 @@ hr {
   border-color: #7fad39;
 }
 
-/* Checkbox */
 .form-checkbox {
   margin-top: 10px;
   font-size: 14px;
 }
 
-/* Account info */
 .account-info p {
   font-size: 15px;
   color: #6f6f6f;
   margin-bottom: 10px;
 }
 
-/* Notes */
 .order-notes textarea {
   width: 100%;
   height: 120px;
@@ -116,14 +109,12 @@ hr {
   font-size: 14px;
 }
 
-.accountPasswordHeader, .orderNotesLabel {
+.accountPasswordHeader,
+.orderNotesLabel {
   font-size: 14px;
   font-weight: 500;
-  color: #1c1c1c;
   margin: 10px 0 8px;
 }
-
-
 
 /* =========================
    RIGHT SIDE (ORDER)
@@ -133,8 +124,8 @@ hr {
   background: #F5F5F5;
   padding: 25px;
   border: 1px solid #ebebeb;
-  height: fit-content;   
-  margin-top: 67px; 
+  height: fit-content;
+  margin-top: 67px;
 }
 
 .order-title {
@@ -152,7 +143,7 @@ hr {
   padding-bottom: 10px;
 }
 
-/* Rows */
+/* Product rows */
 .order-row {
   display: flex;
   justify-content: space-between;
@@ -163,32 +154,59 @@ hr {
 }
 
 /* =========================
-   SUMMARY
+   SUMMARY (FIXED ALIGNMENT)
 ========================= */
+
 .order-summary {
   margin-top: 15px;
-  border-top: 1px solid #ddd;
-  padding-top: 15px;
 }
 
-.summary-row {
+/* Proper row alignment */
+.summary-row,
+#checkout-discount-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 15px;
+  align-items: center;
+  padding: 8px 0;
 }
 
-.summary-row.total {
-  font-size: 17px;
-  font-weight: 700;
+/* Space after HR */
+.order-summary hr {
+  margin: 25px 0 15px;
 }
 
-.amount {
+/* Subtotal */
+.summary-row:first-child {
+  color: #1c1c1c;
+  font-size: 14px;
   font-weight: 600;
 }
 
-.total-amount {
-  color: red;
+/* Discount */
+#checkout-discount-row {
+  color: #dd2222;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Total */
+.summary-row.total {
+  color: #1c1c1c;
+  font-size: 18px;
+  font-weight: 700;
+  padding-top: 12px;
+}
+
+/* Price alignment */
+.amount,
+#checkout-discount {
+  text-align: right;
+  min-width: 90px;
+  font-weight: 600;
+}
+
+.order-summary .summary-row .amount {
+  color: #1c1c1c;
 }
 
 /* =========================
@@ -231,44 +249,87 @@ hr {
 }
 
 /* =========================
-   RESPONSIVE - TABLET
+   RESPONSIVE IMPROVEMENTS
 ========================= */
-@media (max-width: 992px) {
+
+/* ---------- LARGE DESKTOP (1200px+) ---------- */
+@media (min-width: 1200px) {
+  .checkout-container {
+    max-width: 1200px;
+    gap: 50px;
+  }
+
+  .checkout-right {
+    padding: 30px;
+  }
+}
+
+/* ---------- LAPTOP (992px - 1199px) ---------- */
+@media (max-width: 1199px) {
+
+  .checkout-container {
+    gap: 30px;
+    padding: 30px 20px;
+  }
+
+  .checkout-left {
+    flex: 0 0 60%;
+  }
+
+  .checkout-right {
+    flex: 0 0 35%;
+  }
+}
+
+/* ---------- TABLET (768px - 991px) ---------- */
+@media (max-width: 991px) {
 
   .checkout-container {
     flex-direction: column;
+    gap: 25px;
   }
 
   .checkout-left,
   .checkout-right {
     flex: 100%;
+    width: 100%;
   }
 
   .checkout-right {
-    margin-top: 20px;
+    margin-top: 0;
   }
-    
-  .checkout-coupon-bar {
-    max-width: 100%;
-    margin: 20px 15px;
+
+  /* Better spacing */
+  .checkout-form {
+    gap: 12px;
   }
-    
+
+  /* Keep inputs readable */
+  .form-input {
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  /* Order summary tighter */
+  .order-summary {
+    padding-top: 10px;
+  }
 }
 
-/* =========================
-   RESPONSIVE - MOBILE
-========================= */
-@media (max-width: 600px) {
+/* ---------- MOBILE (max 767px) ---------- */
+@media (max-width: 767px) {
 
   .checkout-container {
-    padding: 20px 10px;
+    padding: 20px 12px;
   }
 
+  /* Stack form fields */
   .form-row {
     flex-direction: column;
     gap: 10px;
   }
 
+  /* Reduce heading size */
   .checkout-title {
     font-size: 20px;
   }
@@ -277,35 +338,79 @@ hr {
     font-size: 18px;
   }
 
+  /* Hide table header for cleaner mobile UI */
   .order-header {
-    display: none; 
+    display: none;
   }
 
+  /* Product rows stacked */
   .order-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 5px;
+    gap: 4px;
+    padding: 8px 0;
   }
 
-  .summary-row {
+  /* Summary rows more readable */
+  .summary-row,
+  #checkout-discount-row {
     font-size: 14px;
   }
 
+  /* Amount alignment fix */
+  .amount,
+  #checkout-discount {
+    min-width: auto;
+    text-align: right;
+  }
+
+  /* Buttons full width */
   .place-order-btn {
     font-size: 14px;
     padding: 12px;
   }
-    
+
+  /* Coupon bar adjustments */
   .checkout-coupon-bar {
-    padding: 12px 10px;
+    margin: 15px 10px;
+    padding: 12px;
   }
 
   .checkout-coupon-bar span {
     font-size: 13px;
-    line-height: 1.6;
+    line-height: 1.5;
+  }
+}
+
+/* ---------- SMALL MOBILE (max 480px) ---------- */
+@media (max-width: 480px) {
+
+  .checkout-container {
+    padding: 15px 8px;
   }
 
-  .checkout-coupon-bar i {
-    margin-right: 6px;
+  .checkout-right {
+    padding: 18px;
+  }
+
+  /* Reduce spacing */
+  .order-row {
+    font-size: 13px;
+  }
+
+  .summary-row,
+  #checkout-discount-row {
+    font-size: 13px;
+  }
+
+  /* Tighten gaps */
+  .order-summary hr {
+    margin: 15px 0;
+  }
+
+  /* Button compact */
+  .place-order-btn {
+    font-size: 13px;
+    padding: 10px;
   }
 }

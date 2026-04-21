@@ -63,8 +63,8 @@
   });
 
   /*------------------
-		Navigation
-	--------------------*/
+    Navigation
+  --------------------*/
 
   document.addEventListener("DOMContentLoaded", function () {
     const topLevelItems = document.querySelectorAll(
@@ -121,5 +121,56 @@
         $searchList.show();
       }
     });
+
+
+  });
+
+  /* =========================
+   HEADER CART TOTAL
+========================= */
+  document.addEventListener("DOMContentLoaded", function () {
+
+    function getCart() {
+      try {
+        return JSON.parse(localStorage.getItem("cart")) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function updateHeaderCart() {
+
+      const cart = getCart();
+
+      let total = 0;
+      let count = 0;
+
+      cart.forEach(item => {
+        const qty = item.quantity || 1;
+        const price = item.price || 0;
+
+        total += price * qty;
+        count += qty;
+      });
+
+      /* ===== UPDATE TOTAL PRICE ===== */
+      const totalEl = document.getElementById("cart-total");
+      const totalMobileEl = document.getElementById("cart-total-mobile");
+
+      if (totalEl) totalEl.innerText = "$" + total.toFixed(2);
+      if (totalMobileEl) totalMobileEl.innerText = "$" + total.toFixed(2);
+
+      /* ===== UPDATE ITEM COUNT ===== */
+      const countEl = document.getElementById("cart-count");
+      const countMobileEl = document.getElementById("cart-count-mobile");
+
+      if (countEl) countEl.innerText = count;
+      if (countMobileEl) countMobileEl.innerText = count;
+    }
+
+    updateHeaderCart();
+
+    /* OPTIONAL: update when storage changes (multi-tab sync) */
+    window.addEventListener("storage", updateHeaderCart);
   });
 })(jQuery);

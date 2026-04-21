@@ -27,8 +27,12 @@
     <sly data-sly-list.product="${model.products}">
 
         <div class="product-card"
-             data-category="${product.categories @ join=','}">
-
+            data-id="${product.title}"
+            data-title="${product.title}"
+            data-price="${product.price}"
+            data-image="${product.image}"
+            data-category="${product.categories @ join=','}">
+            
             <!-- Image + Hover Actions Wrapper (IMPORTANT) -->
             <div class="product-img-wrapper">
 
@@ -37,9 +41,9 @@
                 <div class="product-actions"
                      data-sly-test="${model.enableHoverActions}">
                      
-                    <a href="#" class="action-btn"><i class="icon_heart_alt"></i></a>
-                    <a href="#" class="action-btn"><i class="icon_refresh"></i></a>
-                    <a href="#" class="action-btn"><i class="icon_cart_alt"></i></a>
+                    <a href="#" class="action-btn wishlist-btn"><i class="icon_heart_alt"></i></a>
+                    <a href="#" class="action-btn compare-btn"><i class="icon_refresh"></i></a>
+                    <a href="#" class="action-btn cart-btn"><i class="icon_cart_alt"></i></a>
 
                 </div>
 

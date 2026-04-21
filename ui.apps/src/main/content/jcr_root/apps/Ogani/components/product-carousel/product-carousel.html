@@ -20,7 +20,11 @@
         <sly data-sly-test="${model.productList && model.productList.size > 0}">
             <sly data-sly-list.product="${model.productList}">
 
-                <div class="pc__product-card">
+                <div class="pc__product-card"
+                     data-id="${product.title}" 
+                     data-title="${product.title}"
+                     data-price="${product.currentPrice}"
+                     data-image="${product.image}">
 
                     <div class="pc__badge" data-sly-test="${product.discount > 0}">
                         -${product.discount}%
@@ -31,9 +35,9 @@
                     </div>
 
                     <div class="pc__actions">
-                        <button class="pc__icon wishlist"><i class="fa fa-heart"></i></button>
-                        <button class="pc__icon compare"><i class="fa fa-exchange"></i></button>
-                        <button class="pc__icon cart"><i class="fa fa-shopping-cart"></i></button>
+                        <button class="pc__icon wishlist-btn"><i class="fa fa-heart"></i></button>
+                        <button class="pc__icon compare-btn"><i class="fa fa-exchange"></i></button>
+                        <button class="pc__icon cart-btn"><i class="fa fa-shopping-cart"></i></button>
                     </div>
 
                     <div class="pc__product-information">
@@ -41,7 +45,7 @@
                         <h3 class="pc__product-title">${product.title}</h3>
 
                         <div class="pc__price">
-                            <span class="pc__current">₹${product.currentPrice}</span>
+                            <span class="pc__current">$${product.currentPrice}</span>
                             <span class="pc__original"
                                   data-sly-test="${product.originalPrice > product.currentPrice}">
                                 $${product.originalPrice}

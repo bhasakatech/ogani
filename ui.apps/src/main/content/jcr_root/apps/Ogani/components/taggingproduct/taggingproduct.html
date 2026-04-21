@@ -1,41 +1,64 @@
+
 <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
-     data-sly-call="${clientlib.all @ categories='Ogani.tagging-container'}"/>
+    data-sly-call="${clientlib.all @ categories='Ogani.tagging-container'}" />
 
 <sly data-sly-use.model="com.bhasaka.ogani.core.models.taggingproducts.ProductListingModel" />
+
 <div class="product">
     <div class="product__topbar">
         <div class="product__sort">
 
             <span>Sort By</span>
             <select onchange="ProductListing.applySort(this.value)">
-                <option value="">${model.defaultSorting}</option>
-                <option value="low" ${param.sort == 'low' ? 'selected' : ''}>${model.lowSorting}</option>
-                <option value="high" ${param.sort == 'high' ? 'selected' : ''}>${model.highSorting}</option>
+
+                <!-- Default -->
+                <option value="" data-sly-attribute.selected="${!model.selectedSort}">
+                    ${model.defaultSorting}
+                </option>
+
+                <!-- Low -->
+                <option value="low" data-sly-attribute.selected="${model.selectedSort == 'low'}">
+                    ${model.lowSorting}
+                </option>
+
+                <!-- High -->
+                <option value="high" data-sly-attribute.selected="${model.selectedSort == 'high'}">
+                    ${model.highSorting}
+                </option>
+
             </select>
 
         </div>
         <div class="product__count">
             <h6><span>${model.totalProducts}</span> Products found</h6>
         </div>
+
         <div class="product__view">
-            <span>☷</span>
-            <span>☰</span>
+            <span class="view-btn active" onclick="ProductListing.setView('grid', this)">
+                <i class="fa fa-th"></i>
+            </span>
+            <span class="view-btn" onclick="ProductListing.setView('list', this)">
+                <i class="fa fa-bars"></i>
+            </span>
         </div>
+
     </div>
 
     <div class="product__grid" data-sly-test="${model.products.size > 0}">
 
-        <div class="product__item" data-sly-repeat.product="${model.products}">
+        <div class="product__item" data-sly-repeat.product="${model.products}" data-id="${product.title}"
+            data-title="${product.title}" data-price="${product.price}" data-image="${product.image}">
 
             <!-- IMAGE -->
             <div class="product__item__pic">
                 <img src="${product.image @ context='uri'}" alt="${product.title}" />
                 <!-- HOVER ACTIONS -->
                 <ul class="product__item__pic__hover">
-                    <li><a href="#">❤</a></li>
-                    <li><a href="#">⇄</a></li>
-                    <li><a href="#">🛒</a></li>
+                    <li><a href="#" class="wishlist-btn"><i class="fa fa-heart"></i></a></li>
+                    <li><a href="#" class="compare-btn"><i class="fa fa-exchange"></i></a></li>
+                    <li><a href="#" class="cart-btn"><i class="fa fa-shopping-cart"></i></a></li>
                 </ul>
+
             </div>
 
             <!-- TEXT -->
@@ -48,22 +71,19 @@
 
     <!-- PAGINATION -->
     <div class="product__pagination" data-sly-test="${model.totalPages > 1}">
-        <a href="?page=${model.prevPage}&sort=${param.sort}"
-           class="${model.currentPage == 1 ? 'disabled' : ''}">
+        <a href="?page=${model.prevPage}&sort=${param.sort}" class="${model.currentPage == 1 ? 'disabled' : ''}">
             Prev
         </a>
 
         <sly data-sly-list.page="${model.pageNumbers}">
-            <a href="?page=${page}&sort=${param.sort}"
-               class="${page == model.currentPage ? 'active' : ''}">
+            <a href="?page=${page}&sort=${param.sort}" class="${page == model.currentPage ? 'active' : ''}">
                 ${page}
             </a>
         </sly>
-        
+
         <a href="?page=${model.nextPage}&sort=${param.sort}"
-           class="${model.currentPage == model.totalPages ? 'disabled' : ''}">
+            class="${model.currentPage == model.totalPages ? 'disabled' : ''}">
             Next
         </a>
     </div>
 </div>
-

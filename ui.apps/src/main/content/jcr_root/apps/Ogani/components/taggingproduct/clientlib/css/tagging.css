@@ -1,3 +1,4 @@
+
 /* ===== TOP BAR ===== */
 .product__topbar {
     display: flex;
@@ -79,7 +80,7 @@
 /* ===== IMAGE WRAPPER ===== */
 .product__item__pic {
     height: 220px;
-    position: relative; /* IMPORTANT FIX */
+    position: relative; 
     overflow: hidden;
     background: #f5f5f5;
     display: flex;
@@ -231,6 +232,36 @@
     opacity: 0.4;
     cursor: not-allowed;
 }
+
+/* ===== LIST VIEW (ADDED ONLY) ===== */
+
+.product__grid.list-view {
+    display: flex;
+    flex-direction: column;
+}
+
+.product__grid.list-view .product__item {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.product__grid.list-view .product__item__pic {
+    width: 200px;
+    height: 150px;
+    flex-shrink: 0;
+}
+
+.product__grid.list-view .product__item__text {
+    text-align: left;
+}
+
+/* Active button */
+.view-btn.active {
+    color: #7fad39;
+}
+
+
 
 /* ===== RESPONSIVE ===== */
 

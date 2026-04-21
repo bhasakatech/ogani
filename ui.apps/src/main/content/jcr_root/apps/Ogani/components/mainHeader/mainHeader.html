@@ -1,6 +1,6 @@
 <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
-     data-sly-call="${clientlib.all @ categories='Ogani.header'}"/>
-     
+    data-sly-call="${clientlib.all @ categories='Ogani.header'}" />
+
 <div data-sly-use.topHeader="com.bhasaka.ogani.core.models.Header">
 
     <div class="container header">
@@ -20,10 +20,23 @@
                 <div class="header__cart">
                     <sly data-sly-test="${topHeader.enableCart}">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li>
+                                <a href="/content/Ogani/us/en/testing-page-.html#wishlist-section">
+                                    <i class="fa fa-heart"></i>
+                                    <span id="wishlist-count">0</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/content/Ogani/us/en/testing-page-.html#cart-section">
+                                    <i class="fa fa-shopping-bag"></i>
+                                    <span id="cart-count">0</span>
+                                </a>
+                            </li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">
+                            item: <span id="cart-total-mobile">$0.00</span>
+                        </div>
                     </sly>
                 </div>
 
@@ -41,11 +54,15 @@
             <div class="humberger__menu__cart">
                 <sly data-sly-test="${topHeader.enableCart}">
                     <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        <li><a href="wishlist-page.html"><i class="fa fa-heart"></i><span
+                                    id="wishlist-count-mobile">0</span></a></li>
+                        <li><a href="cart-page.html"><i class="fa fa-shopping-bag"></i> <span
+                                    id="cart-count-mobile">0</span></a></li>
                     </ul>
 
-                    <div class="header__cart__price">item: <span>$150.00</span></div>
+                    <div class="header__cart__price">
+                        item: <span id="cart-total">$0.00</span>
+                    </div>
                 </sly>
             </div>
             <div class="humberger__menu__widget">
@@ -68,7 +85,8 @@
             </div>
             <div id="mobile-menu-wrap"></div>
             <div class="header__top__right__social" data-sly-list.item="${topHeader.socialIcons}">
-                <a href="${item.link @ extension='html'}"><i class="fa-brands fa-${item.icon @ context='attribute'}"></i></a>
+                <a href="${item.link @ extension='html'}"><i
+                        class="fa-brands fa-${item.icon @ context='attribute'}"></i></a>
             </div>
             <div class="humberger__menu__contact">
                 <ul>

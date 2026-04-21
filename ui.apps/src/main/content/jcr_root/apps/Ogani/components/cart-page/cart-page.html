@@ -1,9 +1,9 @@
 <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
-     data-sly-call="${clientlib.all @ categories='Ogani.cart-page-container'}"/>
+    data-sly-call="${clientlib.all @ categories='Ogani.cart-page-container'}" />
 
-<sly data-sly-use.model="com.bhasaka.ogani.core.models.ProductCartModel"/>
+<sly data-sly-use.model="com.bhasaka.ogani.core.models.ProductCartModel" />
 
-<div class="cp__cart-container">
+<div class="cp__cart-container" id="cart-section">
 
     <table class="cp__cart-table">
         <tr>
@@ -14,7 +14,7 @@
             <th></th>
         </tr>
 
-        <sly data-sly-list.item="${model.productList}">
+        <!-- <sly data-sly-list.item="${model.productList}">
             <tr class="cp__cart-row" data-price="${item.currentPrice}">
 
                 <td class="cp__product-info">
@@ -39,8 +39,9 @@
                 </td>
 
             </tr>
-        </sly>
+        </sly> -->
 
+        <tbody id="cart-body"></tbody>
     </table>
 
     <div class="cp__cart-actions">
@@ -64,11 +65,23 @@
 
     <div class="cp__cart-summary">
         <h3>${model.cartTotalLabel}</h3>
-        <p>${model.subtotalLabel} <span id="subtotal">$0</span></p>
-        <p>${model.totalSummaryLabel} <span id="total">$0</span></p>
+
+        <p>
+            ${model.subtotalLabel}
+            <span id="subtotal">$0</span>
+        </p>
+        <p id="discount-row" style="display:none;">
+            <span class="cp__label">Discount</span>
+            <span id="discount-amount" class="cp__value">-$0</span>
+        </p>
+
+        <p>
+            ${model.totalSummaryLabel}
+            <span id="total">$0</span>
+        </p>
+
         <button class="cp__checkout nav-btn" data-href="${model.checkoutLink @ extension='html'}">
             ${model.checkoutLabel}
         </button>
     </div>
-
 </div>

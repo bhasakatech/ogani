@@ -59,6 +59,8 @@ public class Product {
     @ValueMapValue
     private double currentPrice;
 
+    private double price = getCurrentPrice();
+
     /**
      * Discount percentage applied to the product.
      */

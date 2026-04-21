@@ -13,7 +13,11 @@
     <div class="RC__product-grid">
         <sly data-sly-list.product="${model.products}">
             
-            <div class="RC__product-card">
+            <div class="RC__product-card"
+                data-id="${product.title}"
+                data-title="${product.title}"
+                data-price="${product.currentPrice}"
+                data-image="${product.image}">
                 
                 <!-- Image -->
                 <div class="RC__product-image">
@@ -21,9 +25,9 @@
 
                     <!-- Hover Actions -->
                     <div class="RC__actions">
-                        <button class="RC__icon wishlist"><i class="fa fa-heart"></i></button>
+                        <button class="RC__icon wishlist-btn"><i class="fa fa-heart"></i></button>
                         <button class="RC__icon compare"><i class="fa fa-exchange"></i></button>
-                        <button class="RC__icon cart"><i class="fa fa-shopping-cart"></i></button>
+                        <button class="RC__icon cart-btn"><i class="fa fa-shopping-cart"></i></button>
                     </div>
                 </div>
 

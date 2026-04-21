@@ -1,4 +1,32 @@
+const COUPONS = {
+    "SAVE10": { type: "percent", value: 10 },
+    "SAVE20": { type: "percent", value: 20 },
+    "FLAT50": { type: "flat", value: 50 }
+};
+
+let appliedCoupon = null;
+
+/* ================= STORAGE HELPERS ================= */
+function getCart() {
+    return CartService.getCart();
+}
+
+function saveCoupon() {
+    localStorage.setItem("coupon", JSON.stringify(appliedCoupon));
+}
+
+function loadCoupon() {
+    try {
+        appliedCoupon = JSON.parse(localStorage.getItem("coupon"));
+    } catch {
+        appliedCoupon = null;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+
+    /* ================= LOAD COUPON ================= */
+    loadCoupon();
 
     /* ================= NAVIGATION ================= */
     document.querySelectorAll(".nav-btn").forEach(function (btn) {
@@ -6,16 +34,64 @@ document.addEventListener("DOMContentLoaded", function () {
             const href = this.getAttribute("data-href");
 
             if (href && href.trim() !== "") {
-                // AEM safe redirect (ensures .html if missing)
                 const finalUrl = href.endsWith(".html") ? href : href + ".html";
                 window.location.href = finalUrl;
-            } else {
-                console.error("Navigation failed: data-href is empty");
             }
         });
     });
 
-    /* ================= CART UPDATE ================= */
+    /* ================= RENDER CART ================= */
+    function renderCart() {
+        const cart = getCart();
+        const tbody = document.getElementById("cart-body");
+
+        if (!tbody) return;
+
+        tbody.innerHTML = "";
+
+        if (cart.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5">Cart is empty</td></tr>`;
+            updateCart();
+            return;
+        }
+
+        cart.forEach(product => {
+            const row = document.createElement("tr");
+
+            row.className = "cp__cart-row";
+            row.dataset.id = product.id || product.title;
+            row.dataset.price = product.price;
+
+            row.innerHTML = `
+                <td class="cp__product-info">
+                    <img src="${product.image}" alt="${product.title}">
+                    <span>${product.title}</span>
+                </td>
+
+                <td>$${product.price}</td>
+
+                <td>
+                    <div class="cp__qty-box">
+                        <button class="cp__minus">-</button>
+                        <input type="text" value="${product.quantity}" class="cp__qty"/>
+                        <button class="cp__plus">+</button>
+                    </div>
+                </td>
+
+                <td class="cp__row-total">$${product.price}</td>
+
+                <td>
+                    <button class="cp__remove">x</button>
+                </td>
+            `;
+
+            tbody.appendChild(row);
+        });
+
+        updateCart();
+    }
+
+    /* ================= UPDATE TOTAL ================= */
     function updateCart() {
         let subtotal = 0;
 
@@ -38,41 +114,101 @@ document.addEventListener("DOMContentLoaded", function () {
             subtotal += total;
         });
 
+        let finalTotal = subtotal;
+        let discountAmount = 0;
+
+        /* ===== APPLY COUPON ===== */
+        if (appliedCoupon) {
+
+            if (appliedCoupon.type === "percent") {
+                discountAmount = subtotal * appliedCoupon.value / 100;
+            }
+
+            if (appliedCoupon.type === "flat") {
+                discountAmount = appliedCoupon.value;
+            }
+
+            finalTotal = subtotal - discountAmount;
+
+            if (finalTotal < 0) finalTotal = 0;
+        }
+
         const subtotalEl = document.getElementById("subtotal");
         const totalEl = document.getElementById("total");
+        const discountRow = document.getElementById("discount-row");
+        const discountEl = document.getElementById("discount-amount");
 
         if (subtotalEl) subtotalEl.innerText = "$" + subtotal.toFixed(2);
-        if (totalEl) totalEl.innerText = "$" + subtotal.toFixed(2);
+        if (totalEl) totalEl.innerText = "$" + finalTotal.toFixed(2);
+
+        /* ===== HANDLE DISCOUNT DISPLAY ===== */
+        if (appliedCoupon && discountAmount > 0) {
+            if (discountRow) discountRow.style.display = "flex";
+            if (discountEl) discountEl.innerText = "-$" + discountAmount.toFixed(2);
+        } else {
+            if (discountRow) discountRow.style.display = "none";
+        }
+    }
+
+    /* ================= UPDATE QUANTITY ================= */
+    function updateQuantity(id, qty) {
+        let cart = getCart();
+
+        cart = cart.map(p => {
+            if (p.id === id) p.quantity = qty;
+            return p;
+        });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    /* ================= REMOVE ITEM ================= */
+    function removeItem(id) {
+        const normalizedId = id.trim().toLowerCase();
+
+        let cart = getCart().filter(p => {
+            return (p.id || "").trim().toLowerCase() !== normalizedId;
+        });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
     }
 
     /* ================= CLICK EVENTS ================= */
     document.addEventListener("click", function (e) {
         const target = e.target;
 
-        /* PLUS */
         if (target.classList.contains("cp__plus")) {
-            const input = target.closest(".cp__qty-box").querySelector(".cp__qty");
-            input.value = parseInt(input.value || "0", 10) + 1;
+            const row = target.closest(".cp__cart-row");
+            const input = row.querySelector(".cp__qty");
+
+            let qty = parseInt(input.value || "0", 10) + 1;
+            input.value = qty;
+
+            updateQuantity(row.dataset.id, qty);
             updateCart();
         }
 
-        /* MINUS */
         if (target.classList.contains("cp__minus")) {
-            const input = target.closest(".cp__qty-box").querySelector(".cp__qty");
-            const current = parseInt(input.value || "0", 10);
+            const row = target.closest(".cp__cart-row");
+            const input = row.querySelector(".cp__qty");
 
-            if (current > 1) {
-                input.value = current - 1;
+            let qty = parseInt(input.value || "0", 10);
+
+            if (qty > 1) {
+                qty--;
+                input.value = qty;
+
+                updateQuantity(row.dataset.id, qty);
                 updateCart();
             }
         }
 
-        /* REMOVE */
-        if (target.classList.contains("cp__remove")) {
+        if (target.closest(".cp__remove")) {
             const row = target.closest(".cp__cart-row");
+
             if (row) {
-                row.remove();
-                updateCart();
+                removeItem(row.dataset.id);
+                renderCart();
             }
         }
     });
@@ -81,14 +217,19 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("input", function (e) {
         if (e.target && e.target.classList.contains("cp__qty")) {
 
-            // allow only numbers
             e.target.value = e.target.value.replace(/[^\d]/g, "");
 
+            const row = e.target.closest(".cp__cart-row");
+            let qty = parseInt(e.target.value || "1", 10);
+
+            if (qty < 1) qty = 1;
+
+            updateQuantity(row.dataset.id, qty);
             updateCart();
         }
     });
 
-    /* ================= INPUT BLUR FIX ================= */
+    /* ================= INPUT BLUR ================= */
     document.addEventListener("blur", function (e) {
         if (e.target && e.target.classList.contains("cp__qty")) {
 
@@ -96,25 +237,44 @@ document.addEventListener("DOMContentLoaded", function () {
                 e.target.value = 1;
             }
 
+            const row = e.target.closest(".cp__cart-row");
+            updateQuantity(row.dataset.id, parseInt(e.target.value, 10));
+
             updateCart();
         }
     }, true);
 
-    /* ================= COUPON ================= */
+    /* ================= COUPON APPLY ================= */
     const applyCouponBtn = document.getElementById("apply-coupon");
 
     if (applyCouponBtn) {
         applyCouponBtn.addEventListener("click", function () {
-            const code = document.getElementById("coupon-code").value.trim();
 
-            if (code) {
-                alert("Coupon applied: " + code);
-            } else {
+            const code = document.getElementById("coupon-code").value.trim().toUpperCase();
+
+            if (!code) {
                 alert("Please enter a coupon code.");
+                return;
             }
+
+            const coupon = COUPONS[code];
+
+            if (!coupon) {
+                alert("Invalid coupon code");
+                appliedCoupon = null;
+                saveCoupon();
+                updateCart();
+                return;
+            }
+
+            appliedCoupon = coupon;
+            saveCoupon();
+
+            alert(`Coupon applied: ${code}`);
+            updateCart();
         });
     }
 
     /* ================= INITIAL LOAD ================= */
-    updateCart();
+    renderCart();
 });

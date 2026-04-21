@@ -101,86 +101,15 @@ public class CheckoutModel {
     @ValueMapValue private String orderNotesPlaceholder;
 
     @ValueMapValue
+    private String couponPagePath;
+
+
+    @ValueMapValue
     private String accountInformation;
 
     @ValueMapValue
     private String paymentDescription;
 
-    /** List of cart products */
-    private List<ProductCart> products = new ArrayList<>();
-
-    /** Total subtotal value */
-    private double subtotal = 0;
-
-    /**
-     * Initializes checkout model and loads cart products.
-     */
-    @PostConstruct
-    protected void init() {
-
-        LOG.info("Initializing CheckoutModel");
-
-        if (cartPath == null || cartPath.isEmpty()) {
-            LOG.error("Cart path is missing");
-            return;
-        }
-
-        Resource cartPage = resolver.getResource(cartPath);
-
-        if (cartPage == null) {
-            LOG.error("Cart page not found at path: {}", cartPath);
-            return;
-        }
-
-        Resource productsNode = cartPage.getChild(cartPageChildData);
-
-        if (productsNode == null) {
-            LOG.error("Products node NOT FOUND at: {}", cartPageChildData);
-            return;
-        }
-
-        LOG.info("Products node FOUND");
-
-        for (Resource item : productsNode.getChildren()) {
-
-            LOG.info("Processing item node: {}", item.getPath());
-
-            ValueMap vm = item.getValueMap();
-            String cfPath = vm.get("cfPath", String.class);
-
-            LOG.info("cfPath value: {}", cfPath);
-
-            if (cfPath == null || cfPath.isEmpty()) {
-                LOG.error("cfPath is NULL or EMPTY for item: {}", item.getPath());
-                continue;
-            }
-
-            Resource data = resolver.getResource(cfPath + "/jcr:content/data/master");
-
-            if (data == null) {
-                LOG.error("Content Fragment data NOT FOUND for: {}", cfPath);
-                continue;
-            }
-
-            ValueMap cfVm = data.getValueMap();
-
-            String title = cfVm.get("title", "");
-            double price = cfVm.get("currentPrice", 0.0);
-
-            LOG.info("Product Loaded: {} | {}", title, price);
-
-            ProductCart p = new ProductCart();
-            p.setTitle(title);
-            p.setCurrentPrice(price);
-            p.setImage(cfVm.get("image", ""));
-
-            products.add(p);
-            subtotal += price;
-        }
-
-        LOG.info("Total products loaded: {}", products.size());
-        LOG.info("Subtotal calculated: {}", subtotal);
-    }
 
     /**
      * Resolves image path.
@@ -222,15 +151,22 @@ public class CheckoutModel {
         return null;
     }
 
+
     /** Getters */
 
-    public List<ProductCart> getProducts() { return products; }
+//    public List<ProductCart> getProducts() { return products; }
+//
+//    public double getSubtotal() { return subtotal; }
+//
+//    public double getTotal() { return subtotal; }
+//
+//    public boolean isEmpty() { return products.isEmpty(); }
 
-    public double getSubtotal() { return subtotal; }
-
-    public double getTotal() { return subtotal; }
-
-    public boolean isEmpty() { return products.isEmpty(); }
+    // Only keep labels + form data
+    public List<ProductCart> getProducts() { return new ArrayList<>(); }
+    public double getSubtotal() { return 0; }
+    public double getTotal() { return 0; }
+    public boolean isEmpty() { return true; }
 
     public String getOrderTitle() { return orderTitle != null ? orderTitle : "Your Order"; }
 

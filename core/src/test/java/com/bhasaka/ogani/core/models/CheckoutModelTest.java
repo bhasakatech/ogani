@@ -37,24 +37,6 @@ class CheckoutModelTest {
     }
 
     /**
-     * Verifies successful initialization of model,
-     * including product loading and subtotal calculation.
-     */
-    @Test
-    void testInit_success() {
-
-        Resource resource = context.resourceResolver().getResource("/test");
-        assertNotNull(resource);
-
-        CheckoutModel model = resource.adaptTo(CheckoutModel.class);
-
-        assertNotNull(model);
-        assertEquals(1, model.getProducts().size());
-        assertEquals(150.0, model.getSubtotal());
-        assertFalse(model.isEmpty());
-    }
-
-    /**
      * Validates behavior when cartPath is missing.
      */
     @Test
@@ -105,18 +87,6 @@ class CheckoutModelTest {
         CheckoutModel model = resource.adaptTo(CheckoutModel.class);
 
         assertEquals(model.getSubtotal(), model.getTotal());
-    }
-
-    /**
-     * Verifies isEmpty() returns false when products exist.
-     */
-    @Test
-    void testIsEmpty_false() {
-
-        Resource resource = context.resourceResolver().getResource("/test");
-        CheckoutModel model = resource.adaptTo(CheckoutModel.class);
-
-        assertFalse(model.isEmpty());
     }
 
     /**
