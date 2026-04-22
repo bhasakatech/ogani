@@ -12,6 +12,9 @@ import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import java.io.IOException;
 
+/**
+ * Servlet endpoint that returns quote data as JSON.
+ */
 @Component(service = Servlet.class)
 @SlingServletPaths("/bin/quote")
 public class QuoteServlet extends SlingSafeMethodsServlet {
@@ -19,10 +22,25 @@ public class QuoteServlet extends SlingSafeMethodsServlet {
     @Reference
     private QuoteService quoteService;
 
+    /**
+     * Handles HTTP GET requests for the quote endpoint.
+     *
+     * @param request the current Sling request
+     * @param response the Sling response used to return JSON
+     * @throws ServletException if servlet processing fails
+     * @throws IOException if writing the response fails
+     */
     @Override
     protected void doGet( SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json");
-
-        response.getWriter().println(quoteService.getResponse());
+        try {
+            response.setContentType("application/json");
+            response.getWriter().println(quoteService.getResponse());
+        } catch (IllegalStateException e) {
+            throw new ServletException("Response writer is not available", e);
+        } catch (IOException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ServletException("Unexpected error while processing quote request", e);
+        }
     }
 }
