@@ -1,0 +1,4 @@
+{
+  "enabled": "$[env:QUOTE_SERVICE_ENABLED;default=true]",
+  "apiURL": "$[env:QUOTE_SERVICE_API_URL;default=zenquotes.io/api/random]"
+}

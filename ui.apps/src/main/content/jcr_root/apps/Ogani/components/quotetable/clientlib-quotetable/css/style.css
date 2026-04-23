@@ -1,0 +1,74 @@
+.quote-table {
+	margin: 24px 0;
+}
+
+.quote-table__header h2 {
+	font-size: 28px;
+	font-weight: 700;
+	margin: 0 0 16px;
+	color: #1c1c1c;
+}
+
+.quote-table__container {
+	width: 100%;
+	overflow-x: auto;
+	border: 1px solid #e1e1e1;
+	border-radius: 8px;
+	background: #ffffff;
+}
+
+.quote-table__table {
+	width: 100%;
+	border-collapse: collapse;
+	min-width: 860px;
+}
+
+.quote-table__table thead th {
+	background: #7fad39;
+	color: #ffffff;
+	font-size: 14px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.4px;
+	padding: 14px 12px;
+	text-align: left;
+}
+
+.quote-table__table tbody td {
+	padding: 12px;
+	border-top: 1px solid #f0f0f0;
+	color: #1c1c1c;
+	font-size: 14px;
+	line-height: 1.5;
+	vertical-align: top;
+}
+
+.quote-table__table tbody tr:nth-child(even) {
+	background: #fafafa;
+}
+
+.quote-table__table tbody tr:hover {
+	background: #f4f8ec;
+}
+
+.quote-table__status,
+.quote-table__error {
+	text-align: center;
+	font-weight: 600;
+}
+
+.quote-table__error {
+	color: #c0392b;
+}
+
+.quote-table__table blockquote {
+	margin: 0;
+	padding-left: 10px;
+	border-left: 3px solid #7fad39;
+}
+
+.quote-table__table footer {
+	margin-top: 6px;
+	font-size: 13px;
+	color: #6f6f6f;
+}
