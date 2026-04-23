@@ -31,10 +31,10 @@ public class QuoteServlet extends SlingSafeMethodsServlet {
      * @throws IOException if writing the response fails
      */
     @Override
-    protected void doGet( SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
         try {
             response.setContentType("application/json");
-            response.getWriter().println(quoteService.getResponse());
+            response.getWriter().write(quoteService.getResponse().isBlank() ? "[]" : quoteService.getResponse());
         } catch (IllegalStateException e) {
             throw new ServletException("Response writer is not available", e);
         } catch (IOException e) {

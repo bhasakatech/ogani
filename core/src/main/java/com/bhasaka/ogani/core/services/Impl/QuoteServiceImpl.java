@@ -22,7 +22,7 @@ import java.net.http.HttpResponse;
 @Designate(ocd = QuoteServiceConfiguration.class)
 public class QuoteServiceImpl implements QuoteService {
     
-    Logger log = LoggerFactory.getLogger(QuoteServiceConfiguration.class);
+    Logger log = LoggerFactory.getLogger(QuoteService.class);
 
     private final HttpClient client = HttpClient.newHttpClient();
 
