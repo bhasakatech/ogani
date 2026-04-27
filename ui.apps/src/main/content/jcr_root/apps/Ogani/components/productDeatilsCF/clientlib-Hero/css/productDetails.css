@@ -38,7 +38,7 @@
 }
 
 .product__thumbnails .thumb {
-  width: 125px;
+  width: 120px;
   height: 100px;
   object-fit: cover;
   cursor: pointer;
@@ -352,7 +352,3 @@
 .thumb.active {
   border-color: #7fad39;
 }
-
-
-
-
